@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/BuildsFolder/Build v0.3.2a/1_Train/Train_Beta_Eoin.unity
     guid: 288fa60bec9a8824481492cad200cbb9
   - enabled: 1
-    path: Assets/BuildsFolder/Build v0.3.2a/2_Hospital/Hospital_Beta_After_Release(11.05)_Matej.unity
+    path: Assets/BuildsFolder/New Scenes after release/Hospital_Beta_After_Release(11.05)_Matej.unity
     guid: 7ee7297ccaa6a774f81ce441f927baba
   - enabled: 1
     path: Assets/BuildsFolder/Build v0.3.2a/3.1_Cutscene_Hospital-Hotel/HospitalCutscene.unity
