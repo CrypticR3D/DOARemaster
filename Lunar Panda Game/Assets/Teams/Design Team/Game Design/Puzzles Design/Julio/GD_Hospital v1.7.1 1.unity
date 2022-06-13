@@ -2815,7 +2815,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!43 &142276447
 Mesh:
   m_ObjectHideFlags: 0
@@ -2998,7 +2997,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!43 &149798554
 Mesh:
   m_ObjectHideFlags: 0
@@ -3924,6 +3922,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65aeb4a9405694d47801944c5cac3949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OpenAudioClip: 
+  MoveAudioClip: 
   screwDriverData: {fileID: 11400000, guid: 81a19f6b177894b4c86d4aa6c003e58c, type: 2}
   moveLocation: {fileID: 602802649}
   speed: 50
@@ -6644,7 +6644,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1 &315231690 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7611827027319614090, guid: acf5956cc75c6f1488b0817e887efcaa, type: 3}
@@ -6663,7 +6662,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1001 &315959749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8185,6 +8183,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 45d7df5d287c8834c8bbf19932fbb30b, type: 3}
   m_PrefabInstance: {fileID: 378298928}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &378298930 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 378298928}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &384893964
 Mesh:
   m_ObjectHideFlags: 0
@@ -8944,6 +8947,12 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 6fe492403e4d83a4fa31b5c34ed5c9d0, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!65 &413988199
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9265,6 +9274,12 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!65 &428450206
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9940,7 +9955,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1001 &460077579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10766,6 +10780,12 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!65 &510864897
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10888,6 +10908,11 @@ PrefabInstance:
 --- !u!4 &516524923 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 45d7df5d287c8834c8bbf19932fbb30b, type: 3}
+  m_PrefabInstance: {fileID: 516524922}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &516524924 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 516524922}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &529031380
@@ -11146,6 +11171,11 @@ PrefabInstance:
 --- !u!4 &550591648 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 45d7df5d287c8834c8bbf19932fbb30b, type: 3}
+  m_PrefabInstance: {fileID: 550591647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &550591649 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 550591647}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &553989186
@@ -16425,7 +16455,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1001 &706209493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16525,7 +16554,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1 &709618068
 GameObject:
   m_ObjectHideFlags: 0
@@ -16640,7 +16668,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1001 &712240874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16727,7 +16754,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d188c28b758d36a40bcc3a48aae66673, type: 2}
     - target: {fileID: 3527866907436257901, guid: e0fa09ad760bbb14d9533e4fc3d1ae80, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3527866907436257901, guid: e0fa09ad760bbb14d9533e4fc3d1ae80, type: 3}
       propertyPath: m_LocalScale.x
@@ -21490,7 +21517,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1 &837350134
 GameObject:
   m_ObjectHideFlags: 0
@@ -22115,6 +22141,12 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 25f8f99a773928f45bb1618209434f45, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!54 &852459334
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22476,7 +22508,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!114 &866454273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23677,7 +23708,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 45d7df5d287c8834c8bbf19932fbb30b, type: 3}
 --- !u!4 &912136859 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 45d7df5d287c8834c8bbf19932fbb30b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 912136858}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &918125948
@@ -24033,6 +24064,12 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!65 &952178974
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25118,10 +25155,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b377f834821c2146aa5bf416ee6a544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioClip: 
   id: 1
   patientID: 5571
   isCorrect: 1
   cutBody: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  openBody: {fileID: 0}
+  insides: {fileID: 0}
   scalpelData: {fileID: 11400000, guid: ae3add6dec6efb54785f085347616e21, type: 2}
   screwdriverTip: {fileID: 166571163}
 --- !u!65 &1013096174
@@ -26738,6 +26778,12 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!65 &1073155260
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27808,6 +27854,12 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 2aceb664a7e449c42b8b9c96e334f4b1, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!65 &1129626747
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28214,7 +28266,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1 &1143068147 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5213057671217272640, guid: 213c0e906f71bb04c984e943afb7a781, type: 3}
@@ -28233,7 +28284,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1001 &1149359934
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28526,6 +28576,12 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 25f8f99a773928f45bb1618209434f45, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!114 &1154994357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30465,7 +30521,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1001 &1205638933
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31683,10 +31738,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b377f834821c2146aa5bf416ee6a544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioClip: 
   id: 1
   patientID: 4410
   isCorrect: 0
   cutBody: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  openBody: {fileID: 0}
+  insides: {fileID: 0}
   scalpelData: {fileID: 11400000, guid: ae3add6dec6efb54785f085347616e21, type: 2}
   screwdriverTip: {fileID: 0}
 --- !u!65 &1276053875
@@ -32980,6 +33038,12 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 757a634b43df6314bbd5f564895d7cd1, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!65 &1355869355
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33124,7 +33188,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1001 &1369340101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33381,7 +33444,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1001 &1389987257
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34002,7 +34064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8207024237382381628, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8207024237382381628, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: m_LocalScale.y
@@ -35817,7 +35879,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!43 &1508591454
 Mesh:
   m_ObjectHideFlags: 0
@@ -36029,9 +36090,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d24c77af0c086845a38184d4c263758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioClipName: 
   switchMode: 1
   amogus: {fileID: 0}
   isPowerOn: 0
+  isLightsOn: 0
   leverSound: 
   nameSound: 
 --- !u!114 &1510034017
@@ -36049,6 +36112,12 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 757a634b43df6314bbd5f564895d7cd1, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!135 &1510034018
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -40011,7 +40080,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1 &1612540790 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4968711331874043189, guid: 2f2caf34e65b52043b516de77e09a1b3, type: 3}
@@ -40333,6 +40401,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundSource: {fileID: 1632929156}
+  buffer: 0.1
+  typeOfFloor: 0
+  soundEffectManager: {fileID: 0}
 --- !u!82 &1632929156
 AudioSource:
   m_ObjectHideFlags: 0
@@ -40441,6 +40512,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b45b41044e0b42489d2b88209a8a237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fullPrompt: 
+  anim: {fileID: 0}
   autoCombineItemsList:
   - itemParts:
     - {fileID: 11400000, guid: 4e6c6e1d7c39d8d4d8e5902c2a81f1dc, type: 2}
@@ -42090,11 +42163,11 @@ Transform:
   m_LocalPosition: {x: 11.91, y: 3.14, z: 17.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1950880793}
-  - {fileID: 550591648}
-  - {fileID: 378298929}
+  - {fileID: 378298930}
+  - {fileID: 516524924}
+  - {fileID: 550591649}
   - {fileID: 912136859}
-  - {fileID: 516524923}
+  - {fileID: 1950880794}
   m_Father: {fileID: 926401681}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -42573,6 +42646,12 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 25f8f99a773928f45bb1618209434f45, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!114 &1710992545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47494,6 +47573,12 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 321736469d4ba70428db6703ff8890e4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!65 &1758849909
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -47860,7 +47945,9 @@ MonoBehaviour:
   - {fileID: 1659626728}
   - {fileID: 2055548470}
   passLight: {fileID: 0}
+  passLight1: {fileID: 0}
   failLight: {fileID: 0}
+  maxPlayerDist: 2
 --- !u!1 &1792298174
 GameObject:
   m_ObjectHideFlags: 0
@@ -48452,7 +48539,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1 &1822515865
 GameObject:
   m_ObjectHideFlags: 0
@@ -50080,6 +50166,12 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 25f8f99a773928f45bb1618209434f45, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!65 &1849727529
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50197,7 +50289,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1 &1859000547
 GameObject:
   m_ObjectHideFlags: 0
@@ -50247,6 +50338,12 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!65 &1859000550
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50422,7 +50519,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1001 &1868352002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54468,6 +54564,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 45d7df5d287c8834c8bbf19932fbb30b, type: 3}
   m_PrefabInstance: {fileID: 1950880792}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1950880794 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 1950880792}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1956523708 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7646402854614507298, guid: c6fc9822b1eaf51459ad4058edc4d557, type: 3}
@@ -56779,7 +56880,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1001 &2062584980
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56980,7 +57080,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1001 &2078966911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57584,7 +57683,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1001 &2101492632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58079,7 +58177,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!43 &2116417325
 Mesh:
   m_ObjectHideFlags: 0
@@ -58262,7 +58359,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1 &2125208390
 GameObject:
   m_ObjectHideFlags: 0
@@ -58594,7 +58690,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lightIntensity: 0
 --- !u!1 &2125359692
 GameObject:
   m_ObjectHideFlags: 0
@@ -59147,7 +59242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7127609796813435151, guid: f411a9ce540ef7144bdef31f15bd1d01, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7127609796813435151, guid: f411a9ce540ef7144bdef31f15bd1d01, type: 3}
       propertyPath: m_LocalPosition.x
