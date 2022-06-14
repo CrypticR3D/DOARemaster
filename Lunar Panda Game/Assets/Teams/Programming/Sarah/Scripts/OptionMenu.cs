@@ -75,17 +75,17 @@ public class OptionMenu : MonoBehaviour
         qualitySettingsDropdown.value = QualitySettings.GetQualityLevel();
         qualitySettingsDropdown.RefreshShownValue();
 
-        audioMixer.GetFloat("MastVol", out float volume);
-        masterVolSlider.value = volume;
+        //audioMixer.GetFloat("MastVol", out float volume);
+        //masterVolSlider.value = volume;
 
-        audioMixer.GetFloat("SFXVol", out volume);
-        SFXVolSlider.value = volume;
+        //audioMixer.GetFloat("SFXVol", out volume);
+        //SFXVolSlider.value = volume;
 
-        audioMixer.GetFloat("DialogueVol", out volume);
-        dialogueVolSlider.value = volume;
+        //audioMixer.GetFloat("DialogueVol", out volume);
+        //dialogueVolSlider.value = volume;
 
-        audioMixer.GetFloat("MusVol", out volume);
-        musicVolSlider.value = volume;
+        //audioMixer.GetFloat("MusVol", out volume);
+        //musicVolSlider.value = volume;
 
         VolumeProfile profile = postProcessV.sharedProfile;
 
@@ -116,24 +116,24 @@ public class OptionMenu : MonoBehaviour
         }
     }
 
-    public void masterVolume(float volume)
+    public void masterVolume(float MasterVolume)
     {
-        audioMixer.SetFloat("MastVol", volume);
+        audioMixer.SetFloat("MastVol", Mathf.Log10(MasterVolume) * 20);
     }
 
-    public void SFXVolume(float volume)
+    public void SFXVolume(float SFXVolume)
     {
-        audioMixer.SetFloat("SFXVol", volume);
+        audioMixer.SetFloat("SFXVol", Mathf.Log10(SFXVolume) * 20);
     }
 
-    public void dialogVolume(float volume)
+    public void dialogVolume(float DialogVolume)
     {
-        audioMixer.SetFloat("DialogueVol", volume);
+        audioMixer.SetFloat("DialogueVol", Mathf.Log10(DialogVolume) * 20);
     }
 
-    public void musicVolume(float volume)
+    public void musicVolume(float MusicVolume)
     {
-        audioMixer.SetFloat("MusVol", volume);
+        audioMixer.SetFloat("MusVol", Mathf.Log10(MusicVolume) * 20);
     }
 
     public void enableSubtitles(bool enable)
