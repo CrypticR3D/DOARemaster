@@ -137,7 +137,7 @@ Material:
     m_Floats:
     - Vector1_823e48dd4a2541b9a197c771c8133190: 10
     - Vector1_8FE7CBED: 10
-    - Vector1_f1ae3c5dcf724f02980a0675a7d8b8cb: 44.61
+    - Vector1_f1ae3c5dcf724f02980a0675a7d8b8cb: 0.1
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1

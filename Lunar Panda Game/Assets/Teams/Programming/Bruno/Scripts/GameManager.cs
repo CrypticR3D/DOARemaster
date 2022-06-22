@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public GameState gameStates;
     public int whichLevel = 0;
     public Room currentRoom;
-    internal GameObject player;
+    public GameObject player;
     internal Vector3 location;
     internal Quaternion rotation;
     public Inventory inventory;
@@ -55,14 +55,14 @@ public class GameManager : MonoBehaviour
     {
         inventory = FindObjectOfType<Inventory>();
         completion = FindObjectOfType<PuzzleData>();
-        player = FindObjectOfType<playerMovement>().gameObject;
+        player = FindObjectOfType<CharacterController>().gameObject;
     }
 
     public void save(bool mainSave)
     {
         currentScene = SceneManager.GetActiveScene().name;
         Database.current.locationUpdate();
-        player = FindObjectOfType<playerMovement>().gameObject;
+        player = FindObjectOfType<CharacterController>().gameObject;
         inventory = FindObjectOfType<Inventory>();
         completion = FindObjectOfType<PuzzleData>();
         location = player.transform.position;

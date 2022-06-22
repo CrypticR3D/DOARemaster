@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class HorrorTrigger : MonoBehaviour
 {
     private int doneEvents = 0;
     private int numberOfEvents = 0;
     private bool coroutineDone = false;
+    public CharacterController cc;
 
 
     private GameObject player;
@@ -60,7 +62,7 @@ public class HorrorTrigger : MonoBehaviour
 
     [Header("---DROP OBJECT SETTINGS---")]
     public bool drop;
-    public GameObject dropObject;
+    public List<FallObject> DropObjects = new List<FallObject>();
 
     [Header("---LEVITATE OBJECTS SETTINGS---")]
     public bool levitate;
@@ -72,7 +74,7 @@ public class HorrorTrigger : MonoBehaviour
     [Header("---THROW OBJECT SETTINGS---")]
     public bool throW;
     //public FallObject throwObject;
-    public List<FallObject> FallObjects = new List<FallObject>();
+    public List<FallObject> ThrowObjects = new List<FallObject>();
     public float force;
 
     [Header("---ENABLE/DISABLE OBJECTS---")]
@@ -90,6 +92,7 @@ public class HorrorTrigger : MonoBehaviour
         if (disableAtStart) ActivateTriggerCollider(false);
         player = GameObject.FindWithTag("Player");
         camera = player.GetComponentInChildren<Camera>().gameObject;
+        cc = player.GetComponentInChildren<CharacterController>();
     }
     public void Update()
     {
@@ -99,7 +102,7 @@ public class HorrorTrigger : MonoBehaviour
                         Time.deltaTime * damping);
             camera.transform.localEulerAngles = new Vector3(Mathf.Lerp(camera.transform.localEulerAngles.x, 0, Time.deltaTime), 0, 0);
         }
-        if (doneEvents == numberOfEvents && coroutineDone) GetComponent<MeshCollider>().enabled = false;
+        if (doneEvents == numberOfEvents && coroutineDone) GetComponent<BoxCollider>().enabled = false;
 
     }
     private void OnTriggerEnter(Collider other)
@@ -150,7 +153,7 @@ public class HorrorTrigger : MonoBehaviour
             if (drop)
             {
                 numberOfEvents++;
-                DropObject();
+                Drop();
             }
             if (levitate)
             {
@@ -172,6 +175,7 @@ public class HorrorTrigger : MonoBehaviour
                 numberOfEvents++;
                 HideObject();
             }
+            gameObject.GetComponent<BoxCollider>().enabled = false;
         }
     }
     private IEnumerator HelpCoroutine()
@@ -183,11 +187,13 @@ public class HorrorTrigger : MonoBehaviour
 
     private IEnumerator PlayerMovementCoroutine(float Delay)
     {
-        player.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        FindObjectOfType<WalkingSound>().canMakeSound = false;
+        //player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        //FindObjectOfType<WalkingSound>().canMakeSound = false;
+        //cc.enabled = false;
         yield return new WaitForSeconds(Delay);
-        player.GetComponent<playerMovement>().enabled = true;
-        FindObjectOfType<WalkingSound>().canMakeSound = true;
+        cc.enabled = true;
+        //player.GetComponent<playerMovement>().enabled = true;
+        //FindObjectOfType<WalkingSound>().canMakeSound = true;
         doneEvents++;
     }
     private IEnumerator StopMoveObject(float Delay)
@@ -207,12 +213,12 @@ public class HorrorTrigger : MonoBehaviour
     }
     private IEnumerator LookAtCoroutine(float delay)
     {
-        player.GetComponentInChildren<lockMouse>().enabled = false;
-        FindObjectOfType<WalkingSound>().canMakeSound = false;
+        player.GetComponentInChildren<FirstPersonController>().enabled = false;
+        //FindObjectOfType<WalkingSound>().canMakeSound = false;
         yield return new WaitForSeconds(delay);
         startLook = false;
-        player.GetComponentInChildren<lockMouse>().enabled = true;
-        FindObjectOfType<WalkingSound>().canMakeSound = true;
+        player.GetComponentInChildren<FirstPersonController>().enabled = true;
+        //FindObjectOfType<WalkingSound>().canMakeSound = true;
         doneEvents++;
     }
     private IEnumerator HideObjectCoroutine(float time)
@@ -237,7 +243,8 @@ public class HorrorTrigger : MonoBehaviour
     }
     public void DisablePlayerMovement()
     {
-        player.GetComponent<playerMovement>().enabled = false;
+        //player.GetComponent<CharacterController>().enabled = false;
+        cc.enabled = false;
         StartCoroutine(PlayerMovementCoroutine(delayBeforeMovingAgain));
     }
     public void Move()
@@ -278,7 +285,7 @@ public class HorrorTrigger : MonoBehaviour
     }
     public void ActivateTriggerCollider(bool value)
     {
-        this.gameObject.GetComponent<MeshCollider>().enabled = value;
+        this.gameObject.GetComponent<BoxCollider>().enabled = value;
         doneEvents++;
     }
     public void PlaySound(string clipName)
@@ -291,9 +298,13 @@ public class HorrorTrigger : MonoBehaviour
         SoundEffectManager.GlobalSFXManager.PauseSFX(clipName);
         doneEvents++;
     }
-    public void DropObject()
+    public void Drop()
     {
-        dropObject.GetComponent<Rigidbody>().useGravity = true;
+        foreach (FallObject dropObject in DropObjects)
+        {
+            dropObject.GetComponent<Rigidbody>().useGravity = true;
+        }
+        //dropObject.GetComponent<Rigidbody>().useGravity = true;
         doneEvents++;
     }
     public void Levitate()
@@ -306,7 +317,7 @@ public class HorrorTrigger : MonoBehaviour
     }
     public void ThrowObject(float force)
     {
-        foreach (FallObject obj in FallObjects)
+        foreach (FallObject obj in ThrowObjects)
 
         {
             obj.Fly(force);

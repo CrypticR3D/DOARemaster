@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
 
     private int itemsIn;
     PlayerPickup pickupControl;
-    GameObject player;
+    public GameObject player;
     internal bool puttingAway = false;
     GameObject puttingAwayItem;
     float lerpSpeed = 5;
@@ -44,7 +44,7 @@ public class Inventory : MonoBehaviour
             documentInventory = GameManager.Instance.docInventory;
         }
 
-        player = FindObjectOfType<playerMovement>().gameObject;
+        player = FindObjectOfType<CharacterController>().gameObject;
         pickupControl = FindObjectOfType<PlayerPickup>();
         itemInventory = new List<ItemData>();
         documentInventory = new List<DocumentData>();
@@ -72,6 +72,7 @@ public class Inventory : MonoBehaviour
         {
             toggleHeldItem();
         }
+        
         if(Input.GetButtonDown("Interact") && itemInventory[selectedItem] != null)
         {
             if (pickupControl.heldItem != null)

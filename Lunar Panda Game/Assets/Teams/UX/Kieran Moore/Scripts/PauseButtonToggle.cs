@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class PauseButtonToggle : MonoBehaviour
 {
     public bool IsPaused;
     public bool IsOnRegularMenu;
     public GameObject PauseMenu;
-    lockMouse MrCapsule;
+    public FirstPersonController PlayerCharacter;
     //public GameObject BarOfStamina;
     JournalMenuToggle Journal;
     InventoryMenuToggle Inventory;
@@ -22,7 +23,7 @@ public class PauseButtonToggle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MrCapsule = FindObjectOfType<lockMouse>();
+        PlayerCharacter = FindObjectOfType<FirstPersonController>();
         Journal = FindObjectOfType<JournalMenuToggle>();
         Inventory = FindObjectOfType<InventoryMenuToggle>();
         Feedback = FindObjectOfType<FeedbackToggle>();
@@ -42,13 +43,13 @@ public class PauseButtonToggle : MonoBehaviour
                     IsOnRegularMenu = true;
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
-                    MrCapsule.canLook = false;
+                    PlayerCharacter.canLook = false;
                     PauseMenu.SetActive(true);
                     Time.timeScale = 0f;
                     EventSystem.current.SetSelectedGameObject(null);
                     if (firstSelectedButton != null)
                         EventSystem.current.SetSelectedGameObject(firstSelectedButton);
-                    FindObjectOfType<WalkingSound>().canMakeSound = false;
+                    //FindObjectOfType<WalkingSound>().canMakeSound = false;
 
                 }
                 else if (IsPaused == true)
@@ -85,10 +86,10 @@ public class PauseButtonToggle : MonoBehaviour
             //BarOfStamina.SetActive(true);
             IsOnRegularMenu = false;
             Cursor.lockState = CursorLockMode.Locked;
-            MrCapsule.canLook = true;
+            PlayerCharacter.canLook = true;
             Cursor.visible = false;
             Time.timeScale = 1f;
-            FindObjectOfType<WalkingSound>().canMakeSound = true;
+            //FindObjectOfType<WalkingSound>().canMakeSound = true;
         }
     }
 }

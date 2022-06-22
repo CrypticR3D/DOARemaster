@@ -25,6 +25,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_109c05fbc1af46e1948a710c3969ffa9:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -119,7 +123,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_823e48dd4a2541b9a197c771c8133190: 10
-    - Vector1_f1ae3c5dcf724f02980a0675a7d8b8cb: 200
+    - Vector1_f1ae3c5dcf724f02980a0675a7d8b8cb: 0.1
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
