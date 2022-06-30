@@ -48,12 +48,12 @@ public class Flashlight : MonoBehaviour
 
             if (onOff)
             {
-                SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);//Matej changes
+                //SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);//Matej changes
                 lightSource.enabled = true;
             }
             else
             {
-                SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);//Matej changes
+                //SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);//Matej changes
                 lightSource.enabled = false;
             }
         }
