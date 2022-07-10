@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1403128842361830568}
   - component: {fileID: 1403128842361830569}
   - component: {fileID: 1403128842361830570}
-  - component: {fileID: 4024186058541544572}
   m_Layer: 0
   m_Name: FlameLight
   m_TagString: Untagged
@@ -217,20 +216,3 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
---- !u!114 &4024186058541544572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1403128842361830571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e399d1b3b575f0647b6ce5191133e42f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxReduction: 0
-  MaxIncrease: 0
-  RateDamping: 0
-  Strength: 0
-  StopFlickering: 0
