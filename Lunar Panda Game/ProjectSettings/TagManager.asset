@@ -19,6 +19,7 @@ TagManager:
   - yellHead
   - greenHead
   - TipCollider
+  - InteractiveObject
   layers:
   - Default
   - TransparentFX
