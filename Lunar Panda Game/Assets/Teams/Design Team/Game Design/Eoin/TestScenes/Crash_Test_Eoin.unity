@@ -3765,18 +3765,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3755500307508749617, guid: d4307f5dbf0a9b54c991f274b682bd14, type: 3}
-      propertyPath: m_JumpSpeed
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3755500307759841007, guid: d4307f5dbf0a9b54c991f274b682bd14, type: 3}
-      propertyPath: customPasses.Array.data[0].depthWrite
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3755500307759841007, guid: d4307f5dbf0a9b54c991f274b682bd14, type: 3}
-      propertyPath: customPasses.Array.data[1].depthWrite
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4307f5dbf0a9b54c991f274b682bd14, type: 3}
 --- !u!1001 &599897731
