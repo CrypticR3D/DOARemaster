@@ -29,9 +29,38 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private CurveControlledBob m_HeadBob = new CurveControlledBob();
         [SerializeField] private LerpControlledBob m_JumpBob = new LerpControlledBob();
         [SerializeField] private float m_StepInterval;
+
+
+
+        /// FOOTSTEP SOUNDS ///
+
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
+
+        [SerializeField] private AudioClip[] Wood_FootstepSounds;
+        [SerializeField] private AudioClip[] Tile_FootstepSounds;
+        [SerializeField] private AudioClip[] Carpet_FootstepSounds;
+        [SerializeField] private AudioClip[] Metal_FootstepSounds;
+        [SerializeField] private AudioClip[] Dirt_FootstepSounds;
+
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
+
+        [SerializeField] private AudioClip Wood_JumpSound;
+        [SerializeField] private AudioClip Tile_JumpSound;
+        [SerializeField] private AudioClip Carpet_JumpSound;
+        [SerializeField] private AudioClip Metal_JumpSound;
+        [SerializeField] private AudioClip Dirt_JumpSound;
+
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+
+        [SerializeField] private AudioClip Wood_LandSound;
+        [SerializeField] private AudioClip Tile_LandSound;
+        [SerializeField] private AudioClip Carpet_LandSound;
+        [SerializeField] private AudioClip Metal_LandSound;
+        [SerializeField] private AudioClip Dirt_LandSound;
+
+        /// FOOTSTEP SOUNDS ///
+
+
 
         [SerializeField] public bool canLook; // stops the camera from moving.
 
@@ -61,7 +90,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         //CapsuleCollider m_CharacterController;
         bool m_Crouching;
 
-
+        private const string WoodTag = "WoodFloor";
+        private const string TileTag = "TileFloor";
+        private const string CarpetTag = "CarpetFloor";
+        private const string MetalTag = "MetalFloor";
+        private const string DirtTag = "DirtFloor";
 
         void Awake()
         {
@@ -80,7 +113,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_NextStep = m_StepCycle/2f;
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
-			m_MouseLook.Init(transform , m_Camera.transform);
+            m_AudioSource.enabled = !m_AudioSource.enabled;
+
+            StartCoroutine(AudioDelay());
+           
+
+            m_MouseLook.Init(transform , m_Camera.transform);
 
             //crouchTrigger = gameObject.GetComponent<CrouchTrigger>();
 
@@ -131,9 +169,48 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void PlayLandingSound()
         {
-            m_AudioSource.clip = m_LandSound;
-            m_AudioSource.Play();
-            m_NextStep = m_StepCycle + .5f;
+            RaycastHit Landhit;
+
+            Physics.Raycast(transform.position, -transform.up, out Landhit);
+
+            //m_AudioSource.clip = m_LandSound;
+            //m_AudioSource.Play();
+            //m_NextStep = m_StepCycle + .5f;
+
+            if (Landhit.collider.CompareTag(WoodTag))
+            {
+                m_AudioSource.clip = Wood_LandSound;
+                m_AudioSource.Play();
+                m_NextStep = m_StepCycle + .5f;
+            }
+
+            if (Landhit.collider.CompareTag(TileTag))
+            {
+                m_AudioSource.clip = Tile_LandSound;
+                m_AudioSource.Play();
+                m_NextStep = m_StepCycle + .5f;
+            }
+
+            if (Landhit.collider.CompareTag(CarpetTag))
+            {
+                m_AudioSource.clip = Carpet_LandSound;
+                m_AudioSource.Play();
+                m_NextStep = m_StepCycle + .5f;
+            }
+
+            if (Landhit.collider.CompareTag(MetalTag))
+            {
+                m_AudioSource.clip = Metal_LandSound;
+                m_AudioSource.Play();
+                m_NextStep = m_StepCycle + .5f;
+            }
+
+            if (Landhit.collider.CompareTag(DirtTag))
+            {
+                m_AudioSource.clip = Dirt_LandSound;
+                m_AudioSource.Play();
+                m_NextStep = m_StepCycle + .5f;
+            }
         }
 
 
@@ -181,8 +258,41 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void PlayJumpSound()
         {
-            m_AudioSource.clip = m_JumpSound;
-            m_AudioSource.Play();
+            RaycastHit Jumphit;
+            Physics.Raycast(transform.position, -transform.up, out Jumphit);
+
+            //m_AudioSource.clip = m_JumpSound;
+            //m_AudioSource.Play();
+
+            if (Jumphit.collider.CompareTag(WoodTag))
+            {
+                m_AudioSource.clip = Wood_JumpSound;
+                m_AudioSource.Play();
+            }
+
+            if (Jumphit.collider.CompareTag(TileTag))
+            {
+                m_AudioSource.clip = Tile_JumpSound;
+                m_AudioSource.Play();
+            }
+
+            if (Jumphit.collider.CompareTag(CarpetTag))
+            {
+                m_AudioSource.clip = Carpet_JumpSound;
+                m_AudioSource.Play();
+            }
+
+            if (Jumphit.collider.CompareTag(MetalTag))
+            {
+                m_AudioSource.clip = Metal_JumpSound;
+                m_AudioSource.Play();
+            }
+
+            if (Jumphit.collider.CompareTag(DirtTag))
+            {
+                m_AudioSource.clip = Dirt_JumpSound;
+                m_AudioSource.Play();
+            }
         }
 
 
@@ -211,14 +321,63 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 return;
             }
-            // pick & play a random footstep sound from the array,
-            // excluding sound at index 0
-            int n = Random.Range(1, m_FootstepSounds.Length);
-            m_AudioSource.clip = m_FootstepSounds[n];
-            m_AudioSource.PlayOneShot(m_AudioSource.clip);
-            // move picked sound to index 0 so it's not picked next time
-            m_FootstepSounds[n] = m_FootstepSounds[0];
-            m_FootstepSounds[0] = m_AudioSource.clip;
+
+            RaycastHit Floorhit;
+
+            Physics.Raycast(transform.position, -transform.up, out Floorhit);
+
+            if (Floorhit.collider.CompareTag(WoodTag))
+            {
+                // pick & play a random footstep sound from the array,
+                // excluding sound at index 0
+                int a = Random.Range(1, Wood_FootstepSounds.Length);
+                m_AudioSource.clip = Wood_FootstepSounds[a];
+                m_AudioSource.PlayOneShot(m_AudioSource.clip);
+                // move picked sound to index 0 so it's not picked next time
+                Wood_FootstepSounds[a] = Wood_FootstepSounds[0];
+                Wood_FootstepSounds[0] = m_AudioSource.clip;
+            }
+
+            if (Floorhit.collider.CompareTag(TileTag))
+            {
+                int b = Random.Range(1, Tile_FootstepSounds.Length);
+                m_AudioSource.clip = Tile_FootstepSounds[b];
+                m_AudioSource.PlayOneShot(m_AudioSource.clip);
+                Tile_FootstepSounds[b] = Tile_FootstepSounds[0];
+                Tile_FootstepSounds[0] = m_AudioSource.clip;
+            }
+
+            if (Floorhit.collider.CompareTag(CarpetTag))
+            {
+                int c = Random.Range(1, Carpet_FootstepSounds.Length);
+                m_AudioSource.clip = Carpet_FootstepSounds[c];
+                m_AudioSource.PlayOneShot(m_AudioSource.clip);
+                Carpet_FootstepSounds[c] = Carpet_FootstepSounds[0];
+                Carpet_FootstepSounds[0] = m_AudioSource.clip;
+            }
+
+            if (Floorhit.collider.CompareTag(MetalTag))
+            {
+                int d = Random.Range(1, Metal_FootstepSounds.Length);
+                m_AudioSource.clip = Metal_FootstepSounds[d];
+                m_AudioSource.PlayOneShot(m_AudioSource.clip);
+                Metal_FootstepSounds[d] = Metal_FootstepSounds[0];
+                Metal_FootstepSounds[0] = m_AudioSource.clip;
+            }
+
+            if (Floorhit.collider.CompareTag(DirtTag))
+            {
+                int e = Random.Range(1, Dirt_FootstepSounds.Length);
+                m_AudioSource.clip = Dirt_FootstepSounds[e];
+                m_AudioSource.PlayOneShot(m_AudioSource.clip);
+                Dirt_FootstepSounds[e] = Dirt_FootstepSounds[0];
+                Dirt_FootstepSounds[0] = m_AudioSource.clip;
+            }
+
+            else
+            {
+                Debug.Log("No Floor Here");
+            }
         }
 
 
@@ -302,7 +461,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         //private void Crouch(bool crouch)
         //{
-            
+
         //    ScaleCapsuleForCrouching(crouch);
         //    PreventStandingInLowHeadroom();
         //    ////Set the key for crouch
@@ -332,7 +491,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         //    //}
         //}
 
-        void ScaleCapsuleForCrouching(bool crouch)
+        private void ScaleCapsuleForCrouching(bool crouch)
         {
             if (m_CharacterController.isGrounded && crouch)
             {
@@ -356,7 +515,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
 
-        void PreventStandingInLowHeadroom()
+        private void PreventStandingInLowHeadroom()
         {
             // prevent standing up in crouch-only zones
             if (!m_Crouching)
@@ -370,6 +529,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
 
-        
+        public IEnumerator AudioDelay()
+        {
+            
+
+           yield return new WaitForSeconds(.5f);
+            m_AudioSource.enabled = !m_AudioSource.enabled;
+        }
     }
 }

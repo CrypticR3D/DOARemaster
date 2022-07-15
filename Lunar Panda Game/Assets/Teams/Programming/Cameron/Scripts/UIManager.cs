@@ -75,7 +75,7 @@ public class UIManager : MonoBehaviour
     [Header("Objective UI")]
     public Text objectText;
     public GameObject objectivesTab;
-    int objectiveNumber = 0;
+    //int objectiveNumber = 0;
     ObjectiveSystem objectiveSystem;
 
     [Header("Tooltip UI")]

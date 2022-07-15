@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3755500306542951519}
   - component: {fileID: 3755500306542951516}
   - component: {fileID: 3755500306542951518}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 3755500307194136026}
   - component: {fileID: 3755500307194136029}
   - component: {fileID: 3755500307194136028}
+  - component: {fileID: 1711353486}
   m_Layer: 7
   m_Name: FPSController
   m_TagString: Player
@@ -288,7 +289,7 @@ CharacterController:
   m_Height: 2.4
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
@@ -309,7 +310,7 @@ MonoBehaviour:
   m_RunSpeed: 3
   m_RunstepLenghten: 0.7
   m_JumpSpeed: 3.5
-  m_StickToGroundForce: 10
+  m_StickToGroundForce: 100
   m_GravityMultiplier: 1
   m_MouseLook:
     XSensitivity: 2
@@ -413,8 +414,33 @@ MonoBehaviour:
   m_FootstepSounds:
   - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
   - {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
+  Wood_FootstepSounds:
+  - {fileID: 8300000, guid: 8e001351cd7065543a068386cde4c960, type: 3}
+  - {fileID: 8300000, guid: c41fb169b2991c247a5466e00faa6639, type: 3}
+  Tile_FootstepSounds:
+  - {fileID: 8300000, guid: b995bc1775ea83b4b8f861763e9a1424, type: 3}
+  - {fileID: 8300000, guid: 14ae706fef2303e4cb71112dbd5d250b, type: 3}
+  Carpet_FootstepSounds:
+  - {fileID: 8300000, guid: 551d550ab98e3cc4bb7793e752fe8628, type: 3}
+  - {fileID: 8300000, guid: 18e761ff5ef14fd4588d9283fcc9b829, type: 3}
+  Metal_FootstepSounds:
+  - {fileID: 8300000, guid: e5b9a63e11f3a8b4a8fef1eb139cc786, type: 3}
+  - {fileID: 8300000, guid: 4ebaaf27aa23a0446b8fd874d60909e5, type: 3}
+  Dirt_FootstepSounds:
+  - {fileID: 8300000, guid: 9ea11a2d13d536e4e8441a0f5895995c, type: 3}
+  - {fileID: 8300000, guid: 203ac8b6f07070e4f93f1c1a6fff06c3, type: 3}
   m_JumpSound: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
+  Wood_JumpSound: {fileID: 8300000, guid: 7d22997c3222c124d91d351ddc1c6ee4, type: 3}
+  Tile_JumpSound: {fileID: 8300000, guid: f42760acdd77d6c459020ab0f9db4f30, type: 3}
+  Carpet_JumpSound: {fileID: 8300000, guid: 0bd6d911a80f46040977198422926d29, type: 3}
+  Metal_JumpSound: {fileID: 8300000, guid: df49938a1860650418b6d5654ed436be, type: 3}
+  Dirt_JumpSound: {fileID: 8300000, guid: 65d9836027675574b8d070c5718f99c7, type: 3}
   m_LandSound: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
+  Wood_LandSound: {fileID: 8300000, guid: bb5ec83ccc5c69f43b31f100278bff91, type: 3}
+  Tile_LandSound: {fileID: 8300000, guid: 304f2bf2228cba94e91cd22803e54bcf, type: 3}
+  Carpet_LandSound: {fileID: 8300000, guid: 7d65afb5fe7bb7e41a03b001f5acfbde, type: 3}
+  Metal_LandSound: {fileID: 8300000, guid: 37cdbcb02c3324849ac457dfc5b1058e, type: 3}
+  Dirt_LandSound: {fileID: 8300000, guid: 942019cf9ecd5854ebeb343b12b7f779, type: 3}
   canLook: 1
   m_Jumping: 0
 --- !u!54 &3755500307494368177
@@ -432,7 +458,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!82 &3755500307497158961
 AudioSource:
   m_ObjectHideFlags: 0
@@ -444,7 +470,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 2506449963155415320, guid: 7a54f5c89a9248e469c0e9f99b86a92e, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -569,6 +595,7 @@ MonoBehaviour:
   GOLookingAt: {fileID: 0}
   throwForce: 20
   rotDist: 1
+  PlayerCharacter: {fileID: 0}
 --- !u!114 &3755500307194136028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,6 +608,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146f72fa654010d49838fdc61ed033bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!23 &1711353486
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3755500307497455825}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 257
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3755500307497455827
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,6 +664,7 @@ GameObject:
   - component: {fileID: 3755500306713177613}
   - component: {fileID: 3755500306713177615}
   - component: {fileID: 3755500307759841007}
+  - component: {fileID: 157080173}
   m_Layer: 0
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
@@ -650,7 +719,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 65535
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -902,6 +971,25 @@ MonoBehaviour:
         depthCompareFunction: 4
         depthWrite: 0
         shaderPass: 0
+--- !u!114 &157080173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3755500307497455827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281e6f403989e68469f1b5b4a0f02ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayLength: 3
+  layerMaskInteract:
+    serializedVersion: 2
+    m_Bits: 256
+  excludeLayerName: 
+  openDoorKey: 323
+  crosshair: {fileID: 0}
 --- !u!1001 &3522499031925269368
 PrefabInstance:
   m_ObjectHideFlags: 0

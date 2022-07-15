@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class ViewDocument : MonoBehaviour
 {
@@ -16,16 +17,19 @@ public class ViewDocument : MonoBehaviour
     public KeyCode keyText; //temp
     private bool overDoc; //temp
     private Inventory inventory;
-    internal playerMovement player;
-    internal lockMouse lockMouse;
+    //internal playerMovement player;
+    //internal lockMouse lockMouse;
     internal PlayerCrouch crouchTrigger;
+    public FirstPersonController PlayerCharacter;
 
     private void Start()
     {
         inventory = FindObjectOfType<Inventory>();
-        player = FindObjectOfType<playerMovement>();
-        lockMouse = FindObjectOfType<lockMouse>();
+        //player = FindObjectOfType<playerMovement>();
+        //lockMouse = FindObjectOfType<lockMouse>();
         crouchTrigger = FindObjectOfType<PlayerCrouch>();
+        PlayerCharacter = FindObjectOfType<FirstPersonController>();
+
     }
 
     //temp testing
@@ -42,10 +46,11 @@ public class ViewDocument : MonoBehaviour
                     UIManager.Instance.showDocument(data, this);
                     UIManager.Instance.activeImage(data);
                     inInventory = true;
-                    player.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                    player.enabled = false;
-                    lockMouse.canLook = false;
-                    crouchTrigger.enabled = false;
+                    //player.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                    //player.enabled = false;
+                    //lockMouse.canLook = false;
+                    PlayerCharacter.canLook = false;
+                    //crouchTrigger.enabled = false;
                 }
             }
         }
@@ -54,10 +59,11 @@ public class ViewDocument : MonoBehaviour
             UIManager.Instance.hideDocument(data, this);
             UIManager.Instance.hideText(this);
 
-            player.enabled = true;
-            lockMouse.canLook = true;
+            //player.enabled = true;
+            //lockMouse.canLook = true;
+            PlayerCharacter.canLook = true;
 
-            crouchTrigger.enabled = true;
+            //crouchTrigger.enabled = true;
             UIManager.Instance.toggleMenuVariables();
         }
 

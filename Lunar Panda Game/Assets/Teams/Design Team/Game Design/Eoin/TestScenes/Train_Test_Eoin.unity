@@ -7508,7 +7508,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1637143087}
-  - component: {fileID: 1637143086}
   m_Layer: 0
   m_Name: SceneIDMap
   m_TagString: Untagged
@@ -7516,18 +7515,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1637143086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1637143085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1746668888}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1637143087
 Transform:
   m_ObjectHideFlags: 19
@@ -7628,20 +7615,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8095809277768693843, guid: 9d281faea8e0d6b4eab4cfd9cfa6b2a9, type: 3}
   m_PrefabInstance: {fileID: 1040528457610229725}
   m_PrefabAsset: {fileID: 0}
---- !u!115 &1746668888
-MonoScript:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 5
-  m_Script: 
-  m_DefaultReferences: {}
-  m_Icon: {fileID: 0}
-  m_ExecutionOrder: 0
-  m_ClassName: SceneObjectIDMapSceneAsset
-  m_Namespace: UnityEngine.Rendering.HighDefinition
 --- !u!4 &1752769649 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3027164084439395456, guid: a03c3473324c1c84dab2e2182b3adedc, type: 3}
@@ -24904,7 +24877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5262327331129638512, guid: 5a83a99e476912a40bfefebc881ca8c8, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5262327331129638512, guid: 5a83a99e476912a40bfefebc881ca8c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -35876,7 +35849,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!4 &5067841289036951145
 Transform:
   m_ObjectHideFlags: 0

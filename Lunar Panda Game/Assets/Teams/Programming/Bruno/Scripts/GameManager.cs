@@ -36,8 +36,14 @@ public class GameManager : MonoBehaviour
     internal bool subtitles;
     internal List<DocumentData> docInventory;
 
+
+
+
     private void Awake()
     {
+
+
+
         docInventory = new List<DocumentData>();
         if (Instance == null)
         {
@@ -48,14 +54,16 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
-    private void Start()
+    public void Start()
     {
         inventory = FindObjectOfType<Inventory>();
         completion = FindObjectOfType<PuzzleData>();
         player = FindObjectOfType<CharacterController>().gameObject;
+
+
     }
 
     public void save(bool mainSave)

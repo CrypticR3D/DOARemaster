@@ -4471,6 +4471,7 @@ MonoBehaviour:
   IsPaused: 0
   IsOnRegularMenu: 0
   PauseMenu: {fileID: 8997694836590198113}
+  PlayerCharacter: {fileID: 0}
   PauseMenuElement: {fileID: 5726494049146838620}
   firstSelectedButton: {fileID: 3511033205307286564}
 --- !u!1 &2288555752394872693
@@ -6957,6 +6958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsOnInventory: 0
   InventoryMenu: {fileID: 3048509602614729587}
+  PlayerCharacter: {fileID: 0}
 --- !u!1 &3048509601149016277
 GameObject:
   m_ObjectHideFlags: 0
@@ -8167,14 +8169,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.21960784}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: e38e93e537783f4489aabe5ed095cfd3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8696,10 +8698,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsOnMenu: 0
   JournalMenu: {fileID: 3048509601629239799}
-  MrCapsule: {fileID: 0}
   Pause: {fileID: 0}
   Inventory: {fileID: 3048509601136369177}
   Feedback: {fileID: 716090042906290188}
+  PlayerCharacter: {fileID: 0}
 --- !u!1 &3048509602132799879
 GameObject:
   m_ObjectHideFlags: 0
@@ -18648,6 +18650,7 @@ MonoBehaviour:
   documentInventory: []
   storyNotesInventory: []
   maxItemsInInventory: 12
+  player: {fileID: 0}
   maxTime: 1
 --- !u!114 &247422084818200298
 MonoBehaviour:
@@ -25037,8 +25040,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStates: 1
-  whichLevel: 4
-  currentRoom: 3
+  whichLevel: 1
+  currentRoom: 0
+  player: {fileID: 0}
   inventory: {fileID: 9118375295698001648}
   completion: {fileID: 8729957444195601789}
 --- !u!1 &8729957444195601788

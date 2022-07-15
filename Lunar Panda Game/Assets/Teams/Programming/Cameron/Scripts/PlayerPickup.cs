@@ -12,6 +12,7 @@ With the rotation, I will have to integrate it with the character looking code b
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerPickup : MonoBehaviour
 {
@@ -44,8 +45,11 @@ public class PlayerPickup : MonoBehaviour
     Transform player;
     InteractRaycasting playerPickupRay;
 
+    public FirstPersonController PlayerCharacter;
+
     void Awake()
     {
+                PlayerCharacter = FindObjectOfType<FirstPersonController>();
         playerCameraTransform = Camera.main.transform;
         inventory = FindObjectOfType<Inventory>();
 
@@ -57,13 +61,13 @@ public class PlayerPickup : MonoBehaviour
 
     void Update()
     {
-        /*if (heldItem != null)
+        if (heldItem != null)
         {
             if (heldItem.GetComponent<Rigidbody>() == null)
             {
                 heldItem.AddComponent<Rigidbody>();
             }
-        }*/
+        }
 
         if (Input.GetButtonDown("Interact") && heldItem == null)
         {

@@ -20,6 +20,11 @@ TagManager:
   - greenHead
   - TipCollider
   - InteractiveObject
+  - WoodFloor
+  - TileFloor
+  - CarpetFloor
+  - MetalFloor
+  - DirtFloor
   layers:
   - Default
   - TransparentFX

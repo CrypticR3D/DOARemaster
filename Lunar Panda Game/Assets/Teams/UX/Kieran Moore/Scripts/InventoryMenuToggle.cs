@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class InventoryMenuToggle : MonoBehaviour
 {
@@ -9,23 +10,26 @@ public class InventoryMenuToggle : MonoBehaviour
     public bool IsOnInventory;
 
     [SerializeField] GameObject InventoryMenu;
-    lockMouse mouseLock;
+    //lockMouse mouseLock;
     //public GameObject BarOfStamina;
     JournalMenuToggle Journal;
     PauseButtonToggle Pause;
     FeedbackToggle Feedback;
     PlayerPickup pickup;
 
+    public FirstPersonController PlayerCharacter;
+
     internal bool canOpen = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        mouseLock = FindObjectOfType<lockMouse>();
+        //mouseLock = FindObjectOfType<lockMouse>();
         Pause = FindObjectOfType<PauseButtonToggle>();
         Journal = FindObjectOfType<JournalMenuToggle>();
         Feedback = FindObjectOfType<FeedbackToggle>();
         pickup = FindObjectOfType<PlayerPickup>();
+        PlayerCharacter = FindObjectOfType<FirstPersonController>();
 
     }
 
@@ -42,9 +46,9 @@ public class InventoryMenuToggle : MonoBehaviour
                     IsOnInventory = true;
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
-
+                    PlayerCharacter.canLook = false;
                     pickup.enabled = false;
-                    mouseLock.canLook = false;
+                    //mouseLock.canLook = false;
                     InventoryMenu.SetActive(true);
                     Time.timeScale = 0f;
 
@@ -62,7 +66,8 @@ public class InventoryMenuToggle : MonoBehaviour
                     InventoryMenu.SetActive(false);
                     IsOnInventory = false;
                     Cursor.lockState = CursorLockMode.Locked;
-                    mouseLock.canLook = true;
+                    PlayerCharacter.canLook = true;
+                    //mouseLock.canLook = true;
                     Cursor.visible = false;
                     pickup.enabled = true;
                     Time.timeScale = 1f;
