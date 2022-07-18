@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FoodChainBrain : MonoBehaviour
 {
+    [Header("Code & Animation")]
     public RandomNumber tiger;
     public RandomNumber wolf;
     public RandomNumber fox;
@@ -16,13 +17,19 @@ public class FoodChainBrain : MonoBehaviour
 
     public string theCode;
 
+
+
     public void Start()
     {
         firstNumber = tiger.GetNumber();
         secondNumber = wolf.GetNumber();
         thirdNumber = fox.GetNumber();
         fourthNumber = rab.GetNumber();
-        theCode =firstNumber+ "" + secondNumber + "" + thirdNumber + "" + fourthNumber;
+        theCode = firstNumber + "" + secondNumber + "" + thirdNumber + "" + fourthNumber;
+    }
+    public void TurnDiscs(char size)
+    {
+
     }
 
 }
