@@ -5,10 +5,10 @@ using UnityEngine;
 public class FoodChainBrain : MonoBehaviour
 {
     [Header("Code & Animation")]
-    public RandomNumber tiger;
-    public RandomNumber wolf;
-    public RandomNumber fox;
-    public RandomNumber rab;
+    public Disc X;
+    public Disc L;
+    public Disc M;
+    public Disc S;
 
     int firstNumber;
     int secondNumber;
@@ -21,15 +21,35 @@ public class FoodChainBrain : MonoBehaviour
 
     public void Start()
     {
-        firstNumber = tiger.GetNumber();
-        secondNumber = wolf.GetNumber();
-        thirdNumber = fox.GetNumber();
-        fourthNumber = rab.GetNumber();
+        firstNumber = X.GetNumber();
+        secondNumber = L.GetNumber();
+        thirdNumber = M.GetNumber();
+        fourthNumber = S.GetNumber();
         theCode = firstNumber + "" + secondNumber + "" + thirdNumber + "" + fourthNumber;
     }
     public void TurnDiscs(char size)
     {
-
+        switch(size)
+        {
+            case 'X':
+                X.Rotate();
+                L.Rotate();
+                M.Rotate();
+                S.Rotate();
+                break;
+            case 'L':
+                L.Rotate();
+                M.Rotate();
+                S.Rotate();
+                break;
+            case 'M':
+                M.Rotate();
+                S.Rotate();
+                break;
+            case 'S':
+                S.Rotate();
+                break;
+        }
     }
 
 }

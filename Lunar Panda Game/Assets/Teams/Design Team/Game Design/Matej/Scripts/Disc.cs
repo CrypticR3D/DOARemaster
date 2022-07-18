@@ -4,8 +4,12 @@ using UnityEngine;
 using TMPro;
 
 
-public class RandomNumber : MonoBehaviour
+public class Disc : MonoBehaviour
 {
+    //Author : Matej Gajdos - Gameplay Designer
+    //When editing please use comments to mark the changes
+    //This script is used in logic and animation of the food chain puzzle
+
     [Header("Random Numbers")]
     //Basic Logic
     int minNumber = 0;
@@ -34,11 +38,15 @@ public class RandomNumber : MonoBehaviour
     public TextMeshPro foxNumber;
     public TextMeshPro rabbitNumber;
 
-    //Animation script                                                  -AS
+    //Animation script
     [Header("Animation")]
     public FoodChainBrain brain;
     public char size;
     public Animator animator;
+    public int beginPhase;
+
+    //Audio settings
+    AudioSource audioSource;
 
     void Awake()
     {
@@ -70,7 +78,33 @@ public class RandomNumber : MonoBehaviour
                 break;
         }
     }
-    public void Update()
+    void Start()
+    {
+        brain = FindObjectOfType<FoodChainBrain>(); //Getting all the needed components
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+
+        beginPhase = Randomize(0, 3);
+        switch (beginPhase)
+        {
+            case 0:
+                animator.SetBool("Tiger", true);
+                break;
+            case 1:
+                animator.SetBool("Wolf", true);
+                break;
+            case 2:
+                animator.SetBool("Fox", true);
+                break;
+            case 3:
+                animator.SetBool("Rabbit", true);
+                break;
+            default:
+                break;
+        }
+
+    }
+    void Update()
     {
         if (Input.GetButtonDown("Interact"))
         {
@@ -80,12 +114,12 @@ public class RandomNumber : MonoBehaviour
     public int Randomize(int min, int max)
     {
         int number;
-        return number = Random.Range(min, max);
-    }
+        return number = Random.Range(min, max+1);
+    }//Basic Randomizing function
     public int GetNumber()
     {
         return theNumber;
-    }
+    }//Function for the "brain" of the puzzle
     public void Interact()
     {
         if (InteractRaycasting.Instance.raycastInteract(out RaycastHit hit))
@@ -93,12 +127,17 @@ public class RandomNumber : MonoBehaviour
             if (hit.transform.gameObject == gameObject)
                 {
                 print(size + " has been hit");
+                brain.TurnDiscs(size);
                 }
         }
     }
     public void Rotate()
     {
-        animator.SetTrigger("");
+        animator.SetTrigger("Next");
+        if (!audioSource.isPlaying)
+        { 
+            audioSource.Play();
+        }
     }
 
 
