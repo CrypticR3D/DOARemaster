@@ -29,6 +29,8 @@ public class ClockPuzzle : MonoBehaviour
     [Header("Temp")]
     [SerializeField] Transform door;
     [SerializeField] Transform pivot;
+
+    [SerializeField] Transform Handpivot;
     private bool completed;
 
     /*[Tooltip("This is the position of the minute hand when its placed on the clock")]
@@ -76,11 +78,11 @@ public class ClockPuzzle : MonoBehaviour
     void RotateHand()
     {
         //minuteHand.transform.eulerAngles = new Vector3(minuteHand.transform.eulerAngles.x, minuteHand.transform.eulerAngles.y, minuteHand.transform.eulerAngles.z + clockAngle);
-        minuteHand.transform.RotateAround(transform.position, Vector3.forward, clockAngle);
+        minuteHand.transform.RotateAround(Handpivot.position, -Vector3.right , clockAngle);
         //the issue with just doing if minute hand is at 90 degrees is that float precision is a piece
         if(minuteHand.transform.eulerAngles.z > hourAngle - 1 && minuteHand.transform.eulerAngles.z < hourAngle + 1)
         {
-            hourHand.transform.RotateAround(transform.position, Vector3.forward, clockAngle);
+            hourHand.transform.RotateAround(Handpivot.position, -Vector3.right, clockAngle);
         }
         CheckCombination();
     }
@@ -89,7 +91,8 @@ public class ClockPuzzle : MonoBehaviour
     {
         if(inventory.itemInventory[inventory.selectedItem] == clockHandsData)
         {
-            clockHands = Instantiate(clockHands, transform.position, Quaternion.identity);
+            clockHands = Instantiate(clockHands, Handpivot.position, Quaternion.Euler(0, 90, 0));
+
             Destroy(clockHands.GetComponent<HoldableItem>());
             Destroy(clockHands.GetComponent<Rigidbody>());
             Destroy(clockHands.GetComponent<BoxCollider>());
@@ -107,6 +110,8 @@ public class ClockPuzzle : MonoBehaviour
             //remove the current selected item (clock hands) from the inventory
             inventory.removeItem();
             handsConnected = true;
+            clockHands.SetActive(true);
+
             if (FindObjectOfType<PlayerPickup>().heldItem != null)
             {
                 if (FindObjectOfType<PlayerPickup>().heldItem.name == "Hand_Min" || FindObjectOfType<PlayerPickup>().heldItem.name == "Hand_Hour")
