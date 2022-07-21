@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 5409049430110288350}
   - component: {fileID: 2642809838636583635}
   - component: {fileID: 2642809838636583636}
-  - component: {fileID: 2642809838636583637}
   - component: {fileID: 2642809838636583638}
+  - component: {fileID: -7570471584481643399}
   m_Layer: 0
-  m_Name: GreenKey
+  m_Name: BlueKey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 2731021154007171800}
   m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 0.110728234, y: 0.80836654, z: 0.3019129}
-  m_LocalScale: {x: 134.0001, y: 134.00006, z: 134.00003}
+  m_LocalScale: {x: 100, y: 99.999985, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2731021154007171800}
-  m_Mesh: {fileID: 2808757078751220448, guid: 7c9f0933c0d801646bfa4aeab75f90e6, type: 3}
+  m_Mesh: {fileID: -6243418113353508856, guid: 7c9f0933c0d801646bfa4aeab75f90e6, type: 3}
 --- !u!23 &5409049430110288350
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: 7c9f0933c0d801646bfa4aeab75f90e6, type: 3}
+  - {fileID: 2100000, guid: 796336aae7c0f7748ab25584de77861c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -114,7 +114,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.00023274156, y: 0.0016321997, z: 0.00026602982}
   m_Center: {x: -0.0000010399198, y: -0.0007755663, z: -0.000008706781}
---- !u!114 &2642809838636583637
+--- !u!114 &2642809838636583638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2731021154007171800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cfb39ce4da44de4f9d3b7b697139982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 086c23ee4ac9b294c9554d4cbf3e32cd, type: 2}
+--- !u!114 &-7570471584481643399
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,17 +141,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGlowing: 0
   baseMaterial: {fileID: 0}
-  glowingMaterial: {fileID: 2100000, guid: 321736469d4ba70428db6703ff8890e4, type: 2}
---- !u!114 &2642809838636583638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2731021154007171800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cfb39ce4da44de4f9d3b7b697139982, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 93ba09b6c24fa1440a8fc3dfdaba39ff, type: 2}
+  glowingMaterial: {fileID: 2100000, guid: 910dbfc430dba874fbe54dd430cf718e, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5

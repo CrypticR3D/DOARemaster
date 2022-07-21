@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PianoSequenceCheck : MonoBehaviour
 {
-    [SerializeField] Collider keyCollider;
+    //[SerializeField] Collider keyCollider;
 
     [Tooltip("id in relation to the event manager")]
     public int id;
@@ -21,7 +21,9 @@ public class PianoSequenceCheck : MonoBehaviour
     [Header("Open Sound")]
     public string openSound;
 
-    public Transform toOpen;
+    //public Transform toOpen;
+
+    [SerializeField] Animation animHatch;
 
     public void Start()
     {
@@ -80,22 +82,24 @@ public class PianoSequenceCheck : MonoBehaviour
         }
     }
 
-    IEnumerator Open() //Rotates the door
-    {
-        SoundEffectManager.GlobalSFXManager.PlaySFX(openSound);
-        toOpen.Rotate(new Vector3(0, 0, -54), Space.World);
-        keyCollider.enabled = true;
+    //IEnumerator Open() //Rotates the door
+    //{
+    //    SoundEffectManager.GlobalSFXManager.PlaySFX(openSound);
+    //    animHatch.Play();
 
-        yield return new WaitForSeconds(4); //In case we want something to happen after uncomment bellow 
+    //    //toOpen.Rotate(new Vector3(0, 0, -54), Space.World);
+    //    keyCollider.enabled = true;
 
-        //toOpen.Rotate(new Vector3(0, -90, 0), Space.World);
-    }
+    //    yield return new WaitForSeconds(4); //In case we want something to happen after uncomment bellow 
+
+    //    //toOpen.Rotate(new Vector3(0, -90, 0), Space.World);
+    //}
 
     public void resetPuzzle(int id)
     {
         if (id == this.id)
         {
-            toOpen.Rotate(new Vector3(0, -90, 0), Space.World);
+            //toOpen.Rotate(new Vector3(0, -90, 0), Space.World);
             attemptedSequence = "";
         }
     }
@@ -104,7 +108,11 @@ public class PianoSequenceCheck : MonoBehaviour
     {
         if (id == this.id)
         {
-            StartCoroutine(Open());
+            SoundEffectManager.GlobalSFXManager.PlaySFX(openSound);
+            animHatch.Play();
+            //keyCollider.enabled = true;
+
+            //StartCoroutine(Open());
             PuzzleData.current.completedEvents[id] = true;
         }
     }
