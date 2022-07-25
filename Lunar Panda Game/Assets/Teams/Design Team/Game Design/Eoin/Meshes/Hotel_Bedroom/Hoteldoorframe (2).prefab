@@ -31,6 +31,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074da4a55e6623f4b9eeb7e29cd7694f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorLocked: 0
+  InteractSound: Electric_Switch
+--- !u!65 &2004583743752391736
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4507392303282357137}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0010922868, y: 0.00020651984, z: 0.0020454973}
+  m_Center: {x: 0.0005461436, y: 0.0000018464203, z: 0.0010128582}
 --- !u!1 &8022511152640239018
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +237,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: InteractiveObject
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3451118302482216456, guid: 40cba2656699bce45ba66eb2bf930f9c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 40cba2656699bce45ba66eb2bf930f9c, type: 3}
 --- !u!1 &4507392303282357137 stripped
 GameObject:

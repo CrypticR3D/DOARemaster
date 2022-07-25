@@ -2,46 +2,85 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MyDoorController : MonoBehaviour
+namespace KeySystem
 {
-    private Animator doorAnim;
-
-    private bool doorOpen = false;
-
-    [SerializeField] string InteractSound = "Electric_Switch";
-
-    private void Awake()
+    public class MyDoorController : MonoBehaviour
     {
-        doorAnim = gameObject.GetComponent<Animator>();
-    }
+        private Animator doorAnim;
 
-    //bool AnimatorIsPlaying()
-    //{
+        public bool doorOpen = false;
+        public bool doorLocked = false;
 
-    //    if (doorAnim != null)
-    //    {
-    //        print(doorAnim.GetCurrentAnimatorStateInfo(0).length > doorAnim.GetCurrentAnimatorStateInfo(0).normalizedTime);
-    //        return doorAnim.GetCurrentAnimatorStateInfo(0).length > doorAnim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-    //    }
-    //    else
-    //        return false;
-    //}
+        [SerializeField] string OpenSound = "DoorOpen";
+        [SerializeField] string LockedSound = "DoorLocked";
 
-    public void PlayAnimation()
-    {
-        SoundEffectManager.GlobalSFXManager.PlaySFX(InteractSound);
+        [Header("Animation Names")]
+        [SerializeField] private string openAnimationName = "DoorOpen";
+        [SerializeField] private string closeAnimationName = "DoorClose";
+        [SerializeField] private string lockedAnimationName = "doorLocked";
 
-        if (!doorOpen)
+        [SerializeField] private KeyInventory _keyInventory = null;
+
+        [SerializeField] private int waitTimer = 1;
+        [SerializeField] private bool pauseInteraction = false;
+
+        private void Awake()
         {
-            doorAnim.Play("DoorOpen", 0, 0.0f);
-            doorOpen = true;
+            doorAnim = gameObject.GetComponent<Animator>();
         }
-        else
+
+        private IEnumerator PauseDoorInteraction()
         {
-            doorAnim.Play("DoorClose", 0, 0.0f);
-            doorOpen = false;        
+            pauseInteraction = true;
+            yield return new WaitForSeconds(waitTimer);
+            pauseInteraction = false;
+        }
+
+        public void PlayAnimation()
+        {
+
+            if (_keyInventory.hasRedKey)
+            {
+                OpenDoor();
+            }
+
+            else if (_keyInventory.hasBlueKey)
+            {
+                OpenDoor();
+            }
+
+            else if (_keyInventory.hasGreenKey)
+            {
+                OpenDoor();
+            }
+
+            else if (doorLocked && !doorOpen && !pauseInteraction || !_keyInventory.hasRedKey || !_keyInventory.hasGreenKey || !_keyInventory.hasBlueKey)
+            {
+                SoundEffectManager.GlobalSFXManager.PlaySFX(LockedSound);
+                doorAnim.Play(lockedAnimationName, 0, 0.0f);
+                StartCoroutine(PauseDoorInteraction());
+            }
+
+        }
+
+        private void OpenDoor()
+        {
+            if (!doorOpen && !doorLocked && !pauseInteraction)
+            {
+                SoundEffectManager.GlobalSFXManager.PlaySFX(OpenSound);
+                doorAnim.Play(openAnimationName, 0, 0.0f);
+                doorOpen = true;
+                StartCoroutine(PauseDoorInteraction());
+            }
+
+            else if (doorOpen && !pauseInteraction)
+            {
+                SoundEffectManager.GlobalSFXManager.PlaySFX(OpenSound);
+                doorAnim.Play(closeAnimationName, 0, 0.0f);
+                doorOpen = false;
+                StartCoroutine(PauseDoorInteraction());
+            }
         }
     }
-
 
 }

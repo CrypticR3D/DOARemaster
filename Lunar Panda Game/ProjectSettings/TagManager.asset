@@ -25,6 +25,10 @@ TagManager:
   - CarpetFloor
   - MetalFloor
   - DirtFloor
+  - Door
+  - Drawer
+  - Wall
+  - Key
   layers:
   - Default
   - TransparentFX
