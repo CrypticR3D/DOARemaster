@@ -87,16 +87,18 @@ public class Inventory : MonoBehaviour
 
         if (puttingAway)
         {
-            timer += Time.deltaTime;
-            puttingAwayItem.transform.position = Vector3.MoveTowards(puttingAwayItem.transform.position, player.transform.position, lerpSpeed * Time.deltaTime);
+            puttingAwayItem.SetActive(false);
 
-            if (puttingAwayItem.transform.position == cam.transform.position || timer >= maxTime)
-            {
-                timer = 0;
-                puttingAway = false;
-                puttingAwayItem.SetActive(false);
-                puttingAwayItem = null;
-            }
+            //timer += Time.deltaTime;
+            //puttingAwayItem.transform.position = Vector3.MoveTowards(puttingAwayItem.transform.position, player.transform.position, lerpSpeed * Time.deltaTime);
+
+            //if (puttingAwayItem.transform.position == cam.transform.position) // || timer >= maxTime)
+            //{
+            //    timer = 0;
+            //    puttingAway = false;
+            //    puttingAwayItem.SetActive(false);
+            //    puttingAwayItem = null;
+            //}
         }
     }
 

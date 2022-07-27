@@ -56,13 +56,13 @@ public class Flashlight : MonoBehaviour
         if (Physics.Raycast(transform.position, fwd, 2))
         {
 
-            angle += 120.0f * Time.deltaTime;
+            angle += 120.0f * Time.deltaTime * 2;
 
         }
 
         else
         {
-            angle -= 120.0f * Time.deltaTime;
+            angle -= 120.0f * Time.deltaTime * 2;
 
         }
 

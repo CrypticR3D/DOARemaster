@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,10 +20,14 @@ public class MyDrawerController : MonoBehaviour
     [SerializeField] private int waitTimer = 1;
     [SerializeField] private bool pauseInteraction = false;
 
+    public GameObject Parent2Drawer;
+
     private void Awake()
     {
         drawerAnim = gameObject.GetComponent<Animator>();
     }
+
+
     private IEnumerator PauseDrawerInteraction()
     {
         pauseInteraction = true;
@@ -45,6 +50,7 @@ public class MyDrawerController : MonoBehaviour
             SoundEffectManager.GlobalSFXManager.PlaySFX(OpenSound);
             drawerAnim.Play(openAnimationName, 0, 0.0f);
             drawerOpen = true;
+            Parent2Drawer.SetActive(false);
             StartCoroutine(PauseDrawerInteraction());
         }
 
@@ -53,6 +59,7 @@ public class MyDrawerController : MonoBehaviour
             SoundEffectManager.GlobalSFXManager.PlaySFX(OpenSound);
             drawerAnim.Play(closeAnimationName, 0, 0.0f);
             drawerOpen = false;
+            Parent2Drawer.SetActive(true);
             StartCoroutine(PauseDrawerInteraction());
         }
     }

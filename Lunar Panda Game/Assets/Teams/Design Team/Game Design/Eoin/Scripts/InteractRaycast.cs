@@ -23,8 +23,6 @@ namespace KeySystem
         private bool isCrosshairActive;
         private bool doOnce;
 
-        private const string WallTag = "Wall";
-
         private const string DoorTag = "Door";
 
         private const string DrawerTag = "Drawer";
@@ -35,18 +33,12 @@ namespace KeySystem
         {
             RaycastHit hit;
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
+            Debug.DrawRay(transform.position, fwd, Color.green);
 
             int mask = 1 << LayerMask.NameToLayer(excludeLayerName) | layerMaskInteract.value;
 
             if (Physics.Raycast(transform.position, fwd, out hit, rayLength, mask))
             {
-
-                if ((hit.collider.CompareTag(WallTag)))
-                {
-                    //Allows crosshair to change back to default, otherwise raycast will not work correcly//
-                    //hit.collider.gameObject.SendMessage("openDoorKey", null, SendMessageOptions.DontRequireReceiver);
-                }
-
                 ///Door Interaction///
 
                 if (hit.collider.CompareTag(DoorTag))
@@ -62,6 +54,7 @@ namespace KeySystem
 
                     if (Input.GetKeyDown(openDoorKey))
                     {
+                        //Debug.Log("ClickDoor");
                         raycastedDoor.PlayAnimation();
                     }
                 }
@@ -81,6 +74,7 @@ namespace KeySystem
 
                     if (Input.GetKeyDown(openDoorKey))
                     {
+                        //Debug.Log("ClickDrawer");
                         raycastedDrawer.PlayAnimation();
                     }
                 }
@@ -89,6 +83,7 @@ namespace KeySystem
 
                 if (hit.collider.CompareTag(KeyTag))
                 {
+                    //Debug.Log("Yikes");
                     if (!doOnce)
                     {
                         raycastedKey = hit.collider.gameObject.GetComponent<KeyItemController>();
@@ -100,6 +95,7 @@ namespace KeySystem
 
                     if (Input.GetKeyDown(openDoorKey))
                     {
+                        //Debug.Log("ClickKey");
                         raycastedKey.ObjectInteraction();
                     }
                 }
@@ -108,11 +104,14 @@ namespace KeySystem
 
             else
             {
-                if (isCrosshairActive)
-                {
-                    CrosshairChange(false);
-                    doOnce = false;
-                }
+                CrosshairChange(false);
+                doOnce = false;
+
+                //if (isCrosshairActive)
+                //{
+                //    CrosshairChange(false);
+                //    doOnce = false;
+                //}
             }
         }
 

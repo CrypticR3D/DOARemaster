@@ -94,7 +94,7 @@ public class chessBoardPlacing : MonoBehaviour
     public bool checkPuzzleCompletion()
     {
         check = false;
-        Debug.Log(queenPiece.GetComponent<chessValuedItem>().checkCorrectSpot() + " " + pawnPiece.GetComponent<chessValuedItem>().checkCorrectSpot());
+        //Debug.Log(queenPiece.GetComponent<chessValuedItem>().checkCorrectSpot() + " " + pawnPiece.GetComponent<chessValuedItem>().checkCorrectSpot());
         if (queenPiece.GetComponent<chessValuedItem>().checkCorrectSpot() && pawnPiece.GetComponent<chessValuedItem>().checkCorrectSpot())
         {
             puzzleComplete = true;

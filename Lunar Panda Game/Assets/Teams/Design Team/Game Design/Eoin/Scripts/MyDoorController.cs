@@ -24,6 +24,11 @@ namespace KeySystem
         [SerializeField] private int waitTimer = 1;
         [SerializeField] private bool pauseInteraction = false;
 
+
+        [SerializeField] ItemData RedKeyData;
+        [SerializeField] ItemData GreenKeyData;
+        [SerializeField] ItemData BlueKeyData;
+
         private void Awake()
         {
             doorAnim = gameObject.GetComponent<Animator>();
@@ -41,20 +46,28 @@ namespace KeySystem
 
             if (_keyInventory.hasRedKey)
             {
+                doorLocked = false;
                 OpenDoor();
             }
 
-            else if (_keyInventory.hasBlueKey)
+            if (_keyInventory.hasGreenKey)
+            {
+                doorLocked = false;
+                OpenDoor();
+            }
+
+            if (_keyInventory.hasBlueKey)
+            {
+                doorLocked = false;
+                OpenDoor();
+            }
+
+            else if (!doorLocked)
             {
                 OpenDoor();
             }
 
-            else if (_keyInventory.hasGreenKey)
-            {
-                OpenDoor();
-            }
-
-            else if (doorLocked && !doorOpen && !pauseInteraction || !_keyInventory.hasRedKey || !_keyInventory.hasGreenKey || !_keyInventory.hasBlueKey)
+            else if (doorLocked && !doorOpen && !pauseInteraction && !_keyInventory.hasRedKey || !_keyInventory.hasGreenKey || !_keyInventory.hasBlueKey)
             {
                 SoundEffectManager.GlobalSFXManager.PlaySFX(LockedSound);
                 doorAnim.Play(lockedAnimationName, 0, 0.0f);

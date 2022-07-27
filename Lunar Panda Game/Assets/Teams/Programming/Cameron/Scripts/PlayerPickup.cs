@@ -49,7 +49,7 @@ public class PlayerPickup : MonoBehaviour
 
     void Awake()
     {
-                PlayerCharacter = FindObjectOfType<FirstPersonController>();
+        PlayerCharacter = FindObjectOfType<FirstPersonController>();
         playerCameraTransform = Camera.main.transform;
         inventory = FindObjectOfType<Inventory>();
 
@@ -77,6 +77,7 @@ public class PlayerPickup : MonoBehaviour
             {
                 if (hit.transform.GetComponent<HoldableItem>())
                 {
+                    
                     holdDist = startingHoldDist;
                     //if the ray hits a holdable item, the player picks it up
                     if (hit.transform.GetComponent<HoldableItem>().data)
@@ -94,7 +95,7 @@ public class PlayerPickup : MonoBehaviour
                     player.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                     holdingNarrative = true;
                     holdDist = rotDist;
-                    player.gameObject.GetComponent<playerMovement>().enabled = false;
+                    //player.gameObject.GetComponent<playerMovement>().enabled = false;
                     FindObjectOfType<lockMouse>().canLook = false;
                     PickupItem(hit.transform);
                 }
@@ -272,11 +273,17 @@ public class PlayerPickup : MonoBehaviour
     {
         inventory.removeItem();
         //heldItem.transform.parent = null;
-        if(heldItem.GetComponent<Rigidbody>())
-        {
-            heldItem.GetComponent<Rigidbody>().useGravity = true;
-            heldItem.GetComponent<Rigidbody>().freezeRotation = false;
-        }
+
+
+        
+        heldItem.GetComponent<Rigidbody>().useGravity = true;
+        heldItem.GetComponent<Rigidbody>().freezeRotation = false;
+
+        //if (heldItem.GetComponent<Rigidbody>())
+        //{
+        //    heldItem.GetComponent<Rigidbody>().useGravity = true;
+        //    heldItem.GetComponent<Rigidbody>().freezeRotation = false;
+        //}
         if (heldItem.GetComponent<RotatableItem>())
         {
             FindObjectOfType<lockMouse>().canLook = true;
@@ -291,6 +298,8 @@ public class PlayerPickup : MonoBehaviour
         //the below code is needed so that the rotation is user-friendly and feels more natural to the player
         //item.transform.rotation = Quaternion.identity;
         //item.transform.eulerAngles = new Vector3(item.transform.eulerAngles.x, transform.eulerAngles.y, item.transform.eulerAngles.z);
+
+        //item.transform.parent = null;
 
         item.GetComponent<Rigidbody>().isKinematic = false;
         item.GetComponent<Rigidbody>().useGravity = false;

@@ -49,27 +49,6 @@ public class InteractRaycasting : MonoBehaviour
             if (hit.transform != null && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory && !Pause.IsPaused)
             {
                 return true;
-
-                //if (flashlight.enabled)
-                //{
-                //    return true;
-                //}
-                //else
-                //{
-                //    if (!hit.transform.CompareTag("Flashlight") && !hit.transform.CompareTag("BorisBox"))
-                //    {
-                //        return false;
-                //    }
-                //    else
-                //    {
-                //        if (hit.transform.CompareTag("Flashlight"))
-                //        {
-                //            //flashlight.enabled = true;
-                //            //hit.transform.gameObject.SetActive(false);
-                //        }
-                //        return true;
-                //    }
-                //}
             }
             return false;
         }
@@ -83,27 +62,6 @@ public class InteractRaycasting : MonoBehaviour
             if (hit.transform != null && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory && !Pause.IsPaused)
             {
                 return true;
-
-                //if (flashlight.enabled)
-                //{
-                //    return true;
-                //}
-                //else
-                //{
-                //    if (!hit.transform.CompareTag("Flashlight") && !hit.transform.CompareTag("BorisBox"))
-                //    {
-                //        return false;
-                //    }
-                //    else
-                //    {
-                //        if (hit.transform.CompareTag("Flashlight"))
-                //        {
-                //            //flashlight.enabled = true;
-                //            //hit.transform.gameObject.SetActive(false);
-                //        }
-                //        return true;
-                //    }
-                //}
             }
             return false;
         }

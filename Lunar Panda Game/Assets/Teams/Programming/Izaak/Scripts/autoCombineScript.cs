@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using KeySystem;
 
 public class autoCombineScript : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class autoCombineScript : MonoBehaviour
     private string itemNamePrompt;
     public string fullPrompt;
     public Animator anim;
+
 
     [System.Serializable]
     public class itemBuildPath
@@ -31,6 +33,9 @@ public class autoCombineScript : MonoBehaviour
     [Tooltip("Script of the inventory system")]
     public Inventory inventoryScript;
     private List<List<bool>> inInventory;
+
+    [SerializeField] ItemData RedKeyData;
+    [SerializeField] private KeyInventory _keyInventory;
 
     // Start is called before the first frame update
     void Start()
@@ -86,14 +91,12 @@ public class autoCombineScript : MonoBehaviour
 
     void combine()
     {
-
        for (int k = 0; k < autoCombineItemsList.Count; k++)
        {
             if (canCombine(k) == true)
             {
                 for (int i = 0; i < inventoryScript.itemInventory.Count; i++)
                 {
-
                     for (int j = 0; j < autoCombineItemsList[k].itemParts.Count; j++)
                     {
                         if (autoCombineItemsList[k].itemParts[j] == inventoryScript.itemInventory[i])
@@ -103,18 +106,21 @@ public class autoCombineScript : MonoBehaviour
                             inInventory[k][j] = false;
                         }
                     }
-
                 }
                 
                 inventoryScript.addItem(autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data);
+
                 autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data.id = Database.current.itemsInScene.Count;
+
                 Database.current.itemsInScene.Add(autoCombineItemsList[k].instance.GetComponent<HoldableItem>());
+
                 itemNamePrompt = autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data.itemName;
+
                 fullPrompt = combinePrompt + itemNamePrompt;
+
                 anim.SetTrigger("Prompt");
+
             }  
         }
-
-
     }
 }
