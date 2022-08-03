@@ -50,7 +50,7 @@ public class MyDrawerController : MonoBehaviour
             SoundEffectManager.GlobalSFXManager.PlaySFX(OpenSound);
             drawerAnim.Play(openAnimationName, 0, 0.0f);
             drawerOpen = true;
-            Parent2Drawer.SetActive(false);
+            //Parent2Drawer.SetActive(false);
             StartCoroutine(PauseDrawerInteraction());
         }
 
@@ -59,7 +59,7 @@ public class MyDrawerController : MonoBehaviour
             SoundEffectManager.GlobalSFXManager.PlaySFX(OpenSound);
             drawerAnim.Play(closeAnimationName, 0, 0.0f);
             drawerOpen = false;
-            Parent2Drawer.SetActive(true);
+            //Parent2Drawer.SetActive(true);
             StartCoroutine(PauseDrawerInteraction());
         }
     }

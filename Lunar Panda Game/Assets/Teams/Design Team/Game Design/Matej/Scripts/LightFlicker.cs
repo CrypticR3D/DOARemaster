@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class LightFlicker : MonoBehaviour
 {
-    Light light;
+    private Light light;
 
-    public float minWaitTime;
-    public float maxWaitTime;
+    private float minWaitTime = 1;
+    private float maxWaitTime = 10;
 
-    public float stopMinWaitTime;
-    public float stopMaxWaitTime;
+    private float stopMinWaitTime = 1;
+    private float stopMaxWaitTime = 10;
 
-    public float minFlicks;
-    public float maxFlicks;
+    private float minFlicks = 1;
+    private float maxFlicks = 10;
 
 
     private bool isOn;

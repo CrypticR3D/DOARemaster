@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3027164084439395461}
   - component: {fileID: 3027164084439395460}
   - component: {fileID: 3027164084439395459}
-  - component: {fileID: 3027164084439395458}
   - component: {fileID: 3027164084439395457}
-  m_Layer: 0
+  - component: {fileID: 682911753}
+  m_Layer: 1
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,9 +28,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3027164084439395487}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.0906515, y: 0, z: 5.699999}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.4142, y: 2.7171, z: 0.30088}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -258,7 +258,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3027164084439395487}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -270,7 +270,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: a1e97cbf2538241b691aae8243b5fb10, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -300,20 +300,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3027164084439395487}
   m_Mesh: {fileID: 0}
---- !u!64 &3027164084439395458
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3027164084439395487}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!114 &3027164084439395457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,19 +312,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a19d17602a975a41b6919f2d45efe71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cc: {fileID: 0}
   camera: {fileID: 0}
   disableAtStart: 0
   audioSource: {fileID: 0}
-  disablePlayerMovement: 0
-  delayBeforeMovingAgain: 0
+  disablePlayerMovement: 1
+  delayBeforeMovingAgain: 1.5
   move: 0
   movableObject: {fileID: 0}
   delayMoveObject: 0
   teleport: 0
   teleportObject: {fileID: 0}
-  lights: 0
+  lights: 1
   lightsOnOff: 0
-  Lights: []
+  Lights:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   jump: 0
   jumpSImage: {fileID: 0}
   stayOnScreenFor: 0
@@ -346,19 +341,19 @@ MonoBehaviour:
   lookAt: {fileID: 0}
   lookAtDelay: 0
   damping: 0
-  play: 0
-  clipName: 
+  play: 1
+  clipName: Piano_Sequence
   stop: 0
   stopClipName: 
   drop: 0
-  dropObject: {fileID: 0}
+  DropObjects: []
   levitate: 0
   LevitateObjects: []
   forceUp: 0
   forceDown: 0
   delay: 0
   throW: 0
-  FallObjects: []
+  ThrowObjects: []
   force: 0
   enableObject: 0
   otherObject: {fileID: 0}
@@ -366,3 +361,16 @@ MonoBehaviour:
   DisableTorch: 0
   enableOtherTrigger: 0
   otherTrigger: {fileID: 0}
+--- !u!65 &682911753
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3027164084439395487}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.6426911, y: 1.5690753, z: 1}
+  m_Center: {x: 0.038466215, y: 0.21546233, z: -0.5}

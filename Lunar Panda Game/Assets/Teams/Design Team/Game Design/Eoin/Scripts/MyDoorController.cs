@@ -19,15 +19,17 @@ namespace KeySystem
         [SerializeField] private string closeAnimationName = "DoorClose";
         [SerializeField] private string lockedAnimationName = "doorLocked";
 
-        [SerializeField] private KeyInventory _keyInventory = null;
+        //[SerializeField] private KeyInventory _keyInventory = null;
+
+        [SerializeField] public Inventory Inv = null;
 
         [SerializeField] private int waitTimer = 1;
         [SerializeField] private bool pauseInteraction = false;
 
 
-        [SerializeField] ItemData RedKeyData;
-        [SerializeField] ItemData GreenKeyData;
-        [SerializeField] ItemData BlueKeyData;
+        //[SerializeField] ItemData RedKeyData;
+        //[SerializeField] ItemData GreenKeyData;
+        //[SerializeField] ItemData BlueKeyData;
 
         private void Awake()
         {
@@ -44,19 +46,19 @@ namespace KeySystem
         public void PlayAnimation()
         {
 
-            if (_keyInventory.hasRedKey)
+            if (Inv.hasRedKey)
             {
                 doorLocked = false;
                 OpenDoor();
             }
 
-            if (_keyInventory.hasGreenKey)
+            if (Inv.hasGreenKey)
             {
                 doorLocked = false;
                 OpenDoor();
             }
 
-            if (_keyInventory.hasBlueKey)
+            if (Inv.hasBlueKey)
             {
                 doorLocked = false;
                 OpenDoor();
@@ -67,16 +69,15 @@ namespace KeySystem
                 OpenDoor();
             }
 
-            else if (doorLocked && !doorOpen && !pauseInteraction && !_keyInventory.hasRedKey || !_keyInventory.hasGreenKey || !_keyInventory.hasBlueKey)
+            else if (doorLocked && !doorOpen && !pauseInteraction && !Inv.hasRedKey || !Inv.hasGreenKey || !Inv.hasBlueKey)
             {
                 SoundEffectManager.GlobalSFXManager.PlaySFX(LockedSound);
                 doorAnim.Play(lockedAnimationName, 0, 0.0f);
                 StartCoroutine(PauseDoorInteraction());
             }
-
         }
 
-        private void OpenDoor()
+        public void OpenDoor()
         {
             if (!doorOpen && !doorLocked && !pauseInteraction)
             {
@@ -95,5 +96,4 @@ namespace KeySystem
             }
         }
     }
-
 }

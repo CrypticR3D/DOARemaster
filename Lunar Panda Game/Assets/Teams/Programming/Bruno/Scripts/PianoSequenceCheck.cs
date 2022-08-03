@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PianoSequenceCheck : MonoBehaviour
 {
-    //[SerializeField] Collider keyCollider;
-
     [Tooltip("id in relation to the event manager")]
     public int id;
 
@@ -15,15 +13,14 @@ public class PianoSequenceCheck : MonoBehaviour
     public string sequence = "";
     public string attemptedSequence;
 
-    [Header("Reset Sound")]
+    [Header("Sounds")]
+    public string openSound;
     public string resetSound;
 
-    [Header("Open Sound")]
-    public string openSound;
 
-    //public Transform toOpen;
-
+    [Header("Animations")]
     [SerializeField] Animation animHatch;
+    [SerializeField] Animation animDisplay;
 
     public void Start()
     {
@@ -110,6 +107,8 @@ public class PianoSequenceCheck : MonoBehaviour
         {
             SoundEffectManager.GlobalSFXManager.PlaySFX(openSound);
             animHatch.Play();
+            
+            animDisplay.Play();
             //keyCollider.enabled = true;
 
             //StartCoroutine(Open());

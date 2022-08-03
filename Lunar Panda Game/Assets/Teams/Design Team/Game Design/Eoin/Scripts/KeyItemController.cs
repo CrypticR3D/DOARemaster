@@ -49,16 +49,15 @@ namespace KeySystem
 
             else if (redKey)
             {
-                _keyInventory.hasRedKey = true;
 
-                //if (Inv.itemInventory[Inv.selectedItem] == RedKeyData)
-                //{
-                //    _keyInventory.hasRedKey = true;
-                //}
-                //else if 
-                //{
-                //    _keyInventory.hasRedKey = false;
-                //}
+                if (RedKeyData == Inv.itemInventory[Inv.selectedItem])
+                {
+                    _keyInventory.hasRedKey = true;
+                }
+                else if (!RedKeyData == Inv.itemInventory[Inv.selectedItem])
+                {
+                    _keyInventory.hasRedKey = false;
+                }
             }
 
             //Green Door//
@@ -69,16 +68,15 @@ namespace KeySystem
 
             else if (greenKey)
             {
-                _keyInventory.hasGreenKey = true;
 
-                //if (Inv.itemInventory[Inv.selectedItem] == GreenKeyData)
-                //{
-                //    _keyInventory.hasGreenKey = true;
-                //}
-                //else
-                //{
-                //    _keyInventory.hasGreenKey = false;
-                //}
+                if (GreenKeyData == Inv.itemInventory[Inv.selectedItem])
+                {
+                    _keyInventory.hasGreenKey = true;
+                }
+                else
+                {
+                    _keyInventory.hasGreenKey = false;
+                }
             }
 
             //Blue Door//
