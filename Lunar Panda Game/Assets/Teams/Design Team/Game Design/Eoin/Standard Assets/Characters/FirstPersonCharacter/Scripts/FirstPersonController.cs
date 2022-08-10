@@ -18,6 +18,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private bool m_IsWalking;
         [SerializeField] private float m_WalkSpeed;
         [SerializeField] private float m_RunSpeed;
+        [SerializeField] private float m_CrouchSpeed;
         [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
         [SerializeField] private float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
@@ -58,17 +59,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip Metal_LandSound;
         [SerializeField] private AudioClip Dirt_LandSound;
 
-        /// FOOTSTEP SOUNDS ///
-
-
-
         [SerializeField] public bool canLook; // stops the camera from moving.
-
-        //[SerializeField] public bool isCrouching = false;
         
         Rigidbody m_Rigidbody;
         const float k_Half = 0.5f;
-        //private CrouchTrigger crouchTrigger;
 
 
         private Camera m_Camera;
@@ -85,16 +79,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public bool m_Jumping;
         private AudioSource m_AudioSource;
 
-        float m_CapsuleHeight;
-        Vector3 m_CapsuleCenter;
-        //CapsuleCollider m_CharacterController;
-        bool m_Crouching;
+        private float m_CapsuleHeight;
+        private Vector3 m_CapsuleCenter;
 
         private const string WoodTag = "WoodFloor";
         private const string TileTag = "TileFloor";
         private const string CarpetTag = "CarpetFloor";
         private const string MetalTag = "MetalFloor";
         private const string DirtTag = "DirtFloor";
+
+        public GameObject crouchChecker;
+        bool isCrouching = false;
+
 
         void Awake()
         {
@@ -136,13 +132,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 RotateView();
             }
-
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
-
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
             {
                 StartCoroutine(m_JumpBob.DoBobCycle());
@@ -154,19 +148,31 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_MoveDir.y = 0f;
             }
-
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
 
-
-            bool crouch = Input.GetKey(KeyCode.C);
-
-            ScaleCapsuleForCrouching(crouch);
-            PreventStandingInLowHeadroom();
-
-            //Crouch();
+            // Crouch
+            if  (Input.GetButtonDown("Crouch"))
+            {
+                Crouching();
+            }
         }
 
-
+        private void Crouching()
+        {
+            if (!isCrouching)
+            {
+                crouchChecker.SetActive(true);
+                transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                isCrouching = true;
+            }
+            
+            else
+            {
+                crouchChecker.SetActive(false);
+                transform.localScale = new Vector3(1f, 1f, 1f);
+                isCrouching = false;
+            }
+        }
         private void PlayLandingSound()
         {
             RaycastHit Landhit;
@@ -212,8 +218,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_NextStep = m_StepCycle + .5f;
             }
         }
-
-
         private void FixedUpdate()
         {
             float speed;
@@ -254,8 +258,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             ProgressStepCycle(speed);
             UpdateCameraPosition(speed);
         }
-
-
         private void PlayJumpSound()
         {
             RaycastHit Jumphit;
@@ -294,8 +296,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_AudioSource.Play();
             }
         }
-
-
         private void ProgressStepCycle(float speed)
         {
             if (m_CharacterController.velocity.sqrMagnitude > 0 && (m_Input.x != 0 || m_Input.y != 0))
@@ -313,8 +313,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             PlayFootStepAudio();
         }
-
-
         private void PlayFootStepAudio()
         {
             if (!m_CharacterController.isGrounded)
@@ -379,8 +377,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 Debug.Log("No Floor Here");
             }
         }
-
-
         private void UpdateCameraPosition(float speed)
         {
             Vector3 newCameraPosition;
@@ -403,8 +399,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             m_Camera.transform.localPosition = newCameraPosition;
         }
-
-
         private void GetInput(out float speed)
         {
             // Read input
@@ -419,6 +413,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
+            
+            
             m_Input = new Vector2(horizontal, vertical);
 
             // normalize input if it exceeds 1 in combined length:
@@ -435,100 +431,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
             }
         }
-
-
         private void RotateView()
         {
             m_MouseLook.LookRotation (transform, m_Camera.transform);
         }
-
-
-        private void OnControllerColliderHit(ControllerColliderHit hit)
-        {
-            Rigidbody body = hit.collider.attachedRigidbody;
-            //dont move the rigidbody if the character is on top of it
-            if (m_CollisionFlags == CollisionFlags.Below)
-            {
-                return;
-            }
-
-            if (body == null || body.isKinematic)
-            {
-                return;
-            }
-            body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
-        }
-
-        //private void Crouch(bool crouch)
-        //{
-
-        //    ScaleCapsuleForCrouching(crouch);
-        //    PreventStandingInLowHeadroom();
-        //    ////Set the key for crouch
-        //    //var crouchButton = Input.GetKey(KeyCode.LeftControl);
-
-
-        //    //if (!isCrouching && Input.GetButtonDown("Crouch"))
-        //    //{
-        //    //    //Set player height to 0.5 when holding crouch key and center to 0.25
-        //    //    m_CharacterController.height = 1f;
-        //    //    //playerCollider.center = new Vector3(playerCollider.center.x, 0.25f, playerCollider.center.z);
-        //    //    isCrouching = true;
-        //    //}
-        //    //else
-        //    //    if (isCrouching && Input.GetButtonDown("Crouch") && crouchTrigger.isObjectAbove == false)
-        //    //{
-        //    //    //var cantStandUp = Physics.Raycast(transform.position, Vector3.up, 2f);
-
-        //    //    //Checks if player can stand up
-        //    //    //if(!cantStandUp)
-        //    //    //{
-        //    //    //Sets player height back to 2 and resets center back to 0
-        //    //    playerCollider.height = 2.4f;
-        //    //    //playerCollider.center = new Vector3(playerCollider.center.x, 0f, playerCollider.center.z);
-        //    //    isCrouching = false;
-        //    //    //}
-        //    //}
-        //}
-
-        private void ScaleCapsuleForCrouching(bool crouch)
-        {
-            if (m_CharacterController.isGrounded && crouch)
-            {
-                if (m_Crouching) return;
-                m_CharacterController.height = m_CharacterController.height / 2f;
-                m_CharacterController.center = m_CharacterController.center / 2f;
-                m_Crouching = true;
-            }
-            else
-            {
-                Ray crouchRay = new Ray(m_Rigidbody.position + Vector3.up * m_CharacterController.radius * k_Half, Vector3.up);
-                float crouchRayLength = m_CapsuleHeight - m_CharacterController.radius * k_Half;
-                if (Physics.SphereCast(crouchRay, m_CharacterController.radius * k_Half, crouchRayLength))
-                {
-                    m_Crouching = true;
-                    return;
-                }
-                m_CharacterController.height = m_CapsuleHeight;
-                m_CharacterController.center = m_CapsuleCenter;
-                m_Crouching = false;
-            }
-        }
-
-        private void PreventStandingInLowHeadroom()
-        {
-            // prevent standing up in crouch-only zones
-            if (!m_Crouching)
-            {
-                Ray crouchRay = new Ray(m_Rigidbody.position + Vector3.up * m_CharacterController.radius * k_Half, Vector3.up);
-                float crouchRayLength = m_CapsuleHeight - m_CharacterController.radius * k_Half;
-                if (Physics.SphereCast(crouchRay, m_CharacterController.radius * k_Half, crouchRayLength))
-                {
-                    m_Crouching = true;
-                }
-            }
-        }
-
         public IEnumerator AudioDelay()
         {
             

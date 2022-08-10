@@ -316,24 +316,16 @@ MonoBehaviour:
   camera: {fileID: 0}
   disableAtStart: 0
   audioSource: {fileID: 0}
-  disablePlayerMovement: 1
-  delayBeforeMovingAgain: 1.5
+  disablePlayerMovement: 0
+  delayBeforeMovingAgain: 0
   move: 0
   movableObject: {fileID: 0}
   delayMoveObject: 0
   teleport: 0
   teleportObject: {fileID: 0}
-  lights: 1
+  lights: 0
   lightsOnOff: 0
-  Lights:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  Lights: []
   jump: 0
   jumpSImage: {fileID: 0}
   stayOnScreenFor: 0
@@ -361,6 +353,8 @@ MonoBehaviour:
   DisableTorch: 0
   enableOtherTrigger: 0
   otherTrigger: {fileID: 0}
+  openDoorSys: 0
+  doorController: {fileID: 0}
 --- !u!65 &682911753
 BoxCollider:
   m_ObjectHideFlags: 0

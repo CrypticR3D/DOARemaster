@@ -7,31 +7,33 @@ public class ClockPuzzle : MonoBehaviour
     [SerializeField] Animation anim;
     public string rotateAudio;//Matej edit
     public string placeAudio;//Matej edit
+    public string chimeAudio;//Matej edit
     bool handsConnected = false;
-    const float clockAngle = 30f;
+    const float minuteAngle = 30f;
     const float hourAngle = 270f;
-    [Header("Prefabs")]
-    [Tooltip("This should be the prefab of the Hour hand")]
+
     [SerializeField] GameObject hourHand;
-    [Tooltip("This should be the prefab of the Minute hand")]
+
     [SerializeField] GameObject minuteHand;
-    [Tooltip("This should be the prefab of the clock hands")]
+
     [SerializeField] GameObject clockHands;
-    [Header("Data")]
-    [Tooltip("This should be the item data of the clock hands")]
+
     [SerializeField] ItemData clockHandsData;
+
     Inventory inventory;
-    [Header("Puzzle Completion")]
-    [Tooltip("Put the angle the minute hand needs to be in (doesn't have to be super exact, can be 1 degree off)")]
+
     [SerializeField] float desiredMinuteRotation;
-    [Tooltip("Put the angle the hour hand needs to be in (doesn't have to be super exact, can be 1 degree off)")]
+
     [SerializeField] float desiredHourRotation;
-    [Header("Temp")]
+    
     [SerializeField] Transform door;
     [SerializeField] Transform pivot;
 
-    [SerializeField] Transform Handpivot;
+    [SerializeField] public Transform Handpivot;
     private bool completed;
+
+    [SerializeField] private int waitTimer = 1;
+    [SerializeField] private bool pauseInteraction = false;
 
     /*[Tooltip("This is the position of the minute hand when its placed on the clock")]
     [SerializeField] Vector3 minHandClockPos;
@@ -50,27 +52,43 @@ public class ClockPuzzle : MonoBehaviour
 
     void CheckInput()
     {
-        if (Input.GetButtonDown("Interact"))
+        if (!completed)
         {
-            if(InteractRaycasting.Instance.raycastInteract(out RaycastHit hit))
+            if (Input.GetButtonDown("Interact"))
             {
-                if (hit.transform.gameObject == gameObject)
+                if (InteractRaycasting.Instance.raycastInteract(out RaycastHit hit))
                 {
-                    if (handsConnected)
-                    {
-                        RotateHand();
-                        SoundEffectManager.GlobalSFXManager.PlaySFX(rotateAudio);//Matej edit
-                    }
-                    else
+                    if (hit.transform.gameObject == gameObject)
                     {
                         PlaceHands();
                         SoundEffectManager.GlobalSFXManager.PlaySFX(placeAudio);//Matej edit
                     }
                 }
+
+                else
+                {
+                    return;
+                }
             }
-            else
+
+            if (Input.GetAxis("Mouse ScrollWheel") != 0f) // forward
             {
-                return;
+                if (InteractRaycasting.Instance.raycastInteract(out RaycastHit hit))
+                {
+                    if (hit.transform.gameObject == gameObject)
+                    {
+                        if (handsConnected)
+                        {
+                            RotateHand();
+                            StartCoroutine(PauseInteraction());
+                        }
+                    }
+                }
+
+                else
+                {
+                    return;
+                }
             }
         }
     }
@@ -78,20 +96,44 @@ public class ClockPuzzle : MonoBehaviour
     void RotateHand()
     {
         //minuteHand.transform.eulerAngles = new Vector3(minuteHand.transform.eulerAngles.x, minuteHand.transform.eulerAngles.y, minuteHand.transform.eulerAngles.z + clockAngle);
-        minuteHand.transform.RotateAround(Handpivot.position, -Vector3.right , clockAngle);
+        minuteHand.transform.RotateAround(Handpivot.position, -Vector3.right , minuteAngle);
         //the issue with just doing if minute hand is at 90 degrees is that float precision is a piece
+        
         if(minuteHand.transform.eulerAngles.z > hourAngle - 1 && minuteHand.transform.eulerAngles.z < hourAngle + 1)
         {
-            hourHand.transform.RotateAround(Handpivot.position, -Vector3.right, clockAngle);
+            hourHand.transform.RotateAround(Handpivot.position, -Vector3.right, minuteAngle);
         }
+
         CheckCombination();
+    }
+    private IEnumerator PauseInteraction()
+    {
+        pauseInteraction = true;
+        if (pauseInteraction)
+        {
+            SoundEffectManager.GlobalSFXManager.PlaySFX(rotateAudio);//Matej edit
+            yield return new WaitForSeconds(waitTimer);
+        }
+
+        else
+        {
+            pauseInteraction = false;
+        }
+    }
+
+    private IEnumerator UnlockDoor()
+    {
+        //unlock the door
+        SoundEffectManager.GlobalSFXManager.PlaySFX(chimeAudio);//Matej edit
+        yield return new WaitForSeconds(7);
+        anim.Play();
     }
 
     void PlaceHands()
     {
         if(inventory.itemInventory[inventory.selectedItem] == clockHandsData)
         {
-            clockHands = Instantiate(clockHands, Handpivot.position, Quaternion.Euler(0, 90, 0));
+            clockHands = Instantiate(clockHands, Handpivot.position, Quaternion.Euler(0, -90, 0));
 
             Destroy(clockHands.GetComponent<HoldableItem>());
             Destroy(clockHands.GetComponent<Rigidbody>());
@@ -122,7 +164,6 @@ public class ClockPuzzle : MonoBehaviour
             }
         }
     }
-
     void CheckCombination()
     {
         //if both the minute and hour hand are at the desired rotation
@@ -130,9 +171,8 @@ public class ClockPuzzle : MonoBehaviour
         {
             if (hourHand.transform.eulerAngles.z > desiredHourRotation - 1 && hourHand.transform.eulerAngles.z < desiredHourRotation + 1)
             {
-                //unlock the door
-                anim.Play();
                 completed = true;
+                StartCoroutine(UnlockDoor());
 
                 if (Analysis.current != null)
                 {

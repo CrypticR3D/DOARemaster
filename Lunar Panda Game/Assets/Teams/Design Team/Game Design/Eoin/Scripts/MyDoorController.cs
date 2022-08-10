@@ -71,9 +71,7 @@ namespace KeySystem
 
             else if (doorLocked && !doorOpen && !pauseInteraction && !Inv.hasRedKey || !Inv.hasGreenKey || !Inv.hasBlueKey)
             {
-                SoundEffectManager.GlobalSFXManager.PlaySFX(LockedSound);
-                doorAnim.Play(lockedAnimationName, 0, 0.0f);
-                StartCoroutine(PauseDoorInteraction());
+                LockedDoor();
             }
         }
 
@@ -94,6 +92,12 @@ namespace KeySystem
                 doorOpen = false;
                 StartCoroutine(PauseDoorInteraction());
             }
+        }
+        public void LockedDoor()
+        {
+            SoundEffectManager.GlobalSFXManager.PlaySFX(LockedSound);
+            doorAnim.Play(lockedAnimationName, 0, 0.0f);
+            StartCoroutine(PauseDoorInteraction());
         }
     }
 }

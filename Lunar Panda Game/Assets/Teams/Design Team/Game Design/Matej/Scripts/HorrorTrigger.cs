@@ -19,6 +19,7 @@ public class HorrorTrigger : MonoBehaviour
 
     public bool disableAtStart;
     public AudioSource audioSource;
+    private float fadeTime = 2f;
 
     [Header("---DISABLE MOVEMENT SETTINGS---")]
     public bool disablePlayerMovement;
@@ -87,9 +88,16 @@ public class HorrorTrigger : MonoBehaviour
     public HorrorTrigger otherTrigger;
 
     [Header("---DOOR SETTINGS---")]
-    public bool openDoorSys;
+    public bool openDoor;
+    public bool interactDoor;
     public MyDoorController doorController;
 
+    [Header("---SOUNDS SETTINGS---")]
+    public bool sounds;
+    public bool fadeIn;
+    public bool fadeOut;
+
+    public AudioClip[] audioClipArray;
 
     public void Start()
     {
@@ -144,15 +152,10 @@ public class HorrorTrigger : MonoBehaviour
                 numberOfEvents++;
                 LookAt();
             }
-            if (play)
+            if (sounds)
             {
                 numberOfEvents++;
-                PlaySound(clipName);
-            }
-            if (stop)
-            {
-                numberOfEvents++;
-                StopSound(stopClipName);
+                Sounds();
             }
             if (drop)
             {
@@ -179,11 +182,17 @@ public class HorrorTrigger : MonoBehaviour
                 numberOfEvents++;
                 HideObject();
             }
-            if (openDoorSys)
+            if (openDoor)
             {
                 numberOfEvents++;
                 OpenDoor();
             }
+            if (interactDoor)
+            {
+                numberOfEvents++;
+                InteractDoor();
+            }
+
             gameObject.GetComponent<BoxCollider>().enabled = false;
         }
     }
@@ -191,7 +200,6 @@ public class HorrorTrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         coroutineDone = true;
-
     }
     private IEnumerator PlayerMovementCoroutine(float Delay)
     {
@@ -213,7 +221,7 @@ public class HorrorTrigger : MonoBehaviour
     }
     private IEnumerator JumpscareStayOnScreen(float time)
     {
-        //Activates the image in Canva and then disables it
+        //Activates the image in Canvas and then disables it
         jumpSImage.gameObject.SetActive(true);
         yield return new WaitForSeconds(time);
         jumpSImage.gameObject.SetActive(false);
@@ -248,6 +256,10 @@ public class HorrorTrigger : MonoBehaviour
 
         otherObject.gameObject.SetActive(false);
         doneEvents++;
+    }
+    private IEnumerator AudioThings()
+    {
+        yield return new WaitForSeconds(2);
     }
     public void DisablePlayerMovement()
     {
@@ -344,5 +356,24 @@ public class HorrorTrigger : MonoBehaviour
     {
         doorController.OpenDoor();
         doorController.doorLocked = true;
+    }
+    public void InteractDoor()
+    {
+        doorController.LockedDoor();
+    }
+    public void Sounds()
+    {
+        if (play)
+        {
+            //PlaySound(clipName);
+            //audioSource(clipName);
+            StartCoroutine(AudioHelper.FadeIn(audioSource, fadeTime));
+        }
+        if (stop)
+        {
+            //StopSound(stopClipName);
+            StartCoroutine(AudioHelper.FadeOut(audioSource, fadeTime));
+        }
+        StartCoroutine(AudioThings());
     }
 }
