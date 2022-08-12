@@ -7,7 +7,7 @@ public class SoundEffectManager : MonoBehaviour
 {
     public List<string> ClipNames = new List<string>();
     public List<AudioClip> ClipList = new List<AudioClip>();
-    private Dictionary<string, AudioClip> SFX_Library = new Dictionary<string, AudioClip>();
+    public Dictionary<string, AudioClip> SFX_Library = new Dictionary<string, AudioClip>();
 
     public GameObject SFX_Prefab;
     AudioSource TheSFX;

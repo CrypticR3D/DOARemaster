@@ -64,16 +64,6 @@ public class BorisBabbles : MonoBehaviour
         {
             StartCoroutine(DisplayOrder());
         }
-        /*else
-        {
-            for (int i = 0; i < buttons.Length; i++)
-            {
-                if(hit.transform.gameObject == buttons[i])
-                {
-                    StartCoroutine(DisplayOrder());
-                }
-            }
-        }*/
     }
 
     IEnumerator DisplayOrder()
@@ -166,7 +156,6 @@ public class BorisBabbles : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         SoundEffectManager.GlobalSFXManager.PlaySFX(briefcaseAudio);
         lid.GetComponent<Animation>().Play();
-        //GetComponent<Animation>().Play();
     }
 
     IEnumerator IncorrectInput()

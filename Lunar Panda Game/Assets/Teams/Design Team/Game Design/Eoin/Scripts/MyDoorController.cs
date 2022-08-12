@@ -13,11 +13,13 @@ namespace KeySystem
 
         [SerializeField] string OpenSound = "DoorOpen";
         [SerializeField] string LockedSound = "DoorLocked";
+        [SerializeField] string SlamSound = "DoorSlam";
 
         [Header("Animation Names")]
         [SerializeField] private string openAnimationName = "DoorOpen";
         [SerializeField] private string closeAnimationName = "DoorClose";
         [SerializeField] private string lockedAnimationName = "doorLocked";
+        [SerializeField] private string slamAnimationName = "DoorSlam";
 
         //[SerializeField] private KeyInventory _keyInventory = null;
 
@@ -99,5 +101,20 @@ namespace KeySystem
             doorAnim.Play(lockedAnimationName, 0, 0.0f);
             StartCoroutine(PauseDoorInteraction());
         }
+
+        public void SlamDoor()
+        {
+            SoundEffectManager.GlobalSFXManager.PlaySFX(OpenSound);
+            doorAnim.Play(slamAnimationName, 0, 0.0f);
+            doorOpen = false;
+            StartCoroutine(PauseDoorInteraction());
+            StartCoroutine(SlamDoorAudio());
+        }
+        private IEnumerator SlamDoorAudio()
+        {
+            yield return new WaitForSeconds(0.7f);
+            SoundEffectManager.GlobalSFXManager.PlaySFX(SlamSound);
+        }
+
     }
 }
