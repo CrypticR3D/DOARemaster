@@ -10,12 +10,10 @@ public class HorrorTriggerExit : MonoBehaviour
     private int doneEvents = 0;
     private int numberOfEvents = 0;
     private bool coroutineDone = false;
-    public CharacterController cc;
-
 
     private GameObject player;
-    //Rotating camera to the mirror settings
-    public GameObject camera;
+    private Camera p_camera;
+    private CharacterController CharacterController;
 
     public bool disableAtStart;
     public AudioSource audioSource;
@@ -56,14 +54,6 @@ public class HorrorTriggerExit : MonoBehaviour
     private Vector3 lookPos = new Vector3();
     private bool startLook;
 
-    [Header("---PLAY SOUND SETTINGS---")]
-    public bool play;
-    public string clipName;
-
-    [Header("---STOP SOUND SETTINGS---")]
-    public bool stop;
-    public string stopClipName;
-
     [Header("---DROP OBJECT SETTINGS---")]
     public bool drop;
     public List<FallObject> DropObjects = new List<FallObject>();
@@ -76,7 +66,7 @@ public class HorrorTriggerExit : MonoBehaviour
     public float delay;
 
     [Header("---THROW OBJECT SETTINGS---")]
-    public bool throW;
+    public bool UseThrow;
     //public FallObject throwObject;
     public List<FallObject> ThrowObjects = new List<FallObject>();
     public float force;
@@ -106,6 +96,15 @@ public class HorrorTriggerExit : MonoBehaviour
     public bool fadeIn;
     public bool fadeOut;
     public SoundEffectManager SoundEffectManager;
+    public bool x;
+
+    [Header("---PLAY SOUND---")]
+    public bool play;
+    public string clipName;
+
+    [Header("---STOP SOUND---")]
+    public bool stop;
+    public string stopClipName;
 
     [Header("---ANIMATION SETTINGS---")]
     public bool AnimEnable;
@@ -117,8 +116,8 @@ public class HorrorTriggerExit : MonoBehaviour
     {
         if (disableAtStart) ActivateTriggerCollider(false);
         player = GameObject.FindWithTag("Player");
-        camera = player.GetComponentInChildren<Camera>().gameObject;
-        cc = player.GetComponentInChildren<CharacterController>();
+        p_camera = Camera.main;
+        CharacterController = player.GetComponentInChildren<CharacterController>();
     }
     public void Update()
     {
@@ -126,7 +125,7 @@ public class HorrorTriggerExit : MonoBehaviour
         {
             player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.LookRotation(lookPos),
                         Time.deltaTime * damping);
-            camera.transform.localEulerAngles = new Vector3(Mathf.Lerp(camera.transform.localEulerAngles.x, 0, Time.deltaTime), 0, 0);
+            p_camera.transform.localEulerAngles = new Vector3(Mathf.Lerp(p_camera.transform.localEulerAngles.x, 0, Time.deltaTime), 0, 0);
         }
         if (doneEvents == numberOfEvents && coroutineDone) GetComponent<BoxCollider>().enabled = false;
 
@@ -182,7 +181,7 @@ public class HorrorTriggerExit : MonoBehaviour
                 numberOfEvents++;
                 Levitate();
             }
-            if (throW)
+            if (UseThrow)
             {
                 numberOfEvents++;
                 ThrowObject(force);
@@ -222,7 +221,7 @@ public class HorrorTriggerExit : MonoBehaviour
         //FindObjectOfType<WalkingSound>().canMakeSound = false;
         //cc.enabled = false;
         yield return new WaitForSeconds(Delay);
-        cc.enabled = true;
+        CharacterController.enabled = true;
         //player.GetComponent<playerMovement>().enabled = true;
         //FindObjectOfType<WalkingSound>().canMakeSound = true;
         doneEvents++;
@@ -254,11 +253,11 @@ public class HorrorTriggerExit : MonoBehaviour
     }
     private IEnumerator HideObjectCoroutine(float time)
     {
-        bool IsTorchOn = camera.GetComponentInChildren<Light>().enabled;
+        bool IsTorchOn = p_camera.GetComponentInChildren<Light>().enabled;
 
         if (DisableTorch)
         {
-            camera.GetComponentInChildren<Light>().enabled = false;
+            p_camera.GetComponentInChildren<Light>().enabled = false;
         }
 
         otherObject.gameObject.SetActive(true);
@@ -266,7 +265,7 @@ public class HorrorTriggerExit : MonoBehaviour
 
         if (DisableTorch && IsTorchOn)
         {
-            camera.GetComponentInChildren<Light>().enabled = true;
+            p_camera.GetComponentInChildren<Light>().enabled = true;
         }
 
         otherObject.gameObject.SetActive(false);
@@ -291,7 +290,7 @@ public class HorrorTriggerExit : MonoBehaviour
     public void DisablePlayerMovement()
     {
         //player.GetComponent<CharacterController>().enabled = false;
-        cc.enabled = false;
+        CharacterController.enabled = false;
         StartCoroutine(PlayerMovementCoroutine(delayBeforeMovingAgain));
     }
     public void Move()

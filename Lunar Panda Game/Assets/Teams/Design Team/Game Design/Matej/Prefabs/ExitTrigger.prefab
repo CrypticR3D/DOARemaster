@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3027164084439395456}
   - component: {fileID: 3027164084439395461}
   - component: {fileID: 3027164084439395460}
-  - component: {fileID: 2218564627625756170}
   - component: {fileID: 682911753}
   m_Layer: 1
   m_Name: ExitTrigger
@@ -291,74 +290,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2218564627625756170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3027164084439395487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f12fc25a601367844abfa470c150d917, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cc: {fileID: 0}
-  camera: {fileID: 0}
-  disableAtStart: 0
-  audioSource: {fileID: 0}
-  disablePlayerMovement: 0
-  delayBeforeMovingAgain: 0
-  move: 0
-  movableObject: {fileID: 0}
-  delayMoveObject: 0
-  teleport: 0
-  teleportObject: {fileID: 0}
-  lights: 0
-  lightsOnOff: 0
-  Lights: []
-  jump: 0
-  jumpSImage: {fileID: 0}
-  stayOnScreenFor: 0
-  look: 0
-  lookAt: {fileID: 0}
-  lookAtDelay: 0
-  damping: 0
-  play: 0
-  clipName: 
-  stop: 0
-  stopClipName: 
-  drop: 0
-  DropObjects: []
-  levitate: 0
-  LevitateObjects: []
-  forceUp: 0
-  forceDown: 0
-  delay: 0
-  throW: 0
-  ThrowObjects: []
-  force: 0
-  enableObject: 0
-  otherObject: {fileID: 0}
-  EnableFor: 0
-  DisableTorch: 0
-  enableOtherTrigger: 0
-  otherTrigger: {fileID: 0}
-  UseDoor: 0
-  openDoor: 0
-  closeDoor: 0
-  slamDoor: 0
-  eventDoor: 0
-  lockDoor: 0
-  unlockDoor: 0
-  doorController: {fileID: 0}
-  sounds: 0
-  fadeIn: 0
-  fadeOut: 0
-  SoundEffectManager: {fileID: 0}
-  AnimEnable: 0
-  PlayAnim: 0
-  StopAnim: 0
 --- !u!65 &682911753
 BoxCollider:
   m_ObjectHideFlags: 0
