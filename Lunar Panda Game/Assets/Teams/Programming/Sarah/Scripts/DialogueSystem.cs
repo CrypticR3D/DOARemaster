@@ -19,6 +19,9 @@ public class DialogueSystem : MonoBehaviour
     int currentCutsceneID = 0;
     public AudioSource voiceOverSource;
 
+    [SerializeField] private int waitTimer = 1;
+
+
     private void Start()
     {
         if(Instance == null)
@@ -45,17 +48,28 @@ public class DialogueSystem : MonoBehaviour
     {
         foreach (Dialogue dialogue in Cutscenes[currentCutsceneID].script)
         {
-            if (!voiceOverSource.isPlaying)
-            {
-                print(dialogue.script);
-                voiceOverSource.clip = dialogue.voiceOver;
-                voiceOverSource.Play();
-                UIManager.Instance.textToScreen(dialogue.script);
-                while (voiceOverSource.isPlaying)
-                {
-                    yield return null;
-                }
-            }
+            print(dialogue.script);
+            //voiceOverSource.clip = dialogue.voiceOver;
+            //voiceOverSource.Play();
+            UIManager.Instance.textToScreen(dialogue.script);
+
+            yield return new WaitForSeconds(waitTimer);
+            yield return null;
+
+            //if (!voiceOverSource.isPlaying)
+            //{
+            //    print(dialogue.script);
+            //    voiceOverSource.clip = dialogue.voiceOver;
+            //    voiceOverSource.Play();
+            //    UIManager.Instance.textToScreen(dialogue.script);
+                
+            //    yield return new WaitForSeconds(waitTimer);
+
+            //    while (voiceOverSource.isPlaying)
+            //    {
+            //        yield return null;
+            //    }
+            //}
         }
 
         UIManager.Instance.diableSubtitles();

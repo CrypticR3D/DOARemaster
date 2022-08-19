@@ -494,12 +494,14 @@ public class UIManager : MonoBehaviour
         twt.setupText();
         twt.dialogue = dialogue;
         twt.dialogueText.enabled = true;
+        twt.BG.enabled = true;
         twt.playText = true;
     }
 
     public void diableSubtitles()
     {
         twt.dialogueText.enabled = false;
+        twt.BG.enabled = false;
     }
 
     public void toggleMenuVariables()

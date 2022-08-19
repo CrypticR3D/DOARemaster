@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Clock Hand
   m_EditorClassIdentifier: 
   voiceOver: {fileID: 8300000, guid: b78379973dd430944bdfecebc5a57c9e, type: 3}
-  script: A clock hand? I mean I did see a clock in the hallway. Better pick it up,
-    might come in handy later.
+  script: 'A minute clock hand, maybe I can use this... '

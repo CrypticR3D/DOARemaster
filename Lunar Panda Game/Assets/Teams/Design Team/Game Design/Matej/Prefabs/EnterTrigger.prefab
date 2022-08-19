@@ -303,8 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a19d17602a975a41b6919f2d45efe71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cc: {fileID: 0}
-  camera: {fileID: 0}
+  UseTriggerOnEnter: 0
+  UseTriggerOnExit: 0
   disableAtStart: 0
   audioSource: {fileID: 0}
   disablePlayerMovement: 0
@@ -314,9 +314,12 @@ MonoBehaviour:
   delayMoveObject: 0
   teleport: 0
   teleportObject: {fileID: 0}
-  lights: 0
-  lightsOnOff: 0
-  Lights: []
+  Uselights: 0
+  lightsOn: 0
+  lightsOff: 0
+  lightFlicker: 0
+  LightsDisableFor: 0
+  LightObjs: []
   jump: 0
   jumpSImage: {fileID: 0}
   stayOnScreenFor: 0
@@ -324,10 +327,6 @@ MonoBehaviour:
   lookAt: {fileID: 0}
   lookAtDelay: 0
   damping: 0
-  play: 1
-  clipName: Piano_Sequence
-  stop: 0
-  stopClipName: 
   drop: 0
   DropObjects: []
   levitate: 0
@@ -335,13 +334,17 @@ MonoBehaviour:
   forceUp: 0
   forceDown: 0
   delay: 0
-  throW: 0
+  UseThrow: 0
   ThrowObjects: []
   force: 0
   enableObject: 0
+  disableObject: 0
   otherObject: {fileID: 0}
   EnableFor: 0
+  DisableAfter: 0
   DisableTorch: 0
+  PlaySting: 0
+  StingName: 
   enableOtherTrigger: 0
   otherTrigger: {fileID: 0}
   UseDoor: 0
@@ -356,9 +359,15 @@ MonoBehaviour:
   fadeIn: 0
   fadeOut: 0
   SoundEffectManager: {fileID: 0}
+  x: 0
+  play: 1
+  clipName: Piano_Sequence
+  stop: 0
+  stopClipName: 
   AnimEnable: 0
   PlayAnim: 0
   StopAnim: 0
+  Anim_1: {fileID: 0}
 --- !u!65 &682911753
 BoxCollider:
   m_ObjectHideFlags: 0

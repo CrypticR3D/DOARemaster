@@ -88,13 +88,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private const string MetalTag = "MetalFloor";
         private const string DirtTag = "DirtFloor";
 
-        public GameObject crouchChecker;
+        //public GameObject crouchChecker;
         bool isCrouching = false;
-
+        public bool canCrouch;
 
         void Awake()
         {
             canLook = true;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         // Use this for initialization
@@ -122,6 +123,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             //m_CharacterController = GetComponent<CapsuleCollider>();
             m_CapsuleHeight = m_CharacterController.height;
             m_CapsuleCenter = m_CharacterController.center;
+
+            canCrouch = true;
         }
 
 
@@ -159,19 +162,25 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Crouching()
         {
-            if (!isCrouching)
+            if (canCrouch)
             {
-                crouchChecker.SetActive(true);
-                transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-                isCrouching = true;
+                if (!isCrouching)
+                {
+                    //crouchChecker.SetActive(true);
+                    transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    isCrouching = true;
+                }
+
+                else
+                {
+                    //crouchChecker.SetActive(false);
+                    transform.localScale = new Vector3(1f, 1f, 1f);
+                    isCrouching = false;
+                }
             }
-            
-            else
-            {
-                crouchChecker.SetActive(false);
-                transform.localScale = new Vector3(1f, 1f, 1f);
-                isCrouching = false;
-            }
+
+
+
         }
         private void PlayLandingSound()
         {

@@ -31,38 +31,38 @@ public class JournalMenuToggle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canOpen)
-        {
-            if (Input.GetKeyDown(KeyCode.V))
-            {
-                if (IsOnMenu == false && Inventory.IsOnInventory == false && Feedback.IsOnFeedbackMenu == false && !Pause.IsPaused)
-                {
-                    IsOnMenu = true;
+        //if (canOpen)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.V))
+        //    {
+        //        if (IsOnMenu == false && Inventory.IsOnInventory == false && Feedback.IsOnFeedbackMenu == false && !Pause.IsPaused)
+        //        {
+        //            IsOnMenu = true;
 
-                    //  BarOfStamina.SetActive(false); 
+        //            //  BarOfStamina.SetActive(false); 
 
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
-                    print("Cursor is visible");
-                    //MrCapsule.canLook = false;
-                    JournalMenu.SetActive(true);
-                    pickup.enabled = false;
-                    Time.timeScale = 0f;
+        //            Cursor.lockState = CursorLockMode.None;
+        //            Cursor.visible = true;
+        //            print("Cursor is visible");
+        //            //MrCapsule.canLook = false;
+        //            JournalMenu.SetActive(true);
+        //            pickup.enabled = false;
+        //            Time.timeScale = 0f;
 
-                    if (Analysis.current != null)
-                    {
-                        if (Analysis.current.consent)
-                        {
-                            Analysis.current.menuOpen = true;
-                        }
-                    }
-                }
-                else if (IsOnMenu == true)
-                {
-                    JournalOff();
-                }
-            }
-        }
+        //            if (Analysis.current != null)
+        //            {
+        //                if (Analysis.current.consent)
+        //                {
+        //                    Analysis.current.menuOpen = true;
+        //                }
+        //            }
+        //        }
+        //        else if (IsOnMenu == true)
+        //        {
+        //            JournalOff();
+        //        }
+        //    }
+        //}
     }
     public void JournalOff()
     {

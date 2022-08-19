@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace KeySystem
 {
-    public class KeyItemController : MonoBehaviour
+    public class    KeyItemController : MonoBehaviour
     {
         [SerializeField] private bool redDoor = false;
         [SerializeField] private bool greenDoor = false;
@@ -89,14 +89,14 @@ namespace KeySystem
             {
                 _keyInventory.hasBlueKey = true;
 
-                //if (Inv.itemInventory[Inv.selectedItem] == BlueKeyData)
-                //{
-                //    _keyInventory.hasBlueKey = true;
-                //}
-                //else
-                //{
-                //    _keyInventory.hasBlueKey = false;
-                //}
+                if (Inv.itemInventory[Inv.selectedItem] == BlueKeyData)
+                {
+                    _keyInventory.hasBlueKey = true;
+                }
+                else
+                {
+                    _keyInventory.hasBlueKey = false;
+                }
             }
         }
     }

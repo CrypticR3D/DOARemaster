@@ -48,7 +48,7 @@ TagManager:
   - FallObject
   - Crouch
   - Torch
-  - 
+  - IgnorePlayerTorch
   - 
   - 
   - 

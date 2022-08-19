@@ -9,4 +9,5 @@ public class Dialogue : ScriptableObject
     public AudioClip voiceOver;
     public string script;
 
+
 }

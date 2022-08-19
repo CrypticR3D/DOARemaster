@@ -15,6 +15,8 @@ namespace KeySystem
         private MyDrawerController raycastedDrawer;
         private KeyItemController raycastedKey;
 
+        private Disc raycastedDisk;
+
         //private MyNewController raycastedObj;
 
         [SerializeField] private KeyCode openDoorKey = KeyCode.Mouse0;
@@ -29,15 +31,17 @@ namespace KeySystem
 
         private const string KeyTag = "Key";
 
+        private const string InteractTag = "InteractiveObject";
+
         private void Update()
         {
-            RaycastHit hit;
+           // RaycastHit hit;
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
             Debug.DrawRay(transform.position, fwd, Color.green);
 
             int mask = 1 << LayerMask.NameToLayer(excludeLayerName) | layerMaskInteract.value;
 
-            if (Physics.Raycast(transform.position, fwd, out hit, rayLength, mask))
+            if (InteractRaycasting.Instance.raycastInteract(out RaycastHit hit, mask)) //(Physics.Raycast(transform.position, fwd, out hit, rayLength, mask))
             {
                 ///Door Interaction///
 
@@ -83,7 +87,7 @@ namespace KeySystem
 
                 if (hit.collider.CompareTag(KeyTag))
                 {
-                    //Debug.Log("Yikes");
+                    Debug.Log("Yikes");
                     if (!doOnce)
                     {
                         raycastedKey = hit.collider.gameObject.GetComponent<KeyItemController>();
@@ -95,8 +99,27 @@ namespace KeySystem
 
                     if (Input.GetKeyDown(openDoorKey))
                     {
-                        //Debug.Log("ClickKey");
+                        Debug.Log("ClickKey");
                         raycastedKey.ObjectInteraction();
+                    }
+                }
+
+                if (hit.collider.CompareTag(InteractTag))
+                {
+                    //Debug.Log("Yikes");
+                    if (!doOnce)
+                    {
+                        raycastedDisk = hit.collider.gameObject.GetComponent<Disc>();
+                        CrosshairChange(true);
+                    }
+
+                    isCrosshairActive = true;
+                    doOnce = true;
+
+                    if (Input.GetButtonDown("Interact"))
+                    {
+                        //Debug.Log("ClickKey");
+                        raycastedDisk.Interact();
                     }
                 }
 

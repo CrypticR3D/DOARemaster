@@ -47,7 +47,7 @@ namespace KeySystem
 
         public void PlayAnimation()
         {
-
+            
             if (Inv.hasRedKey)
             {
                 doorLocked = false;
@@ -66,12 +66,14 @@ namespace KeySystem
                 OpenDoor();
             }
 
-            else if (!doorLocked)
+            if (!doorLocked)
             {
                 OpenDoor();
             }
 
-            else if (doorLocked && !doorOpen && !pauseInteraction && !Inv.hasRedKey || !Inv.hasGreenKey || !Inv.hasBlueKey)
+
+
+            else if (doorLocked && !doorOpen && !pauseInteraction)// && !Inv.hasRedKey || !Inv.hasGreenKey || !Inv.hasBlueKey)
             {
                 LockedDoor();
             }
@@ -107,8 +109,8 @@ namespace KeySystem
             SoundEffectManager.GlobalSFXManager.PlaySFX(OpenSound);
             doorAnim.Play(slamAnimationName, 0, 0.0f);
             doorOpen = false;
-            StartCoroutine(PauseDoorInteraction());
             StartCoroutine(SlamDoorAudio());
+            StartCoroutine(PauseDoorInteraction());
         }
         private IEnumerator SlamDoorAudio()
         {

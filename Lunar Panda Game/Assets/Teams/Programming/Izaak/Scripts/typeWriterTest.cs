@@ -8,6 +8,7 @@ public class typeWriterTest : MonoBehaviour
     [Header("UI Settings")]
     [Tooltip("Reference to the text object that will contain the typewriting text")]
     public Text dialogueText;
+    public Image BG;
 
     [Header("Dialogue Settings")]
     [Tooltip("The final dialogue when the typing animation has finished")]

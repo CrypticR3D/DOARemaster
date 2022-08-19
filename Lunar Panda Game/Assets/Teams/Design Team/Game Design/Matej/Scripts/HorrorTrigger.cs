@@ -9,6 +9,7 @@ public class HorrorTrigger : MonoBehaviour
 {
     public bool UseTriggerOnEnter;
     public bool UseTriggerOnExit;
+    public bool DestroyAfterUse;
 
     private int doneEvents = 0;
     private int numberOfEvents = 0;
@@ -17,14 +18,18 @@ public class HorrorTrigger : MonoBehaviour
     private GameObject player;
     private Camera p_camera;
     private CharacterController CharacterController;
+    private FirstPersonController playerFPSController;
 
     public bool disableAtStart;
     public AudioSource audioSource;
     private float fadeTime = 2f;
 
     [Header("---DISABLE MOVEMENT SETTINGS---")]
+    public bool disablePlayer;
     public bool disablePlayerMovement;
     public float delayBeforeMovingAgain;
+    public bool disablePlayerCrouch;
+
 
     [Header("---MOVE OBJECT SETTINGS---")]
     public bool move;
@@ -45,7 +50,7 @@ public class HorrorTrigger : MonoBehaviour
     public List<Light> LightObjs = new List<Light>();
 
     [Header("---JUMPSCARE SETTINGS---")]
-    public bool jump;
+    public bool UseJumpScare;
     public Image jumpSImage;
     public float stayOnScreenFor;
 
@@ -120,12 +125,15 @@ public class HorrorTrigger : MonoBehaviour
     public bool StopAnim;
     public Animator Anim_1;
 
+
+
     public void Start()
     {
         if (disableAtStart) ActivateTriggerCollider(false);
         player = GameObject.FindWithTag("Player");
         p_camera = Camera.main;
         CharacterController = player.GetComponentInChildren<CharacterController>();
+        playerFPSController = player.GetComponentInChildren<FirstPersonController>();
     }
     public void Update()
     {
@@ -146,10 +154,14 @@ public class HorrorTrigger : MonoBehaviour
             {
                 Debug.Log("Trigger!");
                 StartCoroutine(HelpCoroutine());
-                if (disablePlayerMovement)
+                if (disablePlayer)
                 {
                     numberOfEvents++;
                     DisablePlayerMovement();
+                }
+                if (disablePlayerCrouch)
+                {
+                    playerFPSController.canCrouch = false;
                 }
                 if (move)
                 {
@@ -166,7 +178,7 @@ public class HorrorTrigger : MonoBehaviour
                     numberOfEvents++;
                     Lights();
                 }
-                if (jump)
+                if (UseJumpScare)
                 {
                     numberOfEvents++;
                     Jumpscare();
@@ -221,8 +233,11 @@ public class HorrorTrigger : MonoBehaviour
                     numberOfEvents++;
                     Animations();
                 }
+                if (DestroyAfterUse)
+                {
+                    gameObject.GetComponent<BoxCollider>().enabled = false;
+                }
 
-                gameObject.GetComponent<BoxCollider>().enabled = false;
             }
         }
     }
@@ -234,10 +249,14 @@ public class HorrorTrigger : MonoBehaviour
             {
                 Debug.Log("Trigger!");
                 StartCoroutine(HelpCoroutine());
-                if (disablePlayerMovement)
+                if (disablePlayer)
                 {
                     numberOfEvents++;
                     DisablePlayerMovement();
+                }
+                if (disablePlayerCrouch)
+                {
+                    playerFPSController.canCrouch = true;
                 }
                 if (move)
                 {
@@ -254,7 +273,7 @@ public class HorrorTrigger : MonoBehaviour
                     numberOfEvents++;
                     Lights();
                 }
-                if (jump)
+                if (UseJumpScare)
                 {
                     numberOfEvents++;
                     Jumpscare();
@@ -309,8 +328,10 @@ public class HorrorTrigger : MonoBehaviour
                     numberOfEvents++;
                     Animations();
                 }
-
-                gameObject.GetComponent<BoxCollider>().enabled = false;
+                if (DestroyAfterUse)
+                {
+                    gameObject.GetComponent<BoxCollider>().enabled = false;
+                }
             }
         } 
     }
@@ -399,10 +420,12 @@ public class HorrorTrigger : MonoBehaviour
 
     public void DisablePlayerMovement()
     {
-        //player.GetComponent<CharacterController>().enabled = false;
-        CharacterController.enabled = false;
-        StartCoroutine(PlayerMovementCoroutine(delayBeforeMovingAgain));
-    }
+        if (disablePlayerMovement)
+        {
+            CharacterController.enabled = false;
+            StartCoroutine(PlayerMovementCoroutine(delayBeforeMovingAgain));
+        }
+}
     public void Move()
     {
         //Disable the playerMovement and reset the rigidbody velocity
