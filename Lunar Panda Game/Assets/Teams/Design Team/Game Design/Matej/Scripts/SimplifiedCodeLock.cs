@@ -50,8 +50,8 @@ public class SimplifiedCodeLock : MonoBehaviour
     IEnumerator Open() //Rotates the door
     {
         //SoundEffectManager.GlobalSFXManager.PlaySFX(AudioClipName);       
-        anim.GetComponent<Animator>().SetTrigger("Open");
-
+        //anim.GetComponent<Animator>().SetTrigger("Open");
+        anim.GetComponent<Animator>().enabled = true;
         yield return new WaitForSeconds(4); 
         // In case we want something to happen write bellow
         // For example a scripted event 

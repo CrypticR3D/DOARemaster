@@ -9,6 +9,8 @@ public class ButtonPress : MonoBehaviour
     //I simplified the code to work more effectively with the partner script 'SimplifiedCodeLock'
 
     public SimplifiedCodeLock codeLock;
+    public string beepAudio;
+
     private void Start()
     {
         codeLock = FindObjectOfType<SimplifiedCodeLock>();
@@ -28,6 +30,7 @@ public class ButtonPress : MonoBehaviour
             {
                 Debug.Log("Button got hit");
                 string value = hit.transform.name;
+                SoundEffectManager.GlobalSFXManager.PlaySFX(beepAudio);
                 codeLock.SetValue(value);
             }
         }
