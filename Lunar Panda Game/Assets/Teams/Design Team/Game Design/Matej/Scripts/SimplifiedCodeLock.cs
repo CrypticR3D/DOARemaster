@@ -25,7 +25,7 @@ public class SimplifiedCodeLock : MonoBehaviour
 
     public void Start()
     {
-        Debug.Log("The code length is " + codeLenght);
+        //Debug.Log("The code length is " + codeLenght);
     }
 
     public void Update()
@@ -59,7 +59,7 @@ public class SimplifiedCodeLock : MonoBehaviour
 
     public void SetValue(string value)
     {
-        Debug.Log("Added value");
+        //Debug.Log("Added value");
         placeinCode++;
         if (placeinCode <= codeLenght)
         {

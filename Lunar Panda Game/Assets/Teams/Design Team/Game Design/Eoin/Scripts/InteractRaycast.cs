@@ -87,7 +87,7 @@ namespace KeySystem
 
                 if (hit.collider.CompareTag(KeyTag))
                 {
-                    Debug.Log("Yikes");
+                    //Debug.Log("Yikes");
                     if (!doOnce)
                     {
                         raycastedKey = hit.collider.gameObject.GetComponent<KeyItemController>();
@@ -99,7 +99,7 @@ namespace KeySystem
 
                     if (Input.GetKeyDown(openDoorKey))
                     {
-                        Debug.Log("ClickKey");
+                        //Debug.Log("ClickKey");
                         raycastedKey.ObjectInteraction();
                     }
                 }

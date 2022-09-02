@@ -539,7 +539,7 @@ public class HorrorTrigger : MonoBehaviour
         if (slamDoor)
         {
             doorController.SlamDoor();
-            Debug.Log("Slam!");
+            //Debug.Log("Slam!");
         }
         if (eventDoor)
         {

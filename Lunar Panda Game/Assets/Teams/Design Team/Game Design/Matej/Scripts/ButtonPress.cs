@@ -28,7 +28,7 @@ public class ButtonPress : MonoBehaviour
         {
             if (hit.transform.gameObject == gameObject)
             {
-                Debug.Log("Button got hit");
+                //Debug.Log("Button got hit");
                 string value = hit.transform.name;
                 SoundEffectManager.GlobalSFXManager.PlaySFX(beepAudio);
                 codeLock.SetValue(value);

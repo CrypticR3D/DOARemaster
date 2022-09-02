@@ -29,13 +29,14 @@ namespace KeySystem
         [SerializeField] private bool pauseInteraction = false;
 
 
-        //[SerializeField] ItemData RedKeyData;
-        //[SerializeField] ItemData GreenKeyData;
-        //[SerializeField] ItemData BlueKeyData;
+        [SerializeField] ItemData RedKeyData;
+        [SerializeField] ItemData GreenKeyData;
+        [SerializeField] ItemData BlueKeyData;
 
         private void Awake()
         {
             doorAnim = gameObject.GetComponent<Animator>();
+            Inv = FindObjectOfType<Inventory>();
         }
 
         private IEnumerator PauseDoorInteraction()
@@ -47,23 +48,38 @@ namespace KeySystem
 
         public void PlayAnimation()
         {
-            
-            if (Inv.hasRedKey)
+
+            //if (Inv.itemInventory[Inv.selectedItem] == RedKeyData)
+            //{
+            //    doorLocked = false;
+            //    OpenDoor();
+            //}
+
+            //if (Inv.itemInventory[Inv.selectedItem] == GreenKeyData)
+            //{
+            //    doorLocked = false;
+            //    OpenDoor();
+            //}
+
+            if (Inv.itemInventory[Inv.selectedItem] == RedKeyData)
             {
                 doorLocked = false;
                 OpenDoor();
+                Inv.removeItem();
             }
 
-            if (Inv.hasGreenKey)
+            if (Inv.itemInventory[Inv.selectedItem] == GreenKeyData)
             {
                 doorLocked = false;
                 OpenDoor();
+                Inv.removeItem();
             }
 
-            if (Inv.hasBlueKey)
+            if (Inv.itemInventory[Inv.selectedItem] == BlueKeyData)
             {
                 doorLocked = false;
                 OpenDoor();
+                Inv.removeItem();
             }
 
             if (!doorLocked)
@@ -71,9 +87,7 @@ namespace KeySystem
                 OpenDoor();
             }
 
-
-
-            else if (doorLocked && !doorOpen && !pauseInteraction)// && !Inv.hasRedKey || !Inv.hasGreenKey || !Inv.hasBlueKey)
+            else if (doorLocked && !doorOpen && !pauseInteraction)
             {
                 LockedDoor();
             }
@@ -103,7 +117,6 @@ namespace KeySystem
             doorAnim.Play(lockedAnimationName, 0, 0.0f);
             StartCoroutine(PauseDoorInteraction());
         }
-
         public void SlamDoor()
         {
             SoundEffectManager.GlobalSFXManager.PlaySFX(OpenSound);
@@ -117,6 +130,5 @@ namespace KeySystem
             yield return new WaitForSeconds(0.7f);
             SoundEffectManager.GlobalSFXManager.PlaySFX(SlamSound);
         }
-
     }
 }

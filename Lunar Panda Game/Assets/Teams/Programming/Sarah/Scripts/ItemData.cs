@@ -16,5 +16,7 @@ public class ItemData : ScriptableObject
     internal bool beenPickedUp = false;
     internal int timesChecked = 0;
     internal int timesUses = 0;
-    public Room foundInRoom; 
+    public Room foundInRoom;
+    public bool canDrop;
+
 }

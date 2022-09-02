@@ -9,14 +9,14 @@ public class Parent2Drawer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Parent");
+        //Debug.Log("Parent");
         other.transform.parent = drawer.transform;
         other.attachedRigidbody.useGravity = false;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Orphan");
+        //Debug.Log("Orphan");
         other.attachedRigidbody.useGravity = true;
         other.transform.parent = null;
         

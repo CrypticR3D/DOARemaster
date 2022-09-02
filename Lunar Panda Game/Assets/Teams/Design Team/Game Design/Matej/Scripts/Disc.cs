@@ -126,7 +126,7 @@ public class Disc : MonoBehaviour
         {
             if (hit.transform.gameObject == gameObject)
             {
-                print(size + " has been hit");
+                //print(size + " has been hit");
                 brain.TurnDiscs(size);
             }
         }

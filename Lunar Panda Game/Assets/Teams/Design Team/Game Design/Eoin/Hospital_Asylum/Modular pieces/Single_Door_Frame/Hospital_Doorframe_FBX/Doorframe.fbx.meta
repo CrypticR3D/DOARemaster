@@ -3,7 +3,12 @@ guid: e556934d89008384e88ca268b62b7fc1
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Painted_Doorframe
+    second: {fileID: 2100000, guid: 4807f1326a7bf1348964fa9e780c89df, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

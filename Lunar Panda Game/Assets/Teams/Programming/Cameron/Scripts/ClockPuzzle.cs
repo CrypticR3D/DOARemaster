@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClockPuzzle : MonoBehaviour
 {
@@ -34,6 +35,15 @@ public class ClockPuzzle : MonoBehaviour
 
     [SerializeField] private int waitTimer = 1;
     [SerializeField] private bool pauseInteraction = false;
+
+    [SerializeField] ToolTipType tooltip;
+    [SerializeField] Text tooltipTxt;
+    [SerializeField] CanvasGroup tooltipGroup;
+    PlayerPickup pickup;
+    [SerializeField] float waitTime = 0.5f;
+
+    bool isFading = false;
+
 
     /*[Tooltip("This is the position of the minute hand when its placed on the clock")]
     [SerializeField] Vector3 minHandClockPos;
@@ -81,6 +91,7 @@ public class ClockPuzzle : MonoBehaviour
                         {
                             RotateHand();
                             StartCoroutine(PauseInteraction());
+                            StartCoroutine(FadeTooltips());
                         }
                     }
                 }
@@ -92,6 +103,8 @@ public class ClockPuzzle : MonoBehaviour
             }
         }
     }
+
+
 
     void RotateHand()
     {
@@ -106,6 +119,40 @@ public class ClockPuzzle : MonoBehaviour
 
         CheckCombination();
     }
+
+    IEnumerator FadeTooltips()
+    {
+        tooltipTxt.text = tooltip.text;
+        for (float t = 0f; t < tooltip.fadeTime; t += Time.deltaTime)
+        {
+            float normalizedTime = t / tooltip.fadeTime;
+            tooltipGroup.alpha = Mathf.Lerp(0, 1, normalizedTime);
+            yield return null;
+        }
+        yield return new WaitForSeconds(waitTime);
+        while (InteractRaycasting.Instance.raycastInteract(out RaycastHit hit))
+        {
+            if (hit.transform.gameObject == gameObject && pickup.heldItem == null)
+            {
+                yield return new WaitForEndOfFrame();
+                yield return null;
+            }
+            else
+            {
+                break;
+            }
+        }
+        isFading = false;
+        for (float t = 0f; t < tooltip.fadeTime; t += Time.deltaTime)
+        {
+            float normalizedTime = t / tooltip.fadeTime;
+            tooltipGroup.alpha = Mathf.Lerp(1, 0, normalizedTime);
+            yield return null;
+        }
+        tooltipGroup.alpha = 0;
+        yield return null;
+    }
+
     private IEnumerator PauseInteraction()
     {
         pauseInteraction = true;

@@ -28,11 +28,6 @@ public class Inventory : MonoBehaviour
     float timer = 0;
     public float maxTime = 1;
 
-    public bool hasRedKey = false;
-
-    public bool hasGreenKey = false;
-
-    public bool hasBlueKey = false;
 
 
 

@@ -20,7 +20,7 @@ public class PianoSequenceCheck : MonoBehaviour
 
     [Header("Animations")]
     [SerializeField] Animation animHatch;
-    [SerializeField] Animation animDisplay;
+    //[SerializeField] Animation animDisplay;
 
     public void Start()
     {
@@ -108,7 +108,7 @@ public class PianoSequenceCheck : MonoBehaviour
             SoundEffectManager.GlobalSFXManager.PlaySFX(openSound);
             animHatch.Play();
             
-            animDisplay.Play();
+            //animDisplay.Play();
             //keyCollider.enabled = true;
 
             //StartCoroutine(Open());
