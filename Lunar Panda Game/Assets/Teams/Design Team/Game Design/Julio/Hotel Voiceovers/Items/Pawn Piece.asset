@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Pawn Piece
   m_EditorClassIdentifier: 
   voiceOver: {fileID: 8300000, guid: 9ee025f06602ac3489d2b358eeab418d, type: 3}
-  script: 'A pawn piece? Maybe it has something to do with the chess board I just
-    saw. Better pick it up. '
+  script: "\u201CA Pawn chess piece must be a board around here\u201D"

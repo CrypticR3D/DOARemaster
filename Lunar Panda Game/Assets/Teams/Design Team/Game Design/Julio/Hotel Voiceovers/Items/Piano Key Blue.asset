@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Piano Key Blue
   m_EditorClassIdentifier: 
   voiceOver: {fileID: 8300000, guid: 1c3a604b55828b04bbe10438ee874e97, type: 3}
-  script: A blue piano key? I wonder if I can use this...
+  script: "\u201CA Blue piano key\u201D"

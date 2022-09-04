@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Queen Piece
   m_EditorClassIdentifier: 
   voiceOver: {fileID: 8300000, guid: 99f340367be09454e8674cfb64d0a4cb, type: 3}
-  script: 'Another chess piece? What''s going on here. Maybe I need to collect them
-    and place them on the board. Ugh who knows. '
+  script: "\u201CA Queen chess piece must be a board around here\u201D"

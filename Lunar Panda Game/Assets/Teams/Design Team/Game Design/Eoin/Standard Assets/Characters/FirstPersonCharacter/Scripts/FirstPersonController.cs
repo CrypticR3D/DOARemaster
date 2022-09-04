@@ -92,10 +92,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
         bool isCrouching = false;
         public bool canCrouch;
 
+        PlayerPickup pickup;
+
         void Awake()
         {
+            pickup = FindObjectOfType<PlayerPickup>();
             canLook = true;
+            pickup.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
+
         }
 
         // Use this for initialization
@@ -125,6 +130,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_CapsuleCenter = m_CharacterController.center;
 
             canCrouch = true;
+            
         }
 
 
@@ -164,7 +170,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (canCrouch)
             {
-                if (!isCrouching)
+                if (!isCrouching && m_CharacterController.isGrounded)
                 {
                     //crouchChecker.SetActive(true);
                     transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);

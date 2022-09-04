@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Piano Key Orange
   m_EditorClassIdentifier: 
   voiceOver: {fileID: 8300000, guid: 1c3a604b55828b04bbe10438ee874e97, type: 3}
-  script: 'A set of piano keys sittin in a box. Now this, I have no idea what to
-    do with. I will take them with me I guess, just in case. '
+  script: "\u201CA Orange piano key\u201D"
