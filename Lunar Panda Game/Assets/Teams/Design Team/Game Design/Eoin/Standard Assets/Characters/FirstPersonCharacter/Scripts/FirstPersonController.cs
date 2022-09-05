@@ -389,7 +389,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             else
             {
-                //Debug.Log("No Floor Here");
+                Debug.Log("No Floor Here");
             }
         }
         private void UpdateCameraPosition(float speed)

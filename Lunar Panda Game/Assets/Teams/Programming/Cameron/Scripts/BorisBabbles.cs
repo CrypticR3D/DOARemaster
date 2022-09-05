@@ -34,7 +34,7 @@ public class BorisBabbles : MonoBehaviour
         {
             for (int i = 0; i < buttonOrder.Count; i++)
             {
-                buttonOrder[i] = Random.Range(0, 9);
+                buttonOrder[i] = Random.Range(0, 6);
             }
         }
     }

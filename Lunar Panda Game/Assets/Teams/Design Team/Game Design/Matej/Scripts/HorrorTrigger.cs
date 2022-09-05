@@ -125,7 +125,10 @@ public class HorrorTrigger : MonoBehaviour
     public bool StopAnim;
     public Animator Anim_1;
 
-
+    [Header("---CAMERA SETTINGS---")]
+    public bool UseCamera;
+    public Camera Camera;
+    public float FOVTimer;
 
     public void Start()
     {
@@ -233,6 +236,11 @@ public class HorrorTrigger : MonoBehaviour
                     numberOfEvents++;
                     Animations();
                 }
+                if (UseCamera)
+                {
+                    numberOfEvents++;
+                    CameraSpooks();
+                }
                 if (DestroyAfterUse)
                 {
                     gameObject.GetComponent<BoxCollider>().enabled = false;
@@ -328,6 +336,11 @@ public class HorrorTrigger : MonoBehaviour
                     numberOfEvents++;
                     Animations();
                 }
+                if (UseCamera)
+                {
+                    numberOfEvents++;
+                    CameraSpooks();
+                }
                 if (DestroyAfterUse)
                 {
                     gameObject.GetComponent<BoxCollider>().enabled = false;
@@ -416,6 +429,14 @@ public class HorrorTrigger : MonoBehaviour
 
             light.enabled = false;
         }
+    }
+
+    private IEnumerator WideAngle(float time)
+    {
+        int FOVAmount = 90;
+        Camera.fieldOfView = 90f;
+        yield return new WaitForSeconds(time);
+        Camera.fieldOfView = 47f;
     }
 
     public void DisablePlayerMovement()
@@ -581,5 +602,10 @@ public class HorrorTrigger : MonoBehaviour
         {
 
         }
+    }
+    public void CameraSpooks()
+    {
+        StartCoroutine(WideAngle(FOVTimer));
+        //Camera.farClipPlane = 10f;
     }
 }

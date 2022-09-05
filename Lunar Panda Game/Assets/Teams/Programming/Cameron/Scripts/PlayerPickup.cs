@@ -89,40 +89,41 @@ public class PlayerPickup : MonoBehaviour
                             GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
                     GOLookingAt = null;
                 }
-                else if (hit.transform.GetComponent<RotatableItem>())
-                {
-                    UIManager.Instance.toggleMenuVariables();
-                    player.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                    holdingNarrative = true;
-                    holdDist = rotDist;
-                    //player.gameObject.GetComponent<playerMovement>().enabled = false;
-                    FindObjectOfType<lockMouse>().canLook = false;
-                    PickupItem(hit.transform);
-                }
+                //else if (hit.transform.GetComponent<RotatableItem>())
+                //{
+                //    UIManager.Instance.toggleMenuVariables();
+                //    player.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                //    holdingNarrative = true;
+                //    holdDist = rotDist;
+                //    //player.gameObject.GetComponent<playerMovement>().enabled = false;
+                //    //FindObjectOfType<lockMouse>().canLook = false;
+                //    PickupItem(hit.transform);
+                //}
             }
         }
         else if (Input.GetButtonDown("Interact") && heldItem != null)
         {
             //if the player is holding an item and presses 'e', it drops said item
-            if (heldItem.GetComponent<RotatableItem>())
-            {
-                holdingNarrative = false;
-                GameObject tempHeld = heldItem;
-                heldItem = null;
-                tempHeld.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                tempHeld.transform.rotation = tempHeld.GetComponent<RotatableItem>().startRotation;
-                tempHeld.transform.position = tempHeld.GetComponent<RotatableItem>().startLocation;
-                player.GetComponent<playerMovement>().enabled = true;
-                FindObjectOfType<lockMouse>().canLook = true;
-                heldItem.GetComponent<Rigidbody>().useGravity = true;
-                heldItem.GetComponent<Rigidbody>().freezeRotation = false;
-                UIManager.Instance.toggleMenuVariables();
-            }
-            else
+            //if (heldItem.GetComponent<RotatableItem>())
+            //{
+            //    holdingNarrative = false;
+            //    GameObject tempHeld = heldItem;
+            //    heldItem = null;
+            //    tempHeld.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            //    tempHeld.transform.rotation = tempHeld.GetComponent<RotatableItem>().startRotation;
+            //    tempHeld.transform.position = tempHeld.GetComponent<RotatableItem>().startLocation;
+            //    player.GetComponent<playerMovement>().enabled = true;
+            //    FindObjectOfType<lockMouse>().canLook = true;
+            //    heldItem.GetComponent<Rigidbody>().useGravity = true;
+            //    heldItem.GetComponent<Rigidbody>().freezeRotation = false;
+            //    UIManager.Instance.toggleMenuVariables();
+            //}
+            //else
             {
                 DropHeldItem();
             }
         }
+
         if (Input.GetButtonDown("Throw") && heldItem != null)
         {
             if (!heldItem.GetComponent<RotatableItem>())

@@ -81,7 +81,7 @@ public class ClockPuzzle : MonoBehaviour
                 }
             }
 
-            if (Input.GetAxis("Mouse ScrollWheel") != 0f) // forward
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
             {
                 if (InteractRaycasting.Instance.raycastInteract(out RaycastHit hit))
                 {
@@ -90,6 +90,27 @@ public class ClockPuzzle : MonoBehaviour
                         if (handsConnected)
                         {
                             RotateHand();
+                            StartCoroutine(PauseInteraction());
+                            StartCoroutine(FadeTooltips());
+                        }
+                    }
+                }
+
+                else
+                {
+                    return;
+                }
+            }
+
+            if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+            {
+                if (InteractRaycasting.Instance.raycastInteract(out RaycastHit hit))
+                {
+                    if (hit.transform.gameObject == gameObject)
+                    {
+                        if (handsConnected)
+                        {
+                            RotateHandOtherway();
                             StartCoroutine(PauseInteraction());
                             StartCoroutine(FadeTooltips());
                         }
@@ -119,7 +140,19 @@ public class ClockPuzzle : MonoBehaviour
 
         CheckCombination();
     }
+    void RotateHandOtherway()
+    {
+        //minuteHand.transform.eulerAngles = new Vector3(minuteHand.transform.eulerAngles.x, minuteHand.transform.eulerAngles.y, minuteHand.transform.eulerAngles.z + clockAngle);
+        minuteHand.transform.RotateAround(Handpivot.position, Vector3.right, minuteAngle);
+        //the issue with just doing if minute hand is at 90 degrees is that float precision is a piece
 
+        if (minuteHand.transform.eulerAngles.z > hourAngle + 1 && minuteHand.transform.eulerAngles.z < hourAngle - 1)
+        {
+            hourHand.transform.RotateAround(Handpivot.position, Vector3.right, minuteAngle);
+        }
+
+        CheckCombination();
+    }
     IEnumerator FadeTooltips()
     {
         tooltipTxt.text = tooltip.text;

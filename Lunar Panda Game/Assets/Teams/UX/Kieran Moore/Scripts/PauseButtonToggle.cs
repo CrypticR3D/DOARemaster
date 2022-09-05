@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.SceneManagement;
 
 public class PauseButtonToggle : MonoBehaviour
 {
@@ -91,5 +92,12 @@ public class PauseButtonToggle : MonoBehaviour
             Time.timeScale = 1f;
             //FindObjectOfType<WalkingSound>().canMakeSound = true;
         }
+    }
+
+    public void RestartLvl()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+
     }
 }
