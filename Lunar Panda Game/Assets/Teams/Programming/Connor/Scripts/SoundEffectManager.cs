@@ -55,4 +55,14 @@ public class SoundEffectManager : MonoBehaviour
             TheSFX.Pause();
         }
     }
+
+    public void Mute()
+    {
+        TheSFX.Pause();
+    }
+
+    public void Play()
+    {
+        TheSFX.Play();
+    }
 }

@@ -23,6 +23,9 @@ public class SimplifiedCodeLock : MonoBehaviour
 
     public TextMeshPro CodeScreen;
 
+    public string IncorectAudio;
+    public string CorectAudio;
+
     public void Start()
     {
         //Debug.Log("The code length is " + codeLenght);
@@ -37,11 +40,13 @@ public class SimplifiedCodeLock : MonoBehaviour
     {
         if (attemptedCode == code)
         {
+            SoundEffectManager.GlobalSFXManager.PlaySFX(CorectAudio);
             StartCoroutine(Open());
             Debug.Log("Correct Code");
         }
         else
         {
+            SoundEffectManager.GlobalSFXManager.PlaySFX(IncorectAudio);
             resetPuzzle();
             Debug.Log("Wrong Code");
         }
@@ -76,6 +81,7 @@ public class SimplifiedCodeLock : MonoBehaviour
 
     public void resetPuzzle()
     {
+
         attemptedCode = "";
     }
     public void writeCode(string word) // Specific function for the 'Food Chain' puzzle

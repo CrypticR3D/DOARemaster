@@ -147,7 +147,7 @@ public class PlayerPickup : MonoBehaviour
                 if (GOLookingAt && GOLookingAt != hit.transform.gameObject)
                 {
 
-                    GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+                    GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing = false;
                     GOLookingAt = null;
                 }
                 if (!hit.transform.GetComponent<GlowWhenLookedAt>().isGlowing)
@@ -158,13 +158,13 @@ public class PlayerPickup : MonoBehaviour
             }
             else if (GOLookingAt)
             {
-                GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+                GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing = false;
                 GOLookingAt = null;
             }
         }
         else if (GOLookingAt)
-        { 
-            GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+        {
+            GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing = false;
             GOLookingAt = null;
         }
         //this shit needs to be optimised badly. wtf cameron - cameron

@@ -39,6 +39,9 @@ EditorBuildSettings:
     path: Assets/BuildsFolder/Build v0.3.2a/6_Cutscene/EndingCutscene.unity
     guid: f8eef7b432ce85b4c91ad1522ca545b2
   - enabled: 1
+    path: Assets/BuildsFolder/AR/Main_Menu_New.unity
+    guid: f8fd32384fbda6b409b015ca7491465c
+  - enabled: 1
     path: Assets/Teams/Design Team/Game Design/Eoin/TestScenes/Hotel_Test_Eoin.unity
     guid: 672494db907a65c4daaede27681159b7
   m_configObjects: {}

@@ -33,6 +33,8 @@ namespace KeySystem
 
         private const string InteractTag = "InteractiveObject";
 
+        private const string GlowTag = "DirectGlow";
+
         private void Update()
         {
            // RaycastHit hit;
@@ -104,7 +106,7 @@ namespace KeySystem
                     }
                 }
 
-                if (hit.collider.CompareTag(InteractTag))
+                if (hit.collider.CompareTag(InteractTag) || hit.collider.CompareTag(GlowTag))
                 {
                     //Debug.Log("Yikes");
                     if (!doOnce)
@@ -118,8 +120,13 @@ namespace KeySystem
 
                     if (Input.GetButtonDown("Interact"))
                     {
+                        if (hit.transform.gameObject == raycastedDisk)
+                        {
+                            raycastedDisk.Interact();
+                        }
+                        
                         //Debug.Log("ClickKey");
-                        raycastedDisk.Interact();
+                        
                     }
                 }
 
@@ -127,14 +134,11 @@ namespace KeySystem
 
             else
             {
-                CrosshairChange(false);
-                doOnce = false;
-
-                //if (isCrosshairActive)
-                //{
-                //    CrosshairChange(false);
-                //    doOnce = false;
-                //}
+                if (isCrosshairActive)
+                {
+                    CrosshairChange(false);
+                    doOnce = false;
+                }
             }
         }
 

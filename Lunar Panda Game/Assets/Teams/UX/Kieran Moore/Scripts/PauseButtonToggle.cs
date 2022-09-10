@@ -96,8 +96,8 @@ public class PauseButtonToggle : MonoBehaviour
 
     public void RestartLvl()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
-
+        Unpause();
+        Cursor.lockState = CursorLockMode.Locked;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

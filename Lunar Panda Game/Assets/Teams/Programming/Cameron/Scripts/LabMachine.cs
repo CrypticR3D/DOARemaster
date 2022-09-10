@@ -65,7 +65,7 @@ public class LabMachine : MonoBehaviour
 
                         //add glowyinteractthingie
                         GlowWhenLookedAt glowy = antidote.AddComponent<GlowWhenLookedAt>();
-                        glowy.glowingMaterial = antidoteGlowMat;
+                       // glowy.glowingMaterial = antidoteGlowMat;
                         antidote.AddComponent<Rigidbody>();
                         antidote.transform.parent = null;
                        

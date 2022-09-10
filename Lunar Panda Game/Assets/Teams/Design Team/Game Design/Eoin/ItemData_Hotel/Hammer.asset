@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Hammer
   m_EditorClassIdentifier: 
   itemName: Hammer
-  description: A rusty hammer
+  description: '"A rusty hammer"'
   itemImage: {fileID: 21300000, guid: 5dd1011af08831447b29ca38b2fda9a5, type: 3}
   isUtility: 0
   prefab: {fileID: 4613151898583254607, guid: e4151ca49a57aec47ad52196201fa71a, type: 3}
-  foundInRoom: 2
+  foundInRoom: 3
   canDrop: 0

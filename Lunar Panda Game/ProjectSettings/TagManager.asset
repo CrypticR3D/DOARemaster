@@ -30,6 +30,8 @@ TagManager:
   - Wall
   - Key
   - LockedDrawer
+  - GlowTag
+  - DirectGlow
   layers:
   - Default
   - TransparentFX

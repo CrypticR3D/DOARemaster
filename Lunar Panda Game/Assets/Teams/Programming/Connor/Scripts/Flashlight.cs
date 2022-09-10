@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Script by Connor - if designers need any assistance feel free to dm or @ me on Discord
 
@@ -24,6 +25,8 @@ public class Flashlight : MonoBehaviour
     //public int minFlicks = 2;
     //public int maxFlicks = 3;
 
+    public Image UIon;
+    public Image UIoff;
 
     private bool isOn;
     public string clipName;//Matej changes
@@ -78,13 +81,17 @@ public class Flashlight : MonoBehaviour
 
             if (onOff)
             {
-                //SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);//Matej changes
+                SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);//Matej changes
                 lightSource.enabled = true;
+                UIon.enabled = true;
+                UIoff.enabled = false;
             }
             else
             {
-                //SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);//Matej changes
+                SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);//Matej changes
                 lightSource.enabled = false;
+                UIon.enabled = false;
+                UIoff.enabled = true;
             }
         }
     }

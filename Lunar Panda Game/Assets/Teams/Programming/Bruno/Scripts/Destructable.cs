@@ -5,26 +5,30 @@ using UnityEngine;
 public class Destructable : MonoBehaviour
 {
     //Filip Changes
-    public Animator doorL;
-    public Animator doorR;
+    //public Animator doorL;
+    //public Animator doorR;
 
     public string audioClipName;
-    public int id;
-    [Header("Prefabs")]
-    [Tooltip("Destroyable Version of the gameobject")]
-    public GameObject destroyedVersion;
+    //public int id;
+    //[Header("Prefabs")]
+    //[Tooltip("Destroyable Version of the gameobject")]
+    //public GameObject destroyedVersion;
 
-    [Header("Misc")]
-    [Tooltip("Hammer's item data")]
+    //[Header("Misc")]
+    //[Tooltip("Hammer's item data")]
     public ItemData Hammer;
-    [Tooltip("Inventory's script")]
+    //[Tooltip("Inventory's script")]
     public Inventory inventoryScript;
 
     InteractRaycasting raycast;
+
+    //public GameObject Plank1;
+    //public GameObject Plank2;
+
     private void Start()
     {
         raycast = FindObjectOfType<InteractRaycasting>(); // Needed to stop the object rotating from activating the script as well
-        GameEvents.current.puzzleCompleted += puzzleComplete;
+        //GameEvents.current.puzzleCompleted += puzzleComplete;
     }
 
     void Update()
@@ -49,35 +53,40 @@ public class Destructable : MonoBehaviour
             {
                 if (inventoryScript.itemInventory[inventoryScript.selectedItem] == Hammer)
                 {
-                    //Filip Changes
-                    doorL.SetTrigger("Open");
-                    doorR.SetTrigger("Open");
+                    SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+                    //It instantiates the destroyable version of the game object in the same position as the original object and destroys the original object
+                    //Instantiate(destroyedVersion, transform.position, transform.rotation);
+                    Destroy(gameObject);
 
-                    GameEvents.current.onPuzzleComplete(id);
-                    if (Analysis.current != null)
-                    {
-                        if (Analysis.current.consent)
-                        {
-                            Analysis.current.resetTimer("Destructable Object");
-                        }
-                    }
+                    //Filip Changes
+                    //doorL.SetTrigger("Open");
+                    //doorR.SetTrigger("Open");
+
+                    //GameEvents.current.onPuzzleComplete(id);
+                    //if (Analysis.current != null)
+                    //{
+                    //    if (Analysis.current.consent)
+                    //    {
+                    //        Analysis.current.resetTimer("Destructable Object");
+                    //    }
+                    //}
                 }
             }            
         }
     }
 
-    void puzzleComplete(int id)
-    {
-        if(id == this.id && this.gameObject != null)
-        {
-            SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
-            //It instantiates the destroyable version of the game object in the same position as the original object and destroys the original object
-            Instantiate(destroyedVersion, transform.position, transform.rotation);
-            Destroy(gameObject);
+    //void puzzleComplete(int id)
+    //{
+    //    if(id == this.id && this.gameObject != null)
+    //    {
+    //        SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+    //        //It instantiates the destroyable version of the game object in the same position as the original object and destroys the original object
+    //        //Instantiate(destroyedVersion, transform.position, transform.rotation);
+    //        Destroy(gameObject);
 
-            PuzzleData.current.completedEvents[id] = true;
-            PuzzleData.current.isCompleted[id - 1] = true;
-        }
-    }
+    //        PuzzleData.current.completedEvents[id] = true;
+    //        PuzzleData.current.isCompleted[id - 1] = true;
+    //    }
+    //}
     
 }
