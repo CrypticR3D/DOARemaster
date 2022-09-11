@@ -8,7 +8,7 @@ public class tooltipController : MonoBehaviour
     {
         NONE, MOVE, JUMP, SPRINT, CROUCH, FLASHLIGHT,
         OPENINV, CLOSEINV, OPENJRN, CLOSEJRN, TURNPAGEJRN,
-        ITEMSTORE, INTERACT
+        ITEMSTORE, INTERACT, PROMPTENABLE
     }
     [Header("Controls")]
     [Tooltip("The action you must complete to get rid of the tooltip")]
@@ -32,14 +32,19 @@ public class tooltipController : MonoBehaviour
 
     public GameObject FLTriggerBox;
     public GameObject torch;
+    public GameObject TooltipTrigger;
+
+    public GameObject FlashlightPrompt;
+
+    private void Start()
+    {
+        
+    }
 
     // Update is called once per frame
     void Update()
     {
         checkControls();
-
-        
-
     }
 
     void checkControls()
@@ -157,6 +162,11 @@ public class tooltipController : MonoBehaviour
                         }
                     }
                     break;
+                case controlTypes.PROMPTENABLE:
+                    {
+                        FlashlightPrompt.SetActive(true);
+                    }
+                    break;
                 default:
                     break;
             }
@@ -168,7 +178,7 @@ public class tooltipController : MonoBehaviour
         inRange = false;
         UITip.GetComponent<tooltipDisplay>().changeText(" ");
         UITip.SetActive(false);
-        
+        GameObject.Destroy(TooltipTrigger);
     }
 
     void OnTriggerEnter(Collider col)
@@ -190,8 +200,10 @@ public class tooltipController : MonoBehaviour
                 inRange = false;
                 UITip.GetComponent<tooltipDisplay>().changeText(" ");
                 UITip.SetActive(false);
+                GameObject.Destroy(TooltipTrigger);
             }
         }
+
     }
 
     void OnDrawGizmos()
