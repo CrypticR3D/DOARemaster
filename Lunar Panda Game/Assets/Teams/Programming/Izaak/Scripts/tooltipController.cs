@@ -20,7 +20,7 @@ public class tooltipController : MonoBehaviour
 
     [Tooltip("The range the player must be in to activate the tooltip (set to the same as the sphere collider radius)")]
     public float tooltipRange;
-    private bool inRange = false;
+    public bool inRange = false;
 
     [Header("Game Objects")]
     [Tooltip("Drag the tooltip text in the scene here")]
@@ -30,21 +30,29 @@ public class tooltipController : MonoBehaviour
     [Tooltip("Drag in the InventoryMenu object if it is an inventory-related tooltip")]
     public GameObject inventoryMenu;
 
-    public GameObject FLTriggerBox;
-    public GameObject torch;
+    //public GameObject FLTriggerBox;
+    //public GameObject torch;
     public GameObject TooltipTrigger;
 
-    public GameObject FlashlightPrompt;
+    public GameObject EnableUI;
+
+    PlayerPickup playerPickup;
 
     private void Start()
     {
-        
+        playerPickup = FindObjectOfType<PlayerPickup>();
     }
 
     // Update is called once per frame
     void Update()
     {
         checkControls();
+
+        if (playerPickup.GOLookingAt != null)
+        {
+            inRange = true;
+        }
+        
     }
 
     void checkControls()
@@ -80,17 +88,18 @@ public class tooltipController : MonoBehaviour
                     break;
                 case controlTypes.FLASHLIGHT:
                     {
-                        if (Input.GetButton("Flashlight"))
+                        if (Input.GetButtonDown("Flashlight"))
                         {
                             deactivateTooltip();
-                            FLTriggerBox.SetActive(false);
+                            EnableUI.SetActive(true);
+                            //FLTriggerBox.SetActive(false);
                         }
 
                     }
                     break;
                 case controlTypes.SPRINT:
                     {
-                        if (Input.GetButton("Sprint"))
+                        if (Input.GetButtonDown("Sprint"))
                         {
                             deactivateTooltip();
                         }
@@ -98,7 +107,7 @@ public class tooltipController : MonoBehaviour
                     break;
                 case controlTypes.OPENINV:
                     {
-                        if (Input.GetButton("Inventory"))
+                        if (Input.GetButtonDown("Inventory"))
                         {
                             deactivateTooltip();
                         }
@@ -107,7 +116,7 @@ public class tooltipController : MonoBehaviour
                 case controlTypes.CLOSEINV:
                     {
                         //If Inventory is currently up
-                        if (Input.GetButton("Inventory"))
+                        if (Input.GetButtonDown("Inventory"))
                         {
                             if (inventoryMenu.GetComponent<InventoryMenuToggle>().IsOnInventory)
                             {
@@ -118,7 +127,7 @@ public class tooltipController : MonoBehaviour
                     break;
                 case controlTypes.OPENJRN:
                     {
-                        if (Input.GetButton("Journal"))
+                        if (Input.GetButtonDown("Journal"))
                         {
                             deactivateTooltip();
                         }
@@ -126,7 +135,7 @@ public class tooltipController : MonoBehaviour
                     break;
                 case controlTypes.CLOSEJRN:
                     {
-                        if (Input.GetButton("Journal"))
+                        if (Input.GetButtonDown("Journal"))
                         {
                             if (journalMenu.GetComponent<JournalMenuToggle>().IsOnMenu)
                             {
@@ -137,7 +146,7 @@ public class tooltipController : MonoBehaviour
                     break;
                 case controlTypes.TURNPAGEJRN:
                     {
-                        if (Input.GetKey("e"))
+                        if (Input.GetButtonDown("e"))
                         {
                             if (journalMenu.GetComponent<JournalMenuToggle>().IsOnMenu)
                             {
@@ -148,7 +157,7 @@ public class tooltipController : MonoBehaviour
                     break;
                 case controlTypes.ITEMSTORE:
                     {
-                        if (Input.GetKey("PutAway"))
+                        if (Input.GetButtonDown("PutAway"))
                         {
                                 deactivateTooltip();
                         }
@@ -156,7 +165,7 @@ public class tooltipController : MonoBehaviour
                     break;
                 case controlTypes.INTERACT:
                     {
-                        if (Input.GetKey("mouse0"))
+                        if (Input.GetButtonDown("Interact"))
                         {
                             deactivateTooltip();
                         }
@@ -164,7 +173,7 @@ public class tooltipController : MonoBehaviour
                     break;
                 case controlTypes.PROMPTENABLE:
                     {
-                        FlashlightPrompt.SetActive(true);
+                        //UIPrompt.SetActive(true);
                     }
                     break;
                 default:
@@ -183,7 +192,7 @@ public class tooltipController : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "TipCollider" || col.tag == "Player")
+        if (col.CompareTag("TipCollider") || col.CompareTag("Player"))
         {
             inRange = true;
             UITip.SetActive(true);
@@ -193,7 +202,7 @@ public class tooltipController : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        if (col.tag == "TipCollider" || col.tag == "Player")
+        if (col.CompareTag("TipCollider") || col.CompareTag("Player"))
         {
             if (input == controlTypes.NONE)
             {

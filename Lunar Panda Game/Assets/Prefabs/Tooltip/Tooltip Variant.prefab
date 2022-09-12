@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 92620474400352875, guid: 4414fd4703f20844db0827257ea44a56, type: 3}
+      propertyPath: UITip
+      value: 
+      objectReference: {fileID: 7433111050535492788, guid: 55cfcc8df2691c3489d06250778c3c72, type: 3}
+    - target: {fileID: 92620474400352875, guid: 4414fd4703f20844db0827257ea44a56, type: 3}
+      propertyPath: inventoryMenu
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 850709314602097484, guid: 4414fd4703f20844db0827257ea44a56, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -53,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2165617518973672560, guid: 4414fd4703f20844db0827257ea44a56, type: 3}
       propertyPath: m_Name
-      value: Tooltip
+      value: Tooltip Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4414fd4703f20844db0827257ea44a56, type: 3}

@@ -31,7 +31,7 @@ public class PlayerPickup : MonoBehaviour
     [Range(100f, 500f)]
     [SerializeField] float ControllerItemRotateSens;
     [Header("Lookat System")]
-    [SerializeField] GameObject GOLookingAt = null;
+    [SerializeField] public GameObject GOLookingAt = null;
     [Header("Throw System")]
     [SerializeField] float throwForce;
     Inventory inventory;
@@ -146,25 +146,29 @@ public class PlayerPickup : MonoBehaviour
             {
                 if (GOLookingAt && GOLookingAt != hit.transform.gameObject)
                 {
-
                     GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing = false;
+                    //GOLookingAt.GetComponent<tooltipController>().inRange = false;
                     GOLookingAt = null;
                 }
+
                 if (!hit.transform.GetComponent<GlowWhenLookedAt>().isGlowing)
                 {
                     GOLookingAt = hit.transform.gameObject;
                     GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+                    //GOLookingAt.GetComponent<tooltipController>().inRange = true;
                 }
             }
             else if (GOLookingAt)
             {
                 GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing = false;
+                //GOLookingAt.GetComponent<tooltipController>().inRange = false;
                 GOLookingAt = null;
             }
         }
         else if (GOLookingAt)
         {
             GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing = false;
+            //GOLookingAt.GetComponent<tooltipController>().inRange = false;
             GOLookingAt = null;
         }
         //this shit needs to be optimised badly. wtf cameron - cameron
