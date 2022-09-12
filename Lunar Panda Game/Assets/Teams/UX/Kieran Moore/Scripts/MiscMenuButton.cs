@@ -24,6 +24,8 @@ public class MiscMenuButton : MonoBehaviour
         MenuToShow.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         if (firstButtonSelected != null)
+        {
             EventSystem.current.SetSelectedGameObject(firstButtonSelected);
+        }         
     }
 }

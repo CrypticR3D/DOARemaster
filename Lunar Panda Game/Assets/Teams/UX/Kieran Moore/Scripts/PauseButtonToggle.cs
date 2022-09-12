@@ -17,6 +17,8 @@ public class PauseButtonToggle : MonoBehaviour
     InventoryMenuToggle Inventory;
     FeedbackToggle Feedback;
     public GameObject PauseMenuElement;
+    public GameObject InventorySlot;
+    public GameObject FlashlightSlot;
     [SerializeField] GameObject firstSelectedButton;
 
     internal bool canOpen = true;
@@ -51,6 +53,8 @@ public class PauseButtonToggle : MonoBehaviour
                     if (firstSelectedButton != null)
                         EventSystem.current.SetSelectedGameObject(firstSelectedButton);
                     //FindObjectOfType<WalkingSound>().canMakeSound = false;
+                    InventorySlot.SetActive(false);
+                    FlashlightSlot.SetActive(false);
 
                 }
                 else if (IsPaused == true)
@@ -91,6 +95,13 @@ public class PauseButtonToggle : MonoBehaviour
             Cursor.visible = false;
             Time.timeScale = 1f;
             //FindObjectOfType<WalkingSound>().canMakeSound = true;
+            InventorySlot.SetActive(true);
+             if (tooltipController.FlashlightEnabled == true)
+             {
+                FlashlightSlot.SetActive(true);
+             }
+         
+            
         }
     }
 

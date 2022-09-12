@@ -21,6 +21,8 @@ public class ViewDocument : MonoBehaviour
     //internal lockMouse lockMouse;
     internal PlayerCrouch crouchTrigger;
     public FirstPersonController PlayerCharacter;
+    public GameObject InventorySlot;
+    public GameObject FlashlightSlot;
 
     private void Start()
     {
@@ -51,6 +53,8 @@ public class ViewDocument : MonoBehaviour
                     //lockMouse.canLook = false;
                     PlayerCharacter.canLook = false;
                     //crouchTrigger.enabled = false;
+                    InventorySlot.SetActive(false);
+                    FlashlightSlot.SetActive(false);
                 }
             }
         }
@@ -62,6 +66,8 @@ public class ViewDocument : MonoBehaviour
             //player.enabled = true;
             //lockMouse.canLook = true;
             PlayerCharacter.canLook = true;
+            InventorySlot.SetActive(true);
+            FlashlightSlot.SetActive(true);
 
             //crouchTrigger.enabled = true;
             UIManager.Instance.toggleMenuVariables();

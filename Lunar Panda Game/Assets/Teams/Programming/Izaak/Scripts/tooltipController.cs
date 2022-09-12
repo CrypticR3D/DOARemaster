@@ -21,6 +21,7 @@ public class tooltipController : MonoBehaviour
     [Tooltip("The range the player must be in to activate the tooltip (set to the same as the sphere collider radius)")]
     public float tooltipRange;
     public bool inRange = false;
+    public static bool FlashlightEnabled = false;
 
     [Header("Game Objects")]
     [Tooltip("Drag the tooltip text in the scene here")]
@@ -92,6 +93,8 @@ public class tooltipController : MonoBehaviour
                         {
                             deactivateTooltip();
                             EnableUI.SetActive(true);
+                            FlashlightEnabled = true;
+
                             //FLTriggerBox.SetActive(false);
                         }
 
