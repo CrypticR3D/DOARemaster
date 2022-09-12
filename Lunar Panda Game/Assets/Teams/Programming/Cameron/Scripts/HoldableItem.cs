@@ -15,6 +15,15 @@ public class HoldableItem : MonoBehaviour
         startLocation = transform.position;
         
     }
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.name == "Respawner")
+        {
+            transform.position = startLocation;
+        }
+    }
+
+
     /*
     void OnCollisionEnter(Collision col)
     {

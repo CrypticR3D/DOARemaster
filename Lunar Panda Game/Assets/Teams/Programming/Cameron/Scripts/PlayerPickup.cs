@@ -252,12 +252,14 @@ public class PlayerPickup : MonoBehaviour
     {
         if (heldItem != null)
         {
-
             //why did these 3 lines of code give me so much trouble.... fuck this
+            
             //finds the direction that the object needs to go
             Vector3 direction = (playerCameraTransform.position + (playerCameraTransform.forward * holdDist)) - heldItem.transform.position;
+            
             //finds the distance between the held object and where it needs to go
             float dist = Vector3.Distance(heldItem.transform.position, playerCameraTransform.position + (playerCameraTransform.forward * holdDist));
+            
             //if the object is too far away, drop it
             if (dist > dropDist)
             {
@@ -285,10 +287,10 @@ public class PlayerPickup : MonoBehaviour
         //    heldItem.GetComponent<Rigidbody>().useGravity = true;
         //    heldItem.GetComponent<Rigidbody>().freezeRotation = false;
         //}
-        if (heldItem.GetComponent<RotatableItem>())
-        {
-            FindObjectOfType<lockMouse>().canLook = true;
-        }
+        //if (heldItem.GetComponent<RotatableItem>())
+        //{
+        //    FindObjectOfType<lockMouse>().canLook = true;
+        //}
         heldItem = null;
     }
 
