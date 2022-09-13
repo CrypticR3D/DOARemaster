@@ -14,6 +14,9 @@ public class InteractRaycasting : MonoBehaviour
     private static InteractRaycasting _instance;
     public static InteractRaycasting Instance { get { return _instance; } }
 
+    Transform currentHit;
+    Transform currentPicked;
+
 
     private void Awake()
     {
@@ -46,7 +49,7 @@ public class InteractRaycasting : MonoBehaviour
     {
         if(Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
         {
-            if (hit.transform != null && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory && !Pause.IsPaused)
+            if (hit.transform != null/* && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory && !Pause.IsPaused*/)
             {
                 return true;
             }
@@ -59,9 +62,13 @@ public class InteractRaycasting : MonoBehaviour
     {
         if(Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist, layerMask))
         {
-            if (hit.transform != null && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory && !Pause.IsPaused)
+            if (!Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory && !Pause.IsPaused)
             {
-                return true;
+                if (hit.transform != null)
+                {
+                    return true;
+                }
+                return false;
             }
             return false;
         }

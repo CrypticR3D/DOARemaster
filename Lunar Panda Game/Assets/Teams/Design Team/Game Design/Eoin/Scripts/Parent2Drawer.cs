@@ -5,26 +5,38 @@ using UnityEngine;
 public class Parent2Drawer : MonoBehaviour
 {
 
-    [SerializeField] public GameObject drawer;
+    //[SerializeField] public GameObject drawer;
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider col)
     {
         //Debug.Log("Parent");
-        if (other.tag == "InteractiveObject" )
+        if (col.CompareTag("InteractiveObject"))
         {
-            other.transform.parent = drawer.transform;
-            other.attachedRigidbody.useGravity = false;
+            col.transform.parent = this.transform;
+            col.attachedRigidbody.useGravity = false;
+        }
+
+        if (col.CompareTag("DirectGlow"))
+        {
+            col.transform.parent = this.transform;
+            col.attachedRigidbody.useGravity = false;
         }
 
     }
 
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider col)
     {
         //Debug.Log("Orphan");
-        if (other.tag == "InteractiveObject")
+        if (col.CompareTag("InteractiveObject"))
         {
-            other.attachedRigidbody.useGravity = true;
-            other.transform.parent = null;
+            col.attachedRigidbody.useGravity = true;
+            col.transform.parent = null;
+        }
+
+        if (col.CompareTag("DirectGlow"))
+        {
+            col.attachedRigidbody.useGravity = true;
+            col.transform.parent = null;
         }
     }
 }

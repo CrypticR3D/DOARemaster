@@ -195,7 +195,7 @@ public class tooltipController : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag("TipCollider") || col.CompareTag("Player"))
+        if (col.CompareTag("Player"))
         {
             inRange = true;
             UITip.SetActive(true);
@@ -205,7 +205,7 @@ public class tooltipController : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        if (col.CompareTag("TipCollider") || col.CompareTag("Player"))
+        if (col.CompareTag("Player"))
         {
             if (input == controlTypes.NONE)
             {
