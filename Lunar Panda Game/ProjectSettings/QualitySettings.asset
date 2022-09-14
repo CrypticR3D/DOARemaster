@@ -36,7 +36,7 @@ QualitySettings:
     streamingMipmapsMaxLevelReduction: 2
     streamingMipmapsMaxFileIORequests: 1024
     particleRaycastBudget: 16
-    asyncUploadTimeSlice: 4
+    asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
@@ -115,4 +115,16 @@ QualitySettings:
     customRenderPipeline: {fileID: 11400000, guid: 7d5d57b718856604d8f891e6844ced3f, type: 2}
     excludedTargetPlatforms: []
   m_PerPlatformDefaultQuality:
-    Standalone: 0
+    Android: 1
+    Lumin: 2
+    Nintendo 3DS: 2
+    Nintendo Switch: 2
+    PS4: 2
+    PSP2: 1
+    Stadia: 2
+    Standalone: 1
+    WebGL: 1
+    Windows Store Apps: 2
+    XboxOne: 2
+    iPhone: 1
+    tvOS: 1

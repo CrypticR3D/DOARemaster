@@ -8235,10 +8235,6 @@ PrefabInstance:
       propertyPath: LevelName
       value: Hotel_Test_Eoin
       objectReference: {fileID: 0}
-    - target: {fileID: 8270101718685330311, guid: 9ec26e0b9655d584084e9e95223c3f06, type: 3}
-      propertyPath: LoadingScreen
-      value: 
-      objectReference: {fileID: 1802956131}
     - target: {fileID: 8270101718685330328, guid: 9ec26e0b9655d584084e9e95223c3f06, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -8801,7 +8797,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311551941}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3dda36615f75376419161f690eb86936, type: 3}
   m_Name: 
@@ -10948,7 +10944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369472245710611409, guid: c6bce053c18aa234eb9f5ec89cbd2f28, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7369472245710611413, guid: c6bce053c18aa234eb9f5ec89cbd2f28, type: 3}
       propertyPath: m_VideoClip
@@ -12302,7 +12298,7 @@ VideoPlayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823688464}
-  m_Enabled: 0
+  m_Enabled: 1
   m_VideoClip: {fileID: 32900000, guid: f472e7791f6ba1148a6f9fa4c4b06084, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0

@@ -17,8 +17,6 @@ public class AsyncOperationProgressExample : MonoBehaviour
 
     public GameObject Buttons;
 
-    //public GameObject LoadingScreen;
-
     public string LevelName;
 
     void Start()
@@ -38,13 +36,10 @@ public class AsyncOperationProgressExample : MonoBehaviour
     void HideUI()
     {
         Buttons.gameObject.SetActive(false);
-        //LoadingScreen.gameObject.SetActive(true);
     }
 
     IEnumerator LoadScene()
     {
-        //yield return new WaitForSeconds(5);
-
         yield return null;
 
         //Begin to load the Scene you specify
@@ -56,7 +51,7 @@ public class AsyncOperationProgressExample : MonoBehaviour
         while (!asyncOperation.isDone)
         {
             //Output the current progress
-            m_Text.text = "Loading progress: " + (asyncOperation.progress) + "%";
+            m_Text.text = "Loading progress: " + (asyncOperation.progress * 100) + "%";
 
             // Check if the load has finished
             if (asyncOperation.progress >= 0.9f)

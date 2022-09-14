@@ -20,7 +20,7 @@ public class MyDrawerController : MonoBehaviour
     [SerializeField] private int waitTimer = 1;
     [SerializeField] private bool pauseInteraction = false;
 
-    //public GameObject Parent2Drawer;
+    public GameObject Parent2Drawer;
 
     private void Awake()
     {
