@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,9 +14,21 @@ public class GlowWhenLookedAt : MonoBehaviour
     public GameObject Player;
     public Collider PlayerCollider;
 
+
+    //[SerializeField] ToolTipType tooltip;
+    //[SerializeField] Text tooltipTxt;
+    //[SerializeField] CanvasGroup tooltipGroup;
+    //PlayerPickup pickup;
+    //[SerializeField] float waitTime = 0.5f;
+
+    //bool isFading = false;
+
+
+
     void Start()
     {
         Player = GameObject.FindWithTag("Player");
+        //pickup = FindObjectOfType<PlayerPickup>();
         PlayerCollider = Player.GetComponentInChildren<SphereCollider>();
         isGlowing = false;
         m_EmissiveObject = gameObject;
@@ -32,10 +45,23 @@ public class GlowWhenLookedAt : MonoBehaviour
             {
                 isGlowing = true;
             }
-            
         }
-        
     }
+
+    //IEnumerator FadeTooltips()
+    //{
+    //    tooltipTxt.text = tooltip.text;
+    //    for (float t = 0f; t < tooltip.fadeTime; t += Time.deltaTime)
+    //    {
+    //        float normalizedTime = t / tooltip.fadeTime;
+    //        tooltipGroup.alpha = Mathf.Lerp(0, 1, normalizedTime);
+    //        yield return null;
+    //        isGlowing = false;
+    //    }
+    //    yield return new WaitForSeconds(waitTime);
+    //    while (InteractRaycasting.Instance.raycastInteract(out RaycastHit hit));
+    //}
+
     void OnTriggerExit(Collider other)
     {
         if (other.tag == "GlowTag")

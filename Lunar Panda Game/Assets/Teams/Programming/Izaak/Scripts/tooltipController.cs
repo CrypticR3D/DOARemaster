@@ -60,14 +60,14 @@ public class tooltipController : MonoBehaviour
     {
         if (inRange)
         {
-            Debug.Log(inRange);
+            //Debug.Log(inRange);
             switch (input)
             {
                 case controlTypes.MOVE:
                     {
                         if ((Input.GetButton("Horizontal")) || (Input.GetButton("Vertical")))
                         {
-                            deactivateTooltip();
+                            DisableTooltip();
                         }
                     }
                     break;
@@ -75,7 +75,7 @@ public class tooltipController : MonoBehaviour
                     {
                         if (Input.GetButton("Jump"))
                         {
-                            deactivateTooltip();
+                            DisableTooltip();
                         }
                     }
                     break;
@@ -83,7 +83,7 @@ public class tooltipController : MonoBehaviour
                     {
                         if (Input.GetButton("Crouch"))
                         {
-                            deactivateTooltip();
+                            DisableTooltip();
                         }
                     }
                     break;
@@ -91,7 +91,7 @@ public class tooltipController : MonoBehaviour
                     {
                         if (Input.GetButtonDown("Flashlight"))
                         {
-                            deactivateTooltip();
+                            DisableTooltip();
                             EnableUI.SetActive(true);
                             FlashlightEnabled = true;
 
@@ -104,7 +104,7 @@ public class tooltipController : MonoBehaviour
                     {
                         if (Input.GetButtonDown("Sprint"))
                         {
-                            deactivateTooltip();
+                            DisableTooltip();
                         }
                     }
                     break;
@@ -112,7 +112,7 @@ public class tooltipController : MonoBehaviour
                     {
                         if (Input.GetButtonDown("Inventory"))
                         {
-                            deactivateTooltip();
+                            DisableTooltip();
                         }
                     }
                     break;
@@ -123,7 +123,7 @@ public class tooltipController : MonoBehaviour
                         {
                             if (inventoryMenu.GetComponent<InventoryMenuToggle>().IsOnInventory)
                             {
-                                deactivateTooltip();
+                                DisableTooltip();
                             }
                         }
                     }
@@ -132,7 +132,7 @@ public class tooltipController : MonoBehaviour
                     {
                         if (Input.GetButtonDown("Journal"))
                         {
-                            deactivateTooltip();
+                            DisableTooltip();
                         }
                     }
                     break;
@@ -142,7 +142,7 @@ public class tooltipController : MonoBehaviour
                         {
                             if (journalMenu.GetComponent<JournalMenuToggle>().IsOnMenu)
                             {
-                                deactivateTooltip();
+                                DisableTooltip();
                             }
                         }
                     }
@@ -153,7 +153,7 @@ public class tooltipController : MonoBehaviour
                         {
                             if (journalMenu.GetComponent<JournalMenuToggle>().IsOnMenu)
                             {
-                                deactivateTooltip();
+                                DisableTooltip();
                             }
                         }
                     }
@@ -162,7 +162,7 @@ public class tooltipController : MonoBehaviour
                     {
                         if (Input.GetButtonDown("PutAway"))
                         {
-                                deactivateTooltip();
+                            DisableTooltip();
                         }
                     }
                     break;
@@ -170,7 +170,7 @@ public class tooltipController : MonoBehaviour
                     {
                         if (Input.GetButtonDown("Interact"))
                         {
-                            deactivateTooltip();
+                            DisableTooltip();
                         }
                     }
                     break;
@@ -185,7 +185,35 @@ public class tooltipController : MonoBehaviour
         }
     }
 
-    public void deactivateTooltip()
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            EnableTooltip();
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            if (input == controlTypes.NONE)
+            {
+                DisableTooltip();
+            }
+        }
+
+    }
+
+    public void EnableTooltip()
+    {
+        inRange = true;
+        UITip.SetActive(true);
+        UITip.GetComponent<tooltipDisplay>().changeText(tooltipMessage);
+    }
+
+    public void DisableTooltip()
     {
         inRange = false;
         UITip.GetComponent<tooltipDisplay>().changeText(" ");
@@ -193,34 +221,10 @@ public class tooltipController : MonoBehaviour
         GameObject.Destroy(TooltipTrigger);
     }
 
-    void OnTriggerEnter(Collider col)
-    {
-        if (col.CompareTag("TipCollider") || col.CompareTag("Player"))
-        {
-            inRange = true;
-            UITip.SetActive(true);
-            UITip.GetComponent<tooltipDisplay>().changeText(tooltipMessage);
-        }
-    }
-
-    void OnTriggerExit(Collider col)
-    {
-        if (col.CompareTag("TipCollider") || col.CompareTag("Player"))
-        {
-            if (input == controlTypes.NONE)
-            {
-                inRange = false;
-                UITip.GetComponent<tooltipDisplay>().changeText(" ");
-                UITip.SetActive(false);
-                GameObject.Destroy(TooltipTrigger);
-            }
-        }
-
-    }
-
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, tooltipRange);
     }
+
 }

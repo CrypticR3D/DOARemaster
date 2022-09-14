@@ -35,6 +35,17 @@ namespace KeySystem
 
         private const string GlowTag = "DirectGlow";
 
+        private const string AllTag = "Untagged";
+
+        Transform player;
+        InteractRaycasting playerPickupRay;
+        private void Awake()
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+            playerPickupRay = player.GetComponent<InteractRaycasting>();
+        }
+
+
         private void Update()
         {
            // RaycastHit hit;
@@ -45,6 +56,26 @@ namespace KeySystem
 
             if (InteractRaycasting.Instance.raycastInteract(out RaycastHit hit, mask)) //(Physics.Raycast(transform.position, fwd, out hit, rayLength, mask))
             {
+
+                if (hit.collider.CompareTag(AllTag))
+                {
+                    CrosshairChange(false);
+                    doOnce = false;
+                }
+
+                if (hit.collider.CompareTag(GlowTag))
+                {
+                    if (!doOnce)
+                    {
+                        CrosshairChange(true);
+                    }
+
+                    isCrosshairActive = true;
+                    doOnce = true;
+                }
+
+
+
                 ///Door Interaction///
 
                 if (hit.collider.CompareTag(DoorTag))
@@ -106,7 +137,7 @@ namespace KeySystem
                     }
                 }
 
-                if (hit.collider.CompareTag(InteractTag) || hit.collider.CompareTag(GlowTag))
+                if (hit.collider.CompareTag(InteractTag))
                 {
                     //Debug.Log("Yikes");
                     if (!doOnce)

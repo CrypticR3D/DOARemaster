@@ -57,6 +57,8 @@ public class PlayerPickup : MonoBehaviour
         playerPickupRay = player.GetComponent<InteractRaycasting>();
         startingHoldDist = holdDist;
         pMovement = FindObjectOfType<playerMovement>();
+
+
     }
 
     void Update()
@@ -155,6 +157,17 @@ public class PlayerPickup : MonoBehaviour
                 {
                     GOLookingAt = hit.transform.gameObject;
                     GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+
+                    if (GOLookingAt.GetComponent<tooltipController>() != null)
+                    {
+                        GOLookingAt.GetComponent<tooltipController>().EnableTooltip();
+                    }
+
+                    else
+                    {
+                        //Do nothing
+                    }
+                    
                     //GOLookingAt.GetComponent<tooltipController>().inRange = true;
                 }
             }

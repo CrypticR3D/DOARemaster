@@ -142,9 +142,13 @@ public class HorrorTrigger : MonoBehaviour
     {
         if (startLook)
         {
-            player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.LookRotation(lookPos),
-                        Time.deltaTime * damping);
-            p_camera.transform.localEulerAngles = new Vector3(Mathf.Lerp(p_camera.transform.localEulerAngles.x, 0, Time.deltaTime), 0, 0);
+            //player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.LookRotation(lookPos),
+            //            Time.deltaTime * damping);
+            //p_camera.transform.localEulerAngles = new Vector3(Mathf.Lerp(p_camera.transform.localEulerAngles.x, 0, Time.deltaTime), 0, 0);
+
+
+            transform.rotation = Quaternion.Slerp(Quaternion.Euler(lookAt.position.x, -90f, 0f), Quaternion.LookRotation(lookAt.position), 2f * Time.deltaTime);
+
         }
         if (doneEvents == numberOfEvents && coroutineDone) GetComponent<BoxCollider>().enabled = false;
 
@@ -381,11 +385,18 @@ public class HorrorTrigger : MonoBehaviour
     }
     private IEnumerator LookAtCoroutine(float delay)
     {
+        //startLook = true;
+        lookPos = lookAt.position;
+        player.transform.position = lookPos;
+
+
         player.GetComponentInChildren<FirstPersonController>().enabled = false;
+        player.GetComponentInChildren<FirstPersonController>().canLook = false;
         //FindObjectOfType<WalkingSound>().canMakeSound = false;
         yield return new WaitForSeconds(delay);
-        startLook = false;
+        //startLook = false;
         player.GetComponentInChildren<FirstPersonController>().enabled = true;
+        player.GetComponentInChildren<FirstPersonController>().canLook = true;
         //FindObjectOfType<WalkingSound>().canMakeSound = true;
         doneEvents++;
     }
@@ -490,9 +501,6 @@ public class HorrorTrigger : MonoBehaviour
     public void LookAt()
     {
         StartCoroutine(LookAtCoroutine(lookAtDelay));
-        startLook = true;
-        lookPos = lookAt.position - player.transform.position;
-        lookPos.y = 0;
     }
     public void ActivateTriggerCollider(bool value)
     {
