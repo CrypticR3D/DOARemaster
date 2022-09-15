@@ -55,7 +55,7 @@ public class PauseButtonToggle : MonoBehaviour
                     //FindObjectOfType<WalkingSound>().canMakeSound = false;
                     InventorySlot.SetActive(false);
                     FlashlightSlot.SetActive(false);
-
+                  //  SoundEffectManager.SetActive(false);
                 }
                 else if (IsPaused == true)
                 {
@@ -94,8 +94,9 @@ public class PauseButtonToggle : MonoBehaviour
             PlayerCharacter.canLook = true;
             Cursor.visible = false;
             Time.timeScale = 1f;
+           // SoundEffectManager.SetActive = true;
             //FindObjectOfType<WalkingSound>().canMakeSound = true;
-            InventorySlot.SetActive(true);
+           InventorySlot.SetActive(true);
              if (tooltipController.FlashlightEnabled == true)
              {
                 FlashlightSlot.SetActive(true);
