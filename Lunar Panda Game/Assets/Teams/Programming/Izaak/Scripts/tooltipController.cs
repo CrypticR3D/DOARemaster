@@ -38,6 +38,7 @@ public class tooltipController : MonoBehaviour
     public GameObject EnableUI;
 
     PlayerPickup playerPickup;
+    float tooltipTimer;
 
     private void Start()
     {
@@ -51,9 +52,20 @@ public class tooltipController : MonoBehaviour
 
         if (playerPickup.GOLookingAt != null)
         {
+            tooltipTimer = 0;
             inRange = true;
         }
-        
+
+        if (UITip.gameObject.activeInHierarchy)
+        {
+            tooltipTimer += Time.deltaTime;
+
+            if (tooltipTimer >= 3)
+            {
+                DisableTooltip();
+            }
+        }
+
     }
 
     void checkControls()
