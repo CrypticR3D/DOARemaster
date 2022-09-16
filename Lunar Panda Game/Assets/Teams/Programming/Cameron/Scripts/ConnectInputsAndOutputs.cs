@@ -60,7 +60,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                 {
                     //just realised this is irrelevent. I'll fix after prototype is out
                     //Cam from week 6 here. Not fixing this
-                    if (InteractRaycasting.Instance.raycastInteract(out hit, cableMask))
+                    if (InteractRaycasting.Instance.raycastInteractLayer(out hit, cableMask))
                     {
                         if (hit.transform.CompareTag("OutputNode"))
                         {

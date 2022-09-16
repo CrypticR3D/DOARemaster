@@ -39,10 +39,13 @@ public class tooltipController : MonoBehaviour
 
     PlayerPickup playerPickup;
     float tooltipTimer;
+    bool TipComplete;
+
 
     private void Start()
     {
         playerPickup = FindObjectOfType<PlayerPickup>();
+        TipComplete = false;
     }
 
     // Update is called once per frame
@@ -212,7 +215,7 @@ public class tooltipController : MonoBehaviour
         {
             if (input == controlTypes.NONE)
             {
-                DisableTooltip();
+                HideTip();
             }
         }
 
@@ -220,17 +223,31 @@ public class tooltipController : MonoBehaviour
 
     public void EnableTooltip()
     {
-        inRange = true;
-        UITip.SetActive(true);
-        UITip.GetComponent<tooltipDisplay>().changeText(tooltipMessage);
+        if (TipComplete == false)
+        {
+            gameObject.SetActive(true);
+            inRange = true;
+            UITip.SetActive(true);
+            UITip.GetComponent<tooltipDisplay>().changeText(tooltipMessage);
+
+        }
+    }
+
+    public void HideTip()
+    {
+        TipComplete = false;
+        inRange = false;
+        UITip.GetComponent<tooltipDisplay>().changeText(" ");
+        UITip.SetActive(false);
     }
 
     public void DisableTooltip()
     {
+        TipComplete = true;
         inRange = false;
         UITip.GetComponent<tooltipDisplay>().changeText(" ");
         UITip.SetActive(false);
-        GameObject.Destroy(TooltipTrigger);
+        gameObject.SetActive(false);
     }
 
     void OnDrawGizmos()

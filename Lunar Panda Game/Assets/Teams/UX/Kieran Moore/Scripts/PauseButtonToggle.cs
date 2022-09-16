@@ -41,6 +41,7 @@ public class PauseButtonToggle : MonoBehaviour
             {
                 if (IsPaused == false && Journal.IsOnMenu == false && Inventory.IsOnInventory == false && Feedback.IsOnFeedbackMenu == false)
                 {
+                    AudioListener.pause = true;
                     IsPaused = true;
                     //BarOfStamina.SetActive(false);
                     IsOnRegularMenu = true;
@@ -86,6 +87,7 @@ public class PauseButtonToggle : MonoBehaviour
     {
        if (IsOnRegularMenu == true)
         {
+            AudioListener.pause = false;
             PauseMenu.SetActive(false);
             IsPaused = false;
             //BarOfStamina.SetActive(true);

@@ -54,7 +54,7 @@ namespace KeySystem
 
             int mask = 1 << LayerMask.NameToLayer(excludeLayerName) | layerMaskInteract.value;
 
-            if (InteractRaycasting.Instance.raycastInteract(out RaycastHit hit, mask)) //(Physics.Raycast(transform.position, fwd, out hit, rayLength, mask))
+            if (InteractRaycasting.Instance.raycastInteractLayer(out RaycastHit hit, mask)) //(Physics.Raycast(transform.position, fwd, out hit, rayLength, mask))
             {
 
                 if (hit.collider.CompareTag(AllTag))
@@ -100,11 +100,17 @@ namespace KeySystem
 
                 if (hit.collider.CompareTag(DrawerTag))
                 {
-                    if (!doOnce)
+                    if (hit.collider.gameObject.GetComponentInParent<MyDrawerController>())
+                    {
+                        raycastedDrawer = hit.collider.gameObject.GetComponentInParent<MyDrawerController>();
+                        CrosshairChange(true);
+                    }
+                    if (hit.collider.gameObject.GetComponent<MyDrawerController>())
                     {
                         raycastedDrawer = hit.collider.gameObject.GetComponent<MyDrawerController>();
                         CrosshairChange(true);
                     }
+
 
                     isCrosshairActive = true;
                     doOnce = true;

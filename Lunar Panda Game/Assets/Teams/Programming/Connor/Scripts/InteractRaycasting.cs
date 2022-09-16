@@ -55,7 +55,7 @@ public class InteractRaycasting : MonoBehaviour
         return false;
     }
 
-    public bool raycastInteract(out RaycastHit hit, int layerMask)
+    public bool raycastInteractLayer(out RaycastHit hit, int layerMask)
     {
         if(Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist, layerMask))
         {
