@@ -235,10 +235,10 @@ public class tooltipController : MonoBehaviour
 
     public void HideTip()
     {
-        TipComplete = false;
+        //TipComplete = false;
         inRange = false;
-        UITip.GetComponent<tooltipDisplay>().changeText(" ");
         UITip.SetActive(false);
+
     }
 
     public void DisableTooltip()
