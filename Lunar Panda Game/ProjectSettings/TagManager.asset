@@ -32,6 +32,7 @@ TagManager:
   - LockedDrawer
   - GlowTag
   - DirectGlow
+  - Trigger
   layers:
   - Default
   - TransparentFX
