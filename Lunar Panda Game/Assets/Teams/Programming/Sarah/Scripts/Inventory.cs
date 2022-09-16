@@ -62,6 +62,10 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f && !pickupControl.holdingNarrative)
         {
+            if (true)
+            {
+
+            }
             selectItem(true);
         }
         if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f && !pickupControl.holdingNarrative)

@@ -5269,7 +5269,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -8620}
+  m_AnchoredPosition: {x: 0, y: -10291}
   m_SizeDelta: {x: 932, y: 699}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &741909272
@@ -6679,7 +6679,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -7847.4}
+  m_AnchoredPosition: {x: 0, y: -9518.4}
   m_SizeDelta: {x: 2048, y: 1152}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &898086998
@@ -8232,7 +8232,7 @@ PrefabInstance:
       objectReference: {fileID: 1311551944}
     - target: {fileID: 8270101718685330311, guid: 9ec26e0b9655d584084e9e95223c3f06, type: 3}
       propertyPath: LevelName
-      value: Hotel_Test_Eoin
+      value: Demo_Hotel
       objectReference: {fileID: 0}
     - target: {fileID: 8270101718685330328, guid: 9ec26e0b9655d584084e9e95223c3f06, type: 3}
       propertyPath: m_RootOrder
@@ -8523,7 +8523,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: DEMO
+  m_Text: Remastered  DEMO
 --- !u!222 &1259338113
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8796,7 +8796,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311551941}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3dda36615f75376419161f690eb86936, type: 3}
   m_Name: 
@@ -10413,67 +10413,75 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<b>Producer</b>\r\nKostas
-    Dokos\r\n\r\n<b>Art Director</b>\r\nAdam Barton\r\n\r\n<b>Game Design Lead</b>\r\nEoin
-    Matthews\r\n\r\n<b>Narrative Design Lead</b>\r\nBen Hendry\r\n\r\n<b>Level Design
-    Lead</b>\r\nDavid Ling\r\nJamie Harris\r\n\r\n<b>User Experience Lead </b>\r\nLaura
-    Eszter Kovacs\r\n\r\n<b>Sound Lead</b>\r\nKieran Moore\r\nFilip Jozic\r\n\r\n<b>Programming
-    Lead</b>\r\nSarah Butlin\r\n\r\n<b>Art Leads</b>\r\nBrendon Smith\r\nDominika
-    Kucharska\r\nLuke Jarman\r\n\r\n<b>Game Designers</b>\r\nBogdan Barbu\r\nJulio
-    Arias\r\nMatej Gajdos\r\n\r\n<b>Narrative Designer</b>\r\nAtanas Pilev\r\nOliver
-    Allison\r\n\r\n<b>Level Designers</b>\r\nAshley Mortlock\r\nHaydon Williams\r\nMacorley
-    Hepden-Barker\r\nRafael Theodorou\r\nWilliam Hook\r\nWilliam Whitlam\r\n\r\n<b>User
-    Experience Designers</b>\r\nAlexander Jones\r\nAlexander Slous\r\nMatthew Muhle\r\nNicholas
-    Rawle\r\nRonnie Allum\r\n\r\n<b>Sound Designers</b>\r\nBradley Skelton\r\nCassie
-    Hobbs\r\nSofia Denchovska\r\nTyler Denman\r\n\r\n<b>Programmers</b>\r\nBruno
-    Cerqueria\r\nCameron Chester\r\nConnor Regan\r\nIzaak Lewis\r\nLucas Mellor\r\n\r\n<b>Artists</b>\r\nAndre
-    Gomes\r\nAshley Simpkin\r\nCharlie Allen\r\nChristiano Miola\r\nEmma Summers\r\nErik
-    Alve Buddha Svallfors\r\nErik Lennart Jarhult Viking\r\nIsaac Ellis-Bray\r\nKlaudia
-    Mezynska\r\nLuke Goodenough\r\nNikolett Philippovits\r\nOwen West\r\nReiss Merrick\r\nToma
-    Bieliauskaite\r\nWilliam Poy\r\n\r\n\r\n<b>External Credits</b>\r\n\r\n<b>Art</b>\r\nLumo-Art
-    3D \u2013 Free Casual Food Pack \u2013 Mobile/VR \r\nDevDen \u2013 French Fries
-    \u2013 Free\r\nFoeJofMay \u2013 Hospital Horror Pack\r\nRokay3D \u2013 Morgue
-    Room PBR\r\nFerocious Industries \u2013 Free Homewares Asset Pack\r\nKobra Game
-    Studios \u2013 Bathroom Props\r\nMichal Piatek \u2013 Particle Shaders Vol.1\r\nGalactic
-    Studios \u2013 Ultra Emissive Particles Shader\r\nBRAiNBOX \u2013 Free Christmas
-    Presents / Low Poly\r\nRRFreelance / PiXelBurner \u2013 Low Poly Ofiice Props
-    \u2013 LITE\r\nVertex Studio \u2013 Big Furniture Pack\r\nDexsoft Game (former
-    3dmodels-textures) \u2013 Furniture Free Pack\r\nCasual2D \u2013 Wooden Floor
-    Materials\r\nFrOzBi \u2013 Wood Pattern Material\r\nDefinitely Not A Hero \u2013
-    Pbr Stylized Textures\r\nOneProgram\u2019s \u2013 Small Pack Furniture \r\nTatiana
-    Gladkaya \u2013 Old Wooden Cabinet\r\nDreamerz Lab Ltd. \u2013 Low Poly Bed Room
-    Furniture PBR\r\nKonstantine Vervenko \u2013 Wood Coffee Table 3D model\r\nAngryDruid
-    \u2013 cabinet \r\nahalbayyat \u2013 table\r\nPatulianGray \u2013 3D model Old
-    classic cabinet (PBR, game-ready)\r\nSwapnilfx \u2013 Wooden Cabinet Interior
-    Furniture 3D\r\nPixel_cloud \u2013 TV cabinet 2\r\nquadmade studio \u2013 Tobacco
-    Wood Nightstand model\r\nLully_2663 \u2013 Safe \u2013 Deposit Box\r\nMarc Mons
-    \u2013 Old Book\r\nCharlie Tinley \u2013 Hunting Rifle \r\nRwroclav \u2013 Remington
-    870 with Magpul furniture \r\nVeninhu \u2013 Hunter knife \r\nDJMaesen \u2013
-    Sniper \r\nJan Andreas \u2013 Roska DSCMP 38- 20 Round Box Magazine\r\nPantherOne
-    \u2013 Rope Fence \r\nh8pitts \u2013 Fishing Rod\r\nCihan Gurbuz \u2013 Metal
-    Bucket \r\nTiago Lopes \u2013 Rope for Ships \r\nadrauda_12 \u2013 Lantern Model
-    \r\nFunFant \u2013 Funfant Dining set\r\nAlstra Infinite \u2013 Kitchen Appliance
-    \u2013 Low Poly\r\nAlstra Infinite \u2013 Kitchen Cabintets \u2013 Low Poly \r\ndiegodneo
-    \u2013 Made the Bread \u2013 Wip Photogrammetry \r\nBlender3D \u2013 Simple TV
-    Remote \r\nrizky alamsyah \u2013 Wardrobe \r\nLyskilde \u2013 Grandfather Clock\r\nLorenzo
-    Drago \u2013 Antique wooden bookcase \u2013 Game model \r\nOfekDavid \u2013 Tables
-    and Chairs\r\nFlithycent \u2013 Fireplace\r\nFrank Heuver \u2013 Cabinet With
-    Glass Pattern Windows \r\nJustBlender \u2013 Low Poly Shoe Rack 2\r\nMx \u2013
-    Mtree \u2013 Tree Creation\r\nNatureManufacture \u2013 Forest Environment \u2013
-    Dynamic Nature \r\nRpgwhitelock \u2013 AllSky Free \u2013 10 Sky / Skybox Set\r\nNichigon
-    - Japanese Tray 01\r\nMakovetkyi Volodymyr \u2013 PB153 Notebook Low \r\n3DGunsmith
-    \u2013 Female Overcoat \r\nIordie \u2013 High Poly Hoodie \r\nSirenki \u2013
-    Blue Jeans Pants \r\nmindseye200 \u2013 Black Dress \r\nntrousdale \u2013 Male
-    Sweater \r\nabdillaamy \u2013 Scrunched Paper \r\nDarxkl05 \u2013 Crumpled Paper\r\nBenDuckett95
-    \u2013 Themed Props \r\nshahmirasif - Broken wine glass \r\ns4101141 \u2013 Picture
-    Frame Broken \r\nlyricizt - Pile of Clothes \r\nThrunk3D \u2013 Qing Dynasty
-    Clothing \r\ndudecon \u2013 Hanger and Pants\r\ndudecon - Hangers and Long Sleeve
-    Shirt\r\ndudecon - Hangers and Tee-shirt\r\noscarherry3d - Bloody Towel\r\nEthan
-    Cragun - Bed Curtain and Vital Signs Monitor\r\n\n<b>Sound</b>\r\nHQ Sounds \u2013
-    Walking Footsteps On Carpet Sound Effect: Version 1\r\nhttps://freesound.org/home/tosacceptance/\r\nProSounds
+  m_text: "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nDead
+    On Arrival: Remastered\r\n\r\n<b>Game Design</b>\r\nEoin Matthews\r\nMatej Gajdos\r\n\r\n<b>Narrative
+    Design</b>\r\nBen Hendry\r\n\r\n<b>Level Design</b>\r\nDavid Ling\r\nEoin Matthews\r\n\r\n<b>User
+    Experience</b>\r\nAlexander Slous \r\n\r\n<b>Technical Artist</b>\r\nErik Lennart
+    Jarhult Viking\r\n\r\n<b>Sound Design</b>\r\nDavid Ling\r\n\r\n<b>Additional
+    Help</b>\r\nBruno Cerqueria\r\nCameron Chester\r\nFilip Jozic\r\nLaura Eszter
+    Kovacs\r\nRafael Theodorou\r\n\n<b>\rOutsourced Assets</b>\r\nFootsteps - Essentials
+    by Nox_Sound\ny\r\nz\r\n\n\r\n\r\n\r\n\r\n\r\n</b>\rDead On Arrival (Original
+    Beta)\r</b>\r\n\r\n<b>Producer</b>\r\nKostas Dokos\r\n\r\n<b>Art Director</b>\r\nAdam
+    Barton\r\n\r\n<b>Game Design Lead</b>\r\nEoin Matthews\r\n\r\n<b>Narrative Design
+    Lead</b>\r\nBen Hendry\r\n\r\n<b>Level Design Lead</b>\r\nDavid Ling\r\nJamie
+    Harris\r\n\r\n<b>User Experience Lead </b>\r\nLaura Eszter Kovacs\r\n\r\n<b>Sound
+    Lead</b>\r\nKieran Moore\r\nFilip Jozic\r\n\r\n<b>Programming Lead</b>\r\nSarah
+    Butlin\r\n\r\n<b>Art Leads</b>\r\nBrendon Smith\r\nDominika Kucharska\r\nLuke
+    Jarman\r\n\r\n<b>Game Designers</b>\r\nBogdan Barbu\r\nJulio Arias\r\nMatej Gajdos\r\n\r\n<b>Narrative
+    Designer</b>\r\nAtanas Pilev\r\nOliver Allison\r\n\r\n<b>Level Designers</b>\r\nAshley
+    Mortlock\r\nHaydon Williams\r\nMacorley Hepden-Barker\r\nRafael Theodorou\r\nWilliam
+    Hook\r\nWilliam Whitlam\r\n\r\n<b>User Experience Designers</b>\r\nAlexander
+    Jones\r\nAlexander Slous\r\nMatthew Muhle\r\nNicholas Rawle\r\nRonnie Allum\r\n\r\n<b>Sound
+    Designers</b>\r\nBradley Skelton\r\nCassie Hobbs\r\nSofia Denchovska\r\nTyler
+    Denman\r\n\r\n<b>Programmers</b>\r\nBruno Cerqueria\r\nCameron Chester\r\nConnor
+    Regan\r\nIzaak Lewis\r\nLucas Mellor\r\n\r\n<b>Artists</b>\r\nAndre Gomes\r\nAshley
+    Simpkin\r\nCharlie Allen\r\nChristiano Miola\r\nEmma Summers\r\nErik Alve Buddha
+    Svallfors\r\nErik Lennart Jarhult Viking\r\nIsaac Ellis-Bray\r\nKlaudia Mezynska\r\nLuke
+    Goodenough\r\nNikolett Philippovits\r\nOwen West\r\nReiss Merrick\r\nToma Bieliauskaite\r\nWilliam
+    Poy\r\n\r\n\r\n<b>External Credits</b>\r\n\r\n<b>Art</b>\r\nLumo-Art 3D \u2013
+    Free Casual Food Pack \u2013 Mobile/VR \r\nDevDen \u2013 French Fries \u2013
+    Free\r\nFoeJofMay \u2013 Hospital Horror Pack\r\nRokay3D \u2013 Morgue Room PBR\r\nFerocious
+    Industries \u2013 Free Homewares Asset Pack\r\nKobra Game Studios \u2013 Bathroom
+    Props\r\nMichal Piatek \u2013 Particle Shaders Vol.1\r\nGalactic Studios \u2013
+    Ultra Emissive Particles Shader\r\nBRAiNBOX \u2013 Free Christmas Presents /
+    Low Poly\r\nRRFreelance / PiXelBurner \u2013 Low Poly Ofiice Props \u2013 LITE\r\nVertex
+    Studio \u2013 Big Furniture Pack\r\nDexsoft Game (former 3dmodels-textures) \u2013
+    Furniture Free Pack\r\nCasual2D \u2013 Wooden Floor Materials\r\nFrOzBi \u2013
+    Wood Pattern Material\r\nDefinitely Not A Hero \u2013 Pbr Stylized Textures\r\nOneProgram\u2019s
+    \u2013 Small Pack Furniture \r\nTatiana Gladkaya \u2013 Old Wooden Cabinet\r\nDreamerz
+    Lab Ltd. \u2013 Low Poly Bed Room Furniture PBR\r\nKonstantine Vervenko \u2013
+    Wood Coffee Table 3D model\r\nAngryDruid \u2013 cabinet \r\nahalbayyat \u2013
+    table\r\nPatulianGray \u2013 3D model Old classic cabinet (PBR, game-ready)\r\nSwapnilfx
+    \u2013 Wooden Cabinet Interior Furniture 3D\r\nPixel_cloud \u2013 TV cabinet
+    2\r\nquadmade studio \u2013 Tobacco Wood Nightstand model\r\nLully_2663 \u2013
+    Safe \u2013 Deposit Box\r\nMarc Mons \u2013 Old Book\r\nCharlie Tinley \u2013
+    Hunting Rifle \r\nRwroclav \u2013 Remington 870 with Magpul furniture \r\nVeninhu
+    \u2013 Hunter knife \r\nDJMaesen \u2013 Sniper \r\nJan Andreas \u2013 Roska DSCMP
+    38- 20 Round Box Magazine\r\nPantherOne \u2013 Rope Fence \r\nh8pitts \u2013
+    Fishing Rod\r\nCihan Gurbuz \u2013 Metal Bucket \r\nTiago Lopes \u2013 Rope for
+    Ships \r\nadrauda_12 \u2013 Lantern Model \r\nFunFant \u2013 Funfant Dining set\r\nAlstra
+    Infinite \u2013 Kitchen Appliance \u2013 Low Poly\r\nAlstra Infinite \u2013 Kitchen
+    Cabintets \u2013 Low Poly \r\ndiegodneo \u2013 Made the Bread \u2013 Wip Photogrammetry
+    \r\nBlender3D \u2013 Simple TV Remote \r\nrizky alamsyah \u2013 Wardrobe \r\nLyskilde
+    \u2013 Grandfather Clock\r\nLorenzo Drago \u2013 Antique wooden bookcase \u2013
+    Game model \r\nOfekDavid \u2013 Tables and Chairs\r\nFlithycent \u2013 Fireplace\r\nFrank
+    Heuver \u2013 Cabinet With Glass Pattern Windows \r\nJustBlender \u2013 Low Poly
+    Shoe Rack 2\r\nMx \u2013 Mtree \u2013 Tree Creation\r\nNatureManufacture \u2013
+    Forest Environment \u2013 Dynamic Nature \r\nRpgwhitelock \u2013 AllSky Free
+    \u2013 10 Sky / Skybox Set\r\nNichigon - Japanese Tray 01\r\nMakovetkyi Volodymyr
+    \u2013 PB153 Notebook Low \r\n3DGunsmith \u2013 Female Overcoat \r\nIordie \u2013
+    High Poly Hoodie \r\nSirenki \u2013 Blue Jeans Pants \r\nmindseye200 \u2013 Black
+    Dress \r\nntrousdale \u2013 Male Sweater \r\nabdillaamy \u2013 Scrunched Paper
+    \r\nDarxkl05 \u2013 Crumpled Paper\r\nBenDuckett95 \u2013 Themed Props \r\nshahmirasif
+    - Broken wine glass \r\ns4101141 \u2013 Picture Frame Broken \r\nlyricizt - Pile
+    of Clothes \r\nThrunk3D \u2013 Qing Dynasty Clothing \r\ndudecon \u2013 Hanger
+    and Pants\r\ndudecon - Hangers and Long Sleeve Shirt\r\ndudecon - Hangers and
+    Tee-shirt\r\noscarherry3d - Bloody Towel\r\nEthan Cragun - Bed Curtain and Vital
+    Signs Monitor\r\n\r\n<b>Sound</b>\r\nHQ Sounds \u2013 Walking Footsteps On Carpet
+    Sound Effect: Version 1\r\nhttps://freesound.org/home/tosacceptance/\r\nProSounds
     - Door Opening - Sound Effect \r\nBonn Fields - A Bad Place to Be\r\nEthan Sloan
-    - Spider Room\r\nEpidemic Sound - Various Sounds\n\r\n<b><color=red>Special thanks
-    to Solent University!</color></b>"
+    - Spider Room\r\nEpidemic Sound - Various Sounds\r\n\r\n<b><color=red>Special
+    thanks to Solent University!</color></b>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11681,7 +11689,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Dead on Arrival
+  m_Text: 'Dead on Arrival:'
 --- !u!222 &1664504254
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11943,7 +11951,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1754085721
 RectTransform:
   m_ObjectHideFlags: 0
