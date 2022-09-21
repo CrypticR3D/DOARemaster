@@ -112,7 +112,7 @@ public class ClockPuzzle : MonoBehaviour
                         {
                             RotateHandOtherway();
                             StartCoroutine(PauseInteraction());
-                            StartCoroutine(FadeTooltips());
+                            //StartCoroutine(FadeTooltips());
                         }
                     }
                 }

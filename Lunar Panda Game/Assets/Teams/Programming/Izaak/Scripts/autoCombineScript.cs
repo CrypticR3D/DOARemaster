@@ -9,7 +9,7 @@ public class autoCombineScript : MonoBehaviour
     private string combinePrompt = "You combine the items together to create: ";
     private string itemNamePrompt;
     public string fullPrompt;
-    public Animator anim;
+    //public Animator anim;
 
 
     [System.Serializable]
@@ -118,7 +118,7 @@ public class autoCombineScript : MonoBehaviour
 
                 fullPrompt = combinePrompt + itemNamePrompt;
 
-                anim.SetTrigger("Prompt");
+                //anim.SetTrigger("Prompt");
 
             }  
         }
