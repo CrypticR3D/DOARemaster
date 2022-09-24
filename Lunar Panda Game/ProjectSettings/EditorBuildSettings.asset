@@ -48,6 +48,12 @@ EditorBuildSettings:
     path: Assets/BuildsFolder/Demo/Demo_Main_Menu.unity
     guid: 71c9f0d24eeaed645961323a07d8d05d
   - enabled: 1
+    path: Assets/StartingScene/StartingScene.unity
+    guid: 72a9838c6c022f242b325974222c3217
+  - enabled: 1
     path: Assets/BuildsFolder/Demo/Demo_Hotel.unity
     guid: 47c5575c4fee5db4b8ad827e0bfb5735
+  - enabled: 1
+    path: Assets/EndingScene/EndingScene.unity
+    guid: 29de6648215194e44aa7efb989102925
   m_configObjects: {}

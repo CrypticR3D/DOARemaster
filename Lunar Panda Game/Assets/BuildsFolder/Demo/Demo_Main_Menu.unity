@@ -5269,7 +5269,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -10443.6}
+  m_AnchoredPosition: {x: 0, y: -10596.6}
   m_SizeDelta: {x: 932, y: 699}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &741909272
@@ -6679,7 +6679,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -9671}
+  m_AnchoredPosition: {x: 0, y: -9824}
   m_SizeDelta: {x: 2048, y: 1152}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &898086998
@@ -6776,6 +6776,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   continueButtonCoverPanel: {fileID: 0}
   continueButton: {fileID: 1483116786}
+--- !u!1 &920285090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 920285092}
+  - component: {fileID: 920285091}
+  m_Layer: 0
+  m_Name: LevelLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &920285091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920285090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2905a2d95dd4d4aa5491649c6072e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelName: StartingScene
+--- !u!4 &920285092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920285090}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1086.0825, y: 492.6498, z: -94.51141}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &991143380
 GameObject:
   m_ObjectHideFlags: 0
@@ -8218,6 +8262,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadTest
       objectReference: {fileID: 0}
+    - target: {fileID: 8270101718685330310, guid: 9ec26e0b9655d584084e9e95223c3f06, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8270101718685330311, guid: 9ec26e0b9655d584084e9e95223c3f06, type: 3}
       propertyPath: m_Text
       value: 
@@ -8232,7 +8280,7 @@ PrefabInstance:
       objectReference: {fileID: 1311551944}
     - target: {fileID: 8270101718685330311, guid: 9ec26e0b9655d584084e9e95223c3f06, type: 3}
       propertyPath: LevelName
-      value: Demo_Hotel
+      value: StartingScene
       objectReference: {fileID: 0}
     - target: {fileID: 8270101718685330328, guid: 9ec26e0b9655d584084e9e95223c3f06, type: 3}
       propertyPath: m_RootOrder
@@ -8849,17 +8897,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PauseButtonToggle, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 920285090}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1311551945
 MonoBehaviour:
@@ -10417,16 +10465,16 @@ MonoBehaviour:
     On Arrival: Remastered\r\n\r\n<b>Game Design</b>\r\nEoin Matthews\r\nMatej Gajdos\r\n\r\n<b>Narrative
     Design</b>\r\nBen Hendry\r\n\r\n<b>Level Design</b>\r\nDavid Ling\r\nEoin Matthews\r\n\r\n<b>User
     Experience</b>\r\nAlexander Slous \r\n\r\n<b>Technical Artist</b>\r\nErik Lennart
-    Jarhult Viking\r\n\r\n<b>Sound Design</b>\r\nDavid Ling\r\n\r\n<b>Additional
-    Help</b>\r\nBruno Cerqueria\r\nCameron Chester\r\nFilip Jozic\r\nLaura Eszter
-    Kovacs\r\nRafael Theodorou\r\n\n<b>\rOutsourced Assets</b>\r\nFootsteps - Essentials
-    by Nox_Sound\r\nVarious SFX by https://pixabay.com/\r\nVarious Decals by https://www.textures.com/\r\nVarious
-    Sounds by https://freesound.org/\r\nThe Doctor/Torturer - Animated by tonyflanagan
-    on Sketchfab\r\nCell Phone by Matt Gilchrist on Sketchfab\r\nSuitcase LowPoly
-    by emelyarules on Sketchfab\n\n\r\n\r\n\r\n\r\n\r\n</b>\rDead On Arrival (Original
-    Beta)\r</b>\r\n\r\n<b>Producer</b>\r\nKostas Dokos\r\n\r\n<b>Art Director</b>\r\nAdam
-    Barton\r\n\r\n<b>Game Design Lead</b>\r\nEoin Matthews\r\n\r\n<b>Narrative Design
-    Lead</b>\r\nBen Hendry\r\n\r\n<b>Level Design Lead</b>\r\nDavid Ling\r\nJamie
+    Jarhult Viking\r\n\r\n<b>Sound Design</b>\r\nDavid Ling\r\n\r\nSean Voice- Cameron
+    Baison\r\nDiana Voice - Chelsea Baison\n\n<b>Contributions</b>\r\nBruno Cerqueria\r\nCameron
+    Chester\r\nFilip Jozic\r\nLaura Eszter Kovacs\r\nRafael Theodorou\r\n\n<b>\rOutsourced
+    Assets</b>\r\nFootsteps - Essentials by Nox_Sound\r\nVarious SFX by https://pixabay.com/\r\nVarious
+    Decals by https://www.textures.com/\r\nVarious Sounds by https://freesound.org/\r\nThe
+    Doctor/Torturer - Animated by tonyflanagan on Sketchfab\r\nCell Phone by Matt
+    Gilchrist on Sketchfab\r\nSuitcase LowPoly by emelyarules on Sketchfab\n\n\r\n\r\n\r\n\r\n\r\n</b>\rDead
+    On Arrival (Original Beta)\r</b>\r\n\r\n<b>Producer</b>\r\nKostas Dokos\r\n\r\n<b>Art
+    Director</b>\r\nAdam Barton\r\n\r\n<b>Game Design Lead</b>\r\nEoin Matthews\r\n\r\n<b>Narrative
+    Design Lead</b>\r\nBen Hendry\r\n\r\n<b>Level Design Lead</b>\r\nDavid Ling\r\nJamie
     Harris\r\n\r\n<b>User Experience Lead </b>\r\nLaura Eszter Kovacs\r\n\r\n<b>Sound
     Lead</b>\r\nKieran Moore\r\nFilip Jozic\r\n\r\n<b>Programming Lead</b>\r\nSarah
     Butlin\r\n\r\n<b>Art Leads</b>\r\nBrendon Smith\r\nDominika Kucharska\r\nLuke
@@ -11954,7 +12002,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1754085721
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12329,7 +12377,7 @@ VideoPlayer:
   m_DirectAudioMutes: 
   m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
-  m_SkipOnDrop: 0
+  m_SkipOnDrop: 1
   m_Looping: 1
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
