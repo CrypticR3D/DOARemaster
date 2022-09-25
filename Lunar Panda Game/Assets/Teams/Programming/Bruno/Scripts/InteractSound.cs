@@ -11,7 +11,13 @@ public class InteractSound : MonoBehaviour
     {
         if (Input.GetButtonDown("Interact"))
         {
-            playSound();
+            if (InteractRaycasting.Instance.raycastInteract(out RaycastHit hit))
+            {
+                if (hit.transform.gameObject == gameObject)
+                {
+                    SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+                }
+            }
         }
     }
 

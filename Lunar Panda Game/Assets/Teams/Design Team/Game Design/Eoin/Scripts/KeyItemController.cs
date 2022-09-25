@@ -7,9 +7,9 @@ namespace KeySystem
 {
     public class    KeyItemController : MonoBehaviour
     {
-        [SerializeField] private bool redDoor = false;
-        [SerializeField] private bool greenDoor = false;
-        [SerializeField] private bool blueDoor = false;
+        [SerializeField] public bool redDoor = false;
+        [SerializeField] public bool greenDoor = false;
+        [SerializeField] public bool blueDoor = false;
 
         private MyDoorController doorObject;
 

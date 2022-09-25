@@ -22,6 +22,7 @@ public class InventoryMenuToggle : MonoBehaviour
 
     internal bool canOpen = true;
     [SerializeField] GameObject TorchUI;
+    [SerializeField] GameObject InvPanUI;
 
     //public AudioMixerGroup NSfX;
 
@@ -50,6 +51,7 @@ public class InventoryMenuToggle : MonoBehaviour
                 {
                     //NSfX.audioMixer.SetFloat(VolumeMute, 0.0f);
                     TorchUI.SetActive(false);
+                    InvPanUI.SetActive(false);
                     IsOnInventory = true;
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
@@ -72,6 +74,7 @@ public class InventoryMenuToggle : MonoBehaviour
                 {
                     //M
                     TorchUI.SetActive(true);
+                    InvPanUI.SetActive(true);
                     InventoryMenu.SetActive(false);
                     IsOnInventory = false;
                     Cursor.lockState = CursorLockMode.Locked;

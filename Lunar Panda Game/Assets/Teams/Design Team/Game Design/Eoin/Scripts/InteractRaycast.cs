@@ -14,6 +14,8 @@ public class InteractRaycast : MonoBehaviour
     private MyDrawerController raycastedDrawer;
     private KeyItemController raycastedKey;
 
+    private Destructable raycastedWood;
+
     private Disc raycastedDisk;
 
     //private MyNewController raycastedObj;
@@ -50,13 +52,15 @@ public class InteractRaycast : MonoBehaviour
     //public static InteractRaycasting Instance { get { return _instance; } }
 
     public Transform playerCamera;
-
+    [SerializeField] public Inventory Inv = null;
+    [SerializeField] ItemData Hammer;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerPickupRay = player.GetComponent<InteractRaycasting>();
         playerCamera = Camera.main.transform;
+        Inv = FindObjectOfType<Inventory>();
     }
 
     private void Start()
@@ -84,13 +88,32 @@ public class InteractRaycast : MonoBehaviour
             if (hit.transform != null && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory && !Pause.IsPaused)
             {
 
+                //if (hit.collider.GetComponent<Destructable>() && Inv.itemInventory[Inv.selectedItem] == Hammer)
+                //{
+                //    if (!doOnce)
+                //    {
+                //        raycastedWood = hit.collider.gameObject.GetComponent<Destructable>();
+                //        CrosshairChange(true);
+                //    }
+
+                //    isCrosshairActive = true;
+                //    doOnce = true;
+
+                //    if (Input.GetKeyDown(openDoorKey))
+                //    {
+                //        //Debug.Log("ClickDoor");
+                //        Debug.Log("There");
+                //        raycastedWood.destroyObject();
+                //    }
+               // }
+
                 print(hit.transform.name);
 
                 if (hit.collider.CompareTag(TriggerTag))
                 {
                     //CrosshairChange(false);
                     //doOnce = false;
-                    Debug.Log("TriggerHit");
+                   // Debug.Log("TriggerHit");
                 }
 
                 if (hit.collider.CompareTag(GlowTag))

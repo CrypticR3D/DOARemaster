@@ -65,7 +65,7 @@ namespace KeySystem
             {
                 doorLocked = false;
                 OpenDoor();
-                Inv.removeItem();
+                //Inv.removeItem();
             }
 
             if (Inv.itemInventory[Inv.selectedItem] == GreenKeyData)

@@ -27,6 +27,7 @@ public class Destructable : MonoBehaviour
 
     private void Start()
     {
+        inventoryScript = FindObjectOfType<Inventory>();
         raycast = FindObjectOfType<InteractRaycasting>(); // Needed to stop the object rotating from activating the script as well
         //GameEvents.current.puzzleCompleted += puzzleComplete;
     }

@@ -7,6 +7,8 @@ public class HoldableItem : MonoBehaviour
     PlayerPickup pickup;
     public ItemData data;
     internal Vector3 startLocation;
+    public AudioSource sounds;
+
 
 
     void Awake()
@@ -15,12 +17,27 @@ public class HoldableItem : MonoBehaviour
         startLocation = transform.position;
         
     }
+
+    private void Start()
+    {
+        sounds = GetComponent<AudioSource>();
+    }
+
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.name == "Respawner")
         {
             transform.position = startLocation;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.relativeVelocity.magnitude > 1)
+        {
+            sounds.Play();
+        }
+        
     }
 
 

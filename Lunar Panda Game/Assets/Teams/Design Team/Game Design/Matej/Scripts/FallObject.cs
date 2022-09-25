@@ -9,13 +9,14 @@ public class FallObject : MonoBehaviour
     private bool isActivated;
     private bool isLev = false;
     private Rigidbody rb;
+
     private void OnCollisionEnter(Collision collision)
     {
         if(isActivated)
         {
             SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);
             if(isLev)Destroy(rb);
-            Destroy(this);
+            //Destroy(this);
         }
     }
     public void Fly(float force)

@@ -8,7 +8,7 @@ public class tooltipController : MonoBehaviour
     {
         NONE, MOVE, JUMP, SPRINT, CROUCH, FLASHLIGHT,
         OPENINV, CLOSEINV, OPENJRN, CLOSEJRN, TURNPAGEJRN,
-        ITEMSTORE, INTERACT, PROMPTENABLE
+        ITEMSTORE, INTERACT, SCROLL, CLOCKPLACE, PROMPTENABLE
     }
     [Header("Controls")]
     [Tooltip("The action you must complete to get rid of the tooltip")]
@@ -38,11 +38,23 @@ public class tooltipController : MonoBehaviour
     public GameObject EnableUI;
 
     PlayerPickup playerPickup;
-    float tooltipTimer;
+    public float tooltipTimer;
+
+    Inventory inventory;
+    //[SerializeField] ItemData clockHandsData;
+
+    ClockPuzzle clockPuzzle;
+
+    void Awake()
+    {
+        inventory = FindObjectOfType<Inventory>();
+        clockPuzzle = FindObjectOfType<ClockPuzzle>();
+    }
 
     private void Start()
     {
         playerPickup = FindObjectOfType<PlayerPickup>();
+        TooltipTrigger = gameObject;
     }
 
     // Update is called once per frame
@@ -79,7 +91,7 @@ public class tooltipController : MonoBehaviour
                     {
                         if ((Input.GetButton("Horizontal")) || (Input.GetButton("Vertical")))
                         {
-                            DisableTooltip();
+                            RemoveTooltip();
                         }
                     }
                     break;
@@ -87,7 +99,7 @@ public class tooltipController : MonoBehaviour
                     {
                         if (Input.GetButton("Jump"))
                         {
-                            DisableTooltip();
+                            RemoveTooltip();
                         }
                     }
                     break;
@@ -95,7 +107,7 @@ public class tooltipController : MonoBehaviour
                     {
                         if (Input.GetButton("Crouch"))
                         {
-                            DisableTooltip();
+                            RemoveTooltip();
                         }
                     }
                     break;
@@ -103,20 +115,19 @@ public class tooltipController : MonoBehaviour
                     {
                         if (Input.GetButtonDown("Flashlight"))
                         {
-                            DisableTooltip();
+                            RemoveTooltip();
                             EnableUI.SetActive(true);
                             FlashlightEnabled = true;
 
                             //FLTriggerBox.SetActive(false);
                         }
-
                     }
                     break;
                 case controlTypes.SPRINT:
                     {
                         if (Input.GetButtonDown("Sprint"))
                         {
-                            DisableTooltip();
+                            RemoveTooltip();
                         }
                     }
                     break;
@@ -124,7 +135,7 @@ public class tooltipController : MonoBehaviour
                     {
                         if (Input.GetButtonDown("Inventory"))
                         {
-                            DisableTooltip();
+                            RemoveTooltip();
                         }
                     }
                     break;
@@ -135,7 +146,7 @@ public class tooltipController : MonoBehaviour
                         {
                             if (inventoryMenu.GetComponent<InventoryMenuToggle>().IsOnInventory)
                             {
-                                DisableTooltip();
+                                RemoveTooltip();
                             }
                         }
                     }
@@ -144,7 +155,7 @@ public class tooltipController : MonoBehaviour
                     {
                         if (Input.GetButtonDown("Journal"))
                         {
-                            DisableTooltip();
+                            RemoveTooltip();
                         }
                     }
                     break;
@@ -154,7 +165,7 @@ public class tooltipController : MonoBehaviour
                         {
                             if (journalMenu.GetComponent<JournalMenuToggle>().IsOnMenu)
                             {
-                                DisableTooltip();
+                                RemoveTooltip();
                             }
                         }
                     }
@@ -165,7 +176,7 @@ public class tooltipController : MonoBehaviour
                         {
                             if (journalMenu.GetComponent<JournalMenuToggle>().IsOnMenu)
                             {
-                                DisableTooltip();
+                                RemoveTooltip();
                             }
                         }
                     }
@@ -174,7 +185,7 @@ public class tooltipController : MonoBehaviour
                     {
                         if (Input.GetButtonDown("PutAway"))
                         {
-                            DisableTooltip();
+                            RemoveTooltip();
                         }
                     }
                     break;
@@ -182,10 +193,40 @@ public class tooltipController : MonoBehaviour
                     {
                         if (Input.GetButtonDown("Interact"))
                         {
-                            DisableTooltip();
+                            RemoveTooltip();
                         }
                     }
                     break;
+
+                case controlTypes.SCROLL:
+                    {
+                        if ((Input.GetAxis("Mouse ScrollWheel") < 0f) || (Input.GetAxis("Mouse ScrollWheel") > 0f))
+                        {
+                            RemoveTooltip();
+                        }
+                    }
+                    break;
+
+                case controlTypes.CLOCKPLACE:
+                    {
+                        if (Input.GetButtonDown("Interact")) 
+                        {
+                            if (clockPuzzle.handsConnected)
+                            {
+
+                                RemoveTooltip();
+                                //EnableUI.SetActive(true);
+                                //if (inventory.itemInventory[inventory.selectedItem] == clockHandsData)
+                                //{
+
+                                //}
+                                
+                            }
+                        }
+
+                    }
+                    break;
+
                 case controlTypes.PROMPTENABLE:
                     {
                         //UIPrompt.SetActive(true);
@@ -210,10 +251,11 @@ public class tooltipController : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            if (input == controlTypes.NONE)
-            {
-                DisableTooltip();
-            }
+            DisableTooltip();
+            //if (input == controlTypes.NONE)
+            //{
+            //    DisableTooltip();
+            //}
         }
 
     }
@@ -230,7 +272,15 @@ public class tooltipController : MonoBehaviour
         inRange = false;
         UITip.GetComponent<tooltipDisplay>().changeText(" ");
         UITip.SetActive(false);
-        GameObject.Destroy(TooltipTrigger);
+    }
+
+    public void RemoveTooltip()
+    {
+        inRange = false;
+        UITip.GetComponent<tooltipDisplay>().changeText(" ");
+        UITip.SetActive(false);
+        gameObject.SetActive(false);
+        //GameObject.Destroy(TooltipTrigger);
     }
 
     void OnDrawGizmos()
