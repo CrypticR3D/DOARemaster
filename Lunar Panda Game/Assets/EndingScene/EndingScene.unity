@@ -1423,8 +1423,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: (Ghost Sean) What the fuck just happened? I remember this place now. This
-    is where I was when Leah was dying.
+  m_Text: (Present Sean) What the fuck just happened? I remember this place now.
+    This is where I was when Leah was dying.
 --- !u!222 &968411933
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2950,8 +2950,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: (Ghost Sean) Jesus, what is going on, I can't deal with this anymore. I
-    need to get out.
+  m_Text: (Present Sean) Jesus, what is going on, I can't deal with this anymore.
+    I need to get out.
 --- !u!222 &1787473243
 CanvasRenderer:
   m_ObjectHideFlags: 0
