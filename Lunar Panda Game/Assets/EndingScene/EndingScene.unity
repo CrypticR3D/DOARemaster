@@ -1582,7 +1582,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.46
-  m_Text: "Thanks For Playing! \nPlay the original at\nhttps://lunar-panda-studios.itch.io"
+  m_Text: 'Thanks For Playing! '
 --- !u!222 &1089462714
 CanvasRenderer:
   m_ObjectHideFlags: 0
