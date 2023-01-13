@@ -63,7 +63,7 @@ public class FirstPersonControllerNew : MonoBehaviour
             // Multiply the movement vector by the crouch speed
             movement *= crouchSpeed;
             characterController.height = Mathf.MoveTowards(characterController.height, 1.0f, Time.deltaTime / crouchTimeDown);
-            cameraTransform.localPosition = Vector3.MoveTowards(cameraTransform.localPosition, 1, Time.deltaTime / crouchTimeDown);
+            //cameraTransform.localPosition = Vector3.MoveTowards(cameraTransform.localPosition, 1, Time.deltaTime / crouchTimeDown);
         }
 
         else
@@ -71,7 +71,7 @@ public class FirstPersonControllerNew : MonoBehaviour
             // Multiply the movement vector by the movement speed
             movement *= movementSpeed;
             characterController.height = Mathf.MoveTowards(characterController.height, 2.0f, Time.deltaTime / crouchTimeUp);
-            cameraTransform.localPosition = Vector3.MoveTowards(cameraTransform.localPosition, 2, Time.deltaTime / crouchTimeDown);
+            //cameraTransform.localPosition = Vector3.MoveTowards(cameraTransform.localPosition, 2, Time.deltaTime / crouchTimeDown);
         }
 
         // Apply gravity to the player
