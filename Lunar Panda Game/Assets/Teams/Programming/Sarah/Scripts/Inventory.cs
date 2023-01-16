@@ -72,10 +72,11 @@ public class Inventory : MonoBehaviour
         {
             selectItem(false);
         }
-        if (Input.GetButtonDown("PutAway") && !pickupControl.holdingNarrative)
-        {
-            toggleHeldItem();
-        }
+
+        //if (Input.GetButtonDown("PutAway") && !pickupControl.holdingNarrative)
+        //{
+        //    //toggleHeldItem();
+        //}
         
         if(Input.GetButtonDown("Interact") && itemInventory[selectedItem] != null)
         {
@@ -89,44 +90,33 @@ public class Inventory : MonoBehaviour
 
         }
 
-        if (puttingAway)
-        {
-            puttingAwayItem.SetActive(false);
-
-            //timer += Time.deltaTime;
-            //puttingAwayItem.transform.position = Vector3.MoveTowards(puttingAwayItem.transform.position, player.transform.position, lerpSpeed * Time.deltaTime);
-
-            //if (puttingAwayItem.transform.position == cam.transform.position) // || timer >= maxTime)
-            //{
-            //    timer = 0;
-            //    puttingAway = false;
-            //    puttingAwayItem.SetActive(false);
-            //    puttingAwayItem = null;
-            //}
-        }
+        //if (puttingAway)
+        //{
+        //    puttingAwayItem.SetActive(false);
+        //}
     }
 
-    public void toggleHeldItem()
-    {
-        if (pickupControl.heldItem == null)
-        {
-            takeout();
-        }
-        else
-        {
-            for (int i = 0; i < maxItemsInInventory; i++)
-            {
-                if(itemInventory[i] != null)
-                {
-                    if (itemInventory[i].id == pickupControl.heldItem.GetComponent<HoldableItem>().data.id)
-                    {
-                        putAway();
-                        break;
-                    }
-                }
-            }
-        }
-    }
+    //public void toggleHeldItem()
+    //{
+    //    if (pickupControl.heldItem == null)
+    //    {
+    //        takeout();
+    //    }
+    //    else
+    //    {
+    //        for (int i = 0; i < maxItemsInInventory; i++)
+    //        {
+    //            if(itemInventory[i] != null)
+    //            {
+    //                if (itemInventory[i].id == pickupControl.heldItem.GetComponent<HoldableItem>().data.id)
+    //                {
+    //                    putAway();
+    //                    break;
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 
     public void addItem(ItemData data)
     {
@@ -203,15 +193,15 @@ public class Inventory : MonoBehaviour
             selectedItem = maxItemsInInventory - 1;
         }
 
-       if(pickupControl.heldItem != null)
-        {
-            pickupControl.heldItem.SetActive(false);
+       //if(pickupControl.heldItem != null)
+       // {
+       //     pickupControl.heldItem.SetActive(false);
 
-            if(itemInventory[selectedItem] != null)
-            {
-                takeout();
-            }
-        }
+       //     if(itemInventory[selectedItem] != null)
+       //     {
+       //         takeout();
+       //     }
+       // }
 
         UIManager.Instance.inventoryItemSelected(itemInventory[selectedItem], selectedItem);
         UIManager.Instance.itemEquip(itemInventory[selectedItem]);
@@ -224,34 +214,34 @@ public class Inventory : MonoBehaviour
         UIManager.Instance.itemEquip(itemInventory[selectedItem]);
     }
 
-    private void putAway()
-    {
-        if(pickupControl.heldItem != null)
-        {
-            if (pickupControl.heldItem != null)
-            {
-                if (autoCombine != null)
-                {
-                    autoCombine.itemChecking(pickupControl.heldItem.GetComponent<HoldableItem>().data);
-                }
-            }
+    //private void putAway()
+    //{
+    //    if(pickupControl.heldItem != null)
+    //    {
+    //        if (pickupControl.heldItem != null)
+    //        {
+    //            if (autoCombine != null)
+    //            {
+    //                autoCombine.itemChecking(pickupControl.heldItem.GetComponent<HoldableItem>().data);
+    //            }
+    //        }
 
 
-            puttingAway = true;
-            puttingAwayItem = pickupControl.heldItem;
-            pickupControl.heldItem = null;
-        }
-    }
+    //        puttingAway = true;
+    //        puttingAwayItem = pickupControl.heldItem;
+    //        pickupControl.heldItem = null;
+    //    }
+    //}
 
-    private void takeout()
-    {
-        if(itemInventory[selectedItem] != null)
-        {
-            puttingAway = false;
-            GameObject heldItem = Database.current.itemsInScene[itemInventory[selectedItem].id].gameObject;
-            heldItem.transform.position = player.transform.position;
-            pickupControl.PickupItem(heldItem.transform);
-            heldItem.SetActive(true);
-        }
-    }
+    //private void takeout()
+    //{
+    //    if(itemInventory[selectedItem] != null)
+    //    {
+    //        puttingAway = false;
+    //        GameObject heldItem = Database.current.itemsInScene[itemInventory[selectedItem].id].gameObject;
+    //        heldItem.transform.position = player.transform.position;
+    //        pickupControl.PickupItem(heldItem.transform);
+    //        heldItem.SetActive(true);
+    //    }
+    //}
 }

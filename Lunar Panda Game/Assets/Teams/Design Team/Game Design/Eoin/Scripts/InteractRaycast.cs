@@ -41,15 +41,11 @@ public class InteractRaycast : MonoBehaviour
     Transform player;
     InteractRaycasting playerPickupRay;
 
-    // Transform player;
-    //Flashlight flashlight;
-    //Transform playerCamera;
+
     JournalMenuToggle Journal;
     PauseButtonToggle Pause;
     FeedbackToggle Feedback;
     InventoryMenuToggle Inventory;
-    //private static InteractRaycasting _instance;
-    //public static InteractRaycasting Instance { get { return _instance; } }
 
     public Transform playerCamera;
     [SerializeField] public Inventory Inv = null;
@@ -65,7 +61,6 @@ public class InteractRaycast : MonoBehaviour
 
     private void Start()
     {
-        //Pause = FindObjectOfType<PauseButtonToggle>();
         Journal = FindObjectOfType<JournalMenuToggle>();
         Feedback = FindObjectOfType<FeedbackToggle>();
         Inventory = FindObjectOfType<InventoryMenuToggle>();
@@ -76,36 +71,17 @@ public class InteractRaycast : MonoBehaviour
 
     private void Update()
     {
-        // RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         Debug.DrawRay(transform.position, fwd, Color.green);
 
         int mask = 1 << LayerMask.NameToLayer(excludeLayerName) | layerMaskInteract.value;
 
-        //if (InteractRaycasting.Instance.raycastInteractLayer(out RaycastHit hit, mask)) //(Physics.Raycast(transform.position, fwd, out hit, rayLength, mask))
         if (Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out RaycastHit hit, player.GetComponent<PlayerPickup>().pickupDist, mask))
         {
             if (hit.transform != null && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory && !Pause.IsPaused)
             {
 
-                //if (hit.collider.GetComponent<Destructable>() && Inv.itemInventory[Inv.selectedItem] == Hammer)
-                //{
-                //    if (!doOnce)
-                //    {
-                //        raycastedWood = hit.collider.gameObject.GetComponent<Destructable>();
-                //        CrosshairChange(true);
-                //    }
 
-                //    isCrosshairActive = true;
-                //    doOnce = true;
-
-                //    if (Input.GetKeyDown(openDoorKey))
-                //    {
-                //        //Debug.Log("ClickDoor");
-                //        Debug.Log("There");
-                //        raycastedWood.destroyObject();
-                //    }
-               // }
 
                 print(hit.transform.name);
 
@@ -141,7 +117,6 @@ public class InteractRaycast : MonoBehaviour
 
                     if (Input.GetKeyDown(openDoorKey))
                     {
-                        //Debug.Log("ClickDoor");
                         raycastedDoor.PlayAnimation();
                     }
                 }
@@ -171,7 +146,6 @@ public class InteractRaycast : MonoBehaviour
 
                     if (Input.GetKeyDown(openDoorKey))
                     {
-                        //Debug.Log("ClickDrawer");
                         raycastedDrawer.PlayAnimation();
                     }
                 }
@@ -179,7 +153,6 @@ public class InteractRaycast : MonoBehaviour
                 ///Key Interaction///
                 if (hit.collider.CompareTag(KeyTag))
                 {
-                    //Debug.Log("Yikes");
                     if (!doOnce)
                     {
                         raycastedKey = hit.collider.gameObject.GetComponent<KeyItemController>();
@@ -191,7 +164,6 @@ public class InteractRaycast : MonoBehaviour
 
                     if (Input.GetKeyDown(openDoorKey))
                     {
-                        //Debug.Log("ClickKey");
                         raycastedKey.ObjectInteraction();
                     }
                 }
