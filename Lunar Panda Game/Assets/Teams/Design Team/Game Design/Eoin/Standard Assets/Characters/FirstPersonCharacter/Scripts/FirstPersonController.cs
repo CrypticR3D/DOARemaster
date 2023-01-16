@@ -88,11 +88,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private const string MetalTag = "MetalFloor";
         private const string DirtTag = "DirtFloor";
 
-        //public GameObject crouchChecker;
-        bool isCrouching = false;
+
+        private bool isCrouching = false;
         public bool canCrouch;
 
         PlayerPickup pickup;
+
+
+        public float crouchTimeDown = 0.5F;
+        public float crouchTimeUp = 0.1F;
 
         void Awake()
         {
@@ -103,7 +107,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         }
 
-        // Use this for initialization
+
         private void Start()
         {
             m_CharacterController = GetComponent<CharacterController>();
@@ -126,15 +130,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_Rigidbody = GetComponent<Rigidbody>();
             //m_CharacterController = GetComponent<CapsuleCollider>();
-            m_CapsuleHeight = m_CharacterController.height;
-            m_CapsuleCenter = m_CharacterController.center;
+            //m_CapsuleHeight = m_CharacterController.height;
+            //m_CapsuleCenter = m_CharacterController.center;
 
             canCrouch = true;
             
         }
-
-
-        // Update is called once per frame
         private void Update()
         {
             if (canLook)
@@ -162,32 +163,69 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // Crouch
             if  (Input.GetButtonDown("Crouch"))
             {
-                Crouching();
+                isCrouching = !isCrouching;
             }
-        }
 
-        private void Crouching()
-        {
             if (canCrouch)
             {
-                if (!isCrouching && m_CharacterController.isGrounded)
+                if (isCrouching && m_CharacterController.isGrounded)
                 {
                     //crouchChecker.SetActive(true);
-                    transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    //transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    m_CharacterController.height = Mathf.MoveTowards(m_CharacterController.height, 0.5f, Time.deltaTime / crouchTimeDown);
                     isCrouching = true;
                 }
 
                 else
                 {
                     //crouchChecker.SetActive(false);
-                    transform.localScale = new Vector3(1f, 1f, 1f);
+                    //transform.localScale = new Vector3(1f, 1f, 1f);
+                    m_CharacterController.height = Mathf.MoveTowards(m_CharacterController.height, 2.4f, Time.deltaTime / crouchTimeUp);
                     isCrouching = false;
                 }
             }
-
-
-
         }
+        private void FixedUpdate()
+        {
+            float speed;
+            GetInput(out speed);
+            // always move along the camera forward as it is the direction that it being aimed at
+            Vector3 desiredMove = transform.forward * m_Input.y + transform.right * m_Input.x;
+
+            // get a normal for the surface that is being touched to move along it
+            RaycastHit hitInfo;
+            Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
+                               m_CharacterController.height / 2f);
+            desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
+
+            m_MoveDir.x = desiredMove.x * speed;
+            m_MoveDir.z = desiredMove.z * speed;
+
+
+            if (m_CharacterController.isGrounded)
+            {
+                m_MoveDir.y = -m_StickToGroundForce;
+
+                if (m_Jump)
+                {
+                    m_MoveDir.y = m_JumpSpeed;
+                    PlayJumpSound();
+                    m_Jump = false;
+                    m_Jumping = true;
+                }
+            }
+            else
+            {
+                m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
+            }
+            m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
+
+
+
+            ProgressStepCycle(speed);
+            UpdateCameraPosition(speed);
+        }
+
         private void PlayLandingSound()
         {
             RaycastHit Landhit;
@@ -232,46 +270,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_AudioSource.Play();
                 m_NextStep = m_StepCycle + .5f;
             }
-        }
-        private void FixedUpdate()
-        {
-            float speed;
-            GetInput(out speed);
-            // always move along the camera forward as it is the direction that it being aimed at
-            Vector3 desiredMove = transform.forward*m_Input.y + transform.right*m_Input.x;
-
-            // get a normal for the surface that is being touched to move along it
-            RaycastHit hitInfo;
-            Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
-                               m_CharacterController.height/2f);
-            desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
-
-            m_MoveDir.x = desiredMove.x*speed;
-            m_MoveDir.z = desiredMove.z*speed;
-
-
-            if (m_CharacterController.isGrounded)
-            {
-                m_MoveDir.y = -m_StickToGroundForce;
-
-                if (m_Jump)
-                {
-                    m_MoveDir.y = m_JumpSpeed;
-                    PlayJumpSound();
-                    m_Jump = false;
-                    m_Jumping = true;
-                }
-            }
-            else
-            {
-                m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
-            }
-            m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
-
-
-
-            ProgressStepCycle(speed);
-            UpdateCameraPosition(speed);
         }
         private void PlayJumpSound()
         {
