@@ -1,64 +1,39 @@
-/*
-Quick^tm note from Cam:
-All holdable items should have the "HoldableItem" script on it
-The player should also have the "Player" tag on it (in the inspector)
-I tested this in my own scene and it worked well. Due to the lack of information on what the designers want, i made it so that if the held item
-hits an object, the player drops it. Can change this in the future if we want.
-I was also thinking that we should maybe make an "Interact" script that any script can call and it would find the item infront of it (instead of
-having one in a bunch of different scripts)
-
-With the rotation, I will have to integrate it with the character looking code but it works pretty well. I could also change the keybindings if needed
-*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityStandardAssets.Characters.FirstPerson;
+
 
 public class PlayerPickup : MonoBehaviour
 {
+    // Transform of the main camera
     Transform playerCameraTransform;
+    Transform player;
+
+    public float pickupDist = 3f;
+    public GameObject heldItem;
+
+    [SerializeField] public GameObject IsLookingAt = null;
+    internal bool holdingNarrative = false;
+
     [Tooltip("The layers that the raycasts will ignore")]
     [SerializeField] LayerMask rayMask;
-    [Header("Pickup/Hold System")]
-    public GameObject heldItem;
-    Vector3 mouseRotateStartPoint;
-    Quaternion itemStartRotation;
-    public float pickupDist = 3f;
-    float startingHoldDist;
-    public float holdDist = 1.5f;
-    [SerializeField] float dropDist;
-    [SerializeField] float lerpSpeed;
-    [Range(100f, 500f)]
-    [SerializeField] float ControllerItemRotateSens;
-    [Header("Lookat System")]
-    [SerializeField] public GameObject GOLookingAt = null;
-    [Header("Throw System")]
-    [SerializeField] float throwForce;
+
+    // Reference to the inventory script
     Inventory inventory;
-    bool controllerRotating = false;
-    [Header("Rotatable Items")]
-    [Tooltip("The distance away from the camera that rotatable items are put")]
-    [SerializeField] float rotDist;
-    internal bool holdingNarrative = false;
+
+    // Reference to the player's movement script
     playerMovement pMovement;
 
-    Transform player;
+    // Reference to the raycasting script on the player
     InteractRaycasting playerPickupRay;
-
-    public FirstPersonController PlayerCharacter;
 
     void Awake()
     {
-        PlayerCharacter = FindObjectOfType<FirstPersonController>();
         playerCameraTransform = Camera.main.transform;
         inventory = FindObjectOfType<Inventory>();
-
+        pMovement = FindObjectOfType<playerMovement>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerPickupRay = player.GetComponent<InteractRaycasting>();
-        startingHoldDist = holdDist;
-        pMovement = FindObjectOfType<playerMovement>();
-
-
     }
 
     void Update()
@@ -71,259 +46,303 @@ public class PlayerPickup : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Interact") && heldItem == null)
+        if (Input.GetButtonDown("Interact"))
         {
-            //Casts a ray from the camera
             RaycastHit hit;
             if (playerPickupRay.raycastInteract(out hit))
             {
                 if (hit.transform.GetComponent<HoldableItem>())
                 {
-                    
-                    holdDist = startingHoldDist;
-                    //if the ray hits a holdable item, the player picks it up
+                    // Add the item's data to the player's inventory
                     if (hit.transform.GetComponent<HoldableItem>().data)
                         inventory.addItem(hit.transform.GetComponent<HoldableItem>().data);
-                    PickupItem(hit.transform);
-                    //if the player is looking at an object that can glow, and if the object is currently glowing, toggle the glow effect
-                    if (GOLookingAt != null && GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
-                        if (GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing)
-                            GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
-                    GOLookingAt = null;
-                }
-                //else if (hit.transform.GetComponent<RotatableItem>())
-                //{
-                //    UIManager.Instance.toggleMenuVariables();
-                //    player.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                //    holdingNarrative = true;
-                //    holdDist = rotDist;
-                //    //player.gameObject.GetComponent<playerMovement>().enabled = false;
-                //    //FindObjectOfType<lockMouse>().canLook = false;
-                //    PickupItem(hit.transform);
-                //}
-            }
-        }
-        else if (Input.GetButtonDown("Interact") && heldItem != null)
-        {
-            //if the player is holding an item and presses 'e', it drops said item
-            //if (heldItem.GetComponent<RotatableItem>())
-            //{
-            //    holdingNarrative = false;
-            //    GameObject tempHeld = heldItem;
-            //    heldItem = null;
-            //    tempHeld.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-            //    tempHeld.transform.rotation = tempHeld.GetComponent<RotatableItem>().startRotation;
-            //    tempHeld.transform.position = tempHeld.GetComponent<RotatableItem>().startLocation;
-            //    player.GetComponent<playerMovement>().enabled = true;
-            //    FindObjectOfType<lockMouse>().canLook = true;
-            //    heldItem.GetComponent<Rigidbody>().useGravity = true;
-            //    heldItem.GetComponent<Rigidbody>().freezeRotation = false;
-            //    UIManager.Instance.toggleMenuVariables();
-            //}
-            //else
-            {
-                DropHeldItem();
-            }
-        }
+                        PickupItem(hit.transform);
 
-        if (Input.GetButtonDown("Throw") && heldItem != null)
-        {
-            if (!heldItem.GetComponent<RotatableItem>())
-            {
-                ThrowItem();
-            }
-        }
-        RotateHeldItem();
-        CheckInfront();
-    }
-
-    void CheckInfront()
-    {
-        RaycastHit hit;
-        //Casts a ray from the camera
-        if (playerPickupRay.raycastInteract(out hit))
-        {
-            //all these if's and elses are to handle all edge cases so that when you stop looking at a glowable object, it stops glowing properly
-            if (hit.transform.GetComponent<GlowWhenLookedAt>() && heldItem == null)
-            {
-                if (GOLookingAt && GOLookingAt != hit.transform.gameObject)
-                {
-                    GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing = false;
-                    //GOLookingAt.GetComponent<tooltipController>().inRange = false;
-                    GOLookingAt = null;
-                }
-
-                if (!hit.transform.GetComponent<GlowWhenLookedAt>().isGlowing)
-                {
-                    GOLookingAt = hit.transform.gameObject;
-                    GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
-
-                    if (GOLookingAt.GetComponent<tooltipController>() != null)
-                    {
-                        GOLookingAt.GetComponent<tooltipController>().EnableTooltip();
-                    }
-
-                    else
-                    {
-                        //Do nothing
-                    }
-                    
-                    //GOLookingAt.GetComponent<tooltipController>().inRange = true;
+                    // Destroy the item gameobject
+                    hit.transform.gameObject.SetActive(false);
                 }
             }
-            else if (GOLookingAt)
-            {
-                GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing = false;
-                //GOLookingAt.GetComponent<tooltipController>().inRange = false;
-                GOLookingAt = null;
-            }
         }
-        else if (GOLookingAt)
-        {
-            GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing = false;
-            //GOLookingAt.GetComponent<tooltipController>().inRange = false;
-            GOLookingAt = null;
-        }
-        //this shit needs to be optimised badly. wtf cameron - cameron
-    }
-
-    void RotateHeldItem()
-    {
-        //the frame the player clicks and is holding an item
-        if (Input.GetButtonDown("RotateItemEnable") && heldItem != null)
-        {
-            //setup/start the rotation mode
-            mouseRotateStartPoint = Input.mousePosition;
-            heldItem.transform.localRotation = Quaternion.identity;
-            heldItem.transform.eulerAngles = new Vector3(heldItem.transform.localEulerAngles.x, heldItem.transform.localEulerAngles.y + transform.localEulerAngles.y, heldItem.transform.localEulerAngles.z);
-            itemStartRotation = heldItem.transform.rotation;
-            pMovement.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-            pMovement.enabled = false;
-            //this should only be a temp fix. Better fix needed
-            if(!FindObjectOfType<PauseButtonToggle>().IsPaused)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                playerCameraTransform.GetComponent<lockMouse>().canLook = false;
-            }
-
-        }
-        //while the mouse button is down and player is holding an item
-        else if (Input.GetButton("RotateItemEnable") && heldItem != null)
-        {
-            //get the distance between the first clicks mouse position, and the current mouse position
-            Vector2 distBetweenStartPoint = new Vector2((Input.mousePosition - mouseRotateStartPoint).x, (Input.mousePosition - mouseRotateStartPoint).y);
-            //rotate the held item based on the distance between the start mouse pos and the current mouse pos
-            heldItem.transform.rotation = itemStartRotation * Quaternion.Euler(new Vector3((distBetweenStartPoint.y / Screen.width) * 360, 0, (distBetweenStartPoint.x / Screen.width) * -360));
-        }
-        //the frame the player stops pressing the mouse button
-        if (Input.GetButtonUp("RotateItemEnable"))
-        {
-            //stop rotating the object
-            //this if statement should only be a temp fix. Better fix should be made
-            if (!heldItem.GetComponent<RotatableItem>())
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                playerCameraTransform.GetComponent<lockMouse>().canLook = true;
-
-            }
-            
-            if (heldItem)
-            {
-                heldItem.transform.localRotation = Quaternion.identity;
-                heldItem.transform.eulerAngles = new Vector3(heldItem.transform.localEulerAngles.x, heldItem.transform.localEulerAngles.y + transform.localEulerAngles.y, heldItem.transform.localEulerAngles.z);
-                pMovement.enabled = true;
-            }
-        }
-        //controller support
-        if ((Input.GetAxisRaw("ItemRotateX") != 0 || Input.GetAxisRaw("ItemRotateY") != 0) && heldItem != null)
-        {
-            if (controllerRotating) //this acts as Input.getButton
-            {
-                heldItem.transform.RotateAround(heldItem.transform.position, heldItem.transform.up, Input.GetAxisRaw("ItemRotateX") * ControllerItemRotateSens * Time.deltaTime);
-                heldItem.transform.RotateAround(heldItem.transform.position, heldItem.transform.right, Input.GetAxisRaw("ItemRotateY") * ControllerItemRotateSens * Time.deltaTime);
-
-            }
-            else //this acts as "Input.getButtonDown" cos get axis doesnt have a "down" thingie
-            {
-                //also, why the fuck is the dpad an axis when theyre just buttons. U cant half-press the dpad, its either pressed down, or
-                //is up. Theres no in-between. shitty ass input shit. Still not gonna use the new input system
-
-                controllerRotating = true;
-            }
-        }
-        else if (Input.GetAxisRaw("ItemRotateX") == 0 && Input.GetAxisRaw("ItemRotateY") == 0)
-        {
-            controllerRotating = false;
-        }
-    }
-
-    //yeets held object using the throwForce variable that the designers can balance
-    void ThrowItem()
-    {
-        Rigidbody heldItemRB = heldItem.GetComponent<Rigidbody>();
-        heldItemRB.AddForce(playerCameraTransform.forward * throwForce, ForceMode.Impulse);
-        DropHeldItem();
-    }
-
-    void FixedUpdate()
-    {
-        if (heldItem != null)
-        {
-            //why did these 3 lines of code give me so much trouble.... fuck this
-            
-            //finds the direction that the object needs to go
-            Vector3 direction = (playerCameraTransform.position + (playerCameraTransform.forward * holdDist)) - heldItem.transform.position;
-            
-            //finds the distance between the held object and where it needs to go
-            float dist = Vector3.Distance(heldItem.transform.position, playerCameraTransform.position + (playerCameraTransform.forward * holdDist));
-            
-            //if the object is too far away, drop it
-            if (dist > dropDist)
-            {
-                DropHeldItem();
-                return;
-            }
-            //sets the velocity of the object to the direction times the lerp speed times the distance between them
-            if(heldItem.GetComponent<Rigidbody>())
-                heldItem.GetComponent<Rigidbody>().velocity = direction.normalized * lerpSpeed * dist;
-        }
-    }
-
-    public void DropHeldItem()
-    {
-        inventory.removeItem();
-        //heldItem.transform.parent = null;
-
-
-        
-        heldItem.GetComponent<Rigidbody>().useGravity = true;
-        heldItem.GetComponent<Rigidbody>().freezeRotation = false;
-
-        //if (heldItem.GetComponent<Rigidbody>())
-        //{
-        //    heldItem.GetComponent<Rigidbody>().useGravity = true;
-        //    heldItem.GetComponent<Rigidbody>().freezeRotation = false;
-        //}
-        //if (heldItem.GetComponent<RotatableItem>())
-        //{
-        //    FindObjectOfType<lockMouse>().canLook = true;
-        //}
-        heldItem = null;
     }
 
     internal void PickupItem(Transform item)
     {
-        //item.parent = playerCameraTransform;
-        //item.localPosition = new Vector3(0, 0, holdDist);
-        //the below code is needed so that the rotation is user-friendly and feels more natural to the player
-        //item.transform.rotation = Quaternion.identity;
-        //item.transform.eulerAngles = new Vector3(item.transform.eulerAngles.x, transform.eulerAngles.y, item.transform.eulerAngles.z);
-
-        //item.transform.parent = null;
-
-        item.GetComponent<Rigidbody>().isKinematic = false;
-        item.GetComponent<Rigidbody>().useGravity = false;
-        item.GetComponent<Rigidbody>().freezeRotation = true;
         heldItem = item.gameObject;
     }
 }
+
+
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
+//using UnityStandardAssets.Characters.FirstPerson;
+
+//public class PlayerPickup : MonoBehaviour
+//{
+//    Transform playerCameraTransform;
+//    [Tooltip("The layers that the raycasts will ignore")]
+//    [SerializeField] LayerMask rayMask;
+
+//    [Header("Pickup/Hold System")]
+//    public GameObject heldItem;
+//    Vector3 mouseRotateStartPoint;
+//    Quaternion itemStartRotation;
+//    public float pickupDist = 3f;
+//    float startingHoldDist;
+//    public float holdDist = 1.5f;
+//    [SerializeField] float dropDist;
+//    [SerializeField] float lerpSpeed;
+//    [Range(100f, 500f)]
+//    [SerializeField] float ControllerItemRotateSens;
+
+//    [Header("Lookat System")]
+//    [SerializeField] public GameObject GOLookingAt = null;
+
+
+//    Inventory inventory;
+//    bool controllerRotating = false;
+
+//    [Header("Rotatable Items")]
+//    [Tooltip("The distance away from the camera that rotatable items are put")]
+//    [SerializeField] float rotDist;
+//    internal bool holdingNarrative = false;
+//    playerMovement pMovement;
+
+//    Transform player;
+//    InteractRaycasting playerPickupRay;
+
+//    public FirstPersonController PlayerCharacter;
+
+//    void Awake()
+//    {
+//        PlayerCharacter = FindObjectOfType<FirstPersonController>();
+//        playerCameraTransform = Camera.main.transform;
+//        inventory = FindObjectOfType<Inventory>();
+
+//        player = GameObject.FindGameObjectWithTag("Player").transform;
+//        playerPickupRay = player.GetComponent<InteractRaycasting>();
+//        startingHoldDist = holdDist;
+//        pMovement = FindObjectOfType<playerMovement>();
+
+
+//    }
+
+//    void Update()
+//    {
+//        if (heldItem != null)
+//        {
+//            if (heldItem.GetComponent<Rigidbody>() == null)
+//            {
+//                heldItem.AddComponent<Rigidbody>();
+//            }
+//        }
+
+//        if (Input.GetButtonDown("Interact") && heldItem == null)
+//        {
+
+//            RaycastHit hit;
+//            if (playerPickupRay.raycastInteract(out hit))
+//            {
+//                if (hit.transform.GetComponent<HoldableItem>())
+//                {
+
+//                    holdDist = startingHoldDist;
+
+//                    if (hit.transform.GetComponent<HoldableItem>().data)
+//                        inventory.addItem(hit.transform.GetComponent<HoldableItem>().data);
+//                    PickupItem(hit.transform);
+
+//                    if (GOLookingAt != null && GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
+//                        if (GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing)
+//                            GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+//                    GOLookingAt = null;
+//                }
+
+//            }
+//        }
+//        else if (Input.GetButtonDown("Interact") && heldItem != null)
+//        {
+
+//            {
+//                DropHeldItem();
+//            }
+//        }
+
+//        if (Input.GetButtonDown("Throw") && heldItem != null)
+//        {
+//            if (!heldItem.GetComponent<RotatableItem>())
+//            {
+//                ThrowItem();
+//            }
+//        }
+//        RotateHeldItem();
+//        CheckInfront();
+//    }
+
+//    void CheckInfront()
+//    {
+//        RaycastHit hit;
+
+//        if (playerPickupRay.raycastInteract(out hit))
+//        {
+
+//            if (hit.transform.GetComponent<GlowWhenLookedAt>() && heldItem == null)
+//            {
+//                if (GOLookingAt && GOLookingAt != hit.transform.gameObject)
+//                {
+//                    GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing = false;
+
+//                    GOLookingAt = null;
+//                }
+
+//                if (!hit.transform.GetComponent<GlowWhenLookedAt>().isGlowing)
+//                {
+//                    GOLookingAt = hit.transform.gameObject;
+//                    GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+
+//                    if (GOLookingAt.GetComponent<tooltipController>() != null)
+//                    {
+//                        GOLookingAt.GetComponent<tooltipController>().EnableTooltip();
+//                    }
+
+//                    else
+//                    {
+
+//                    }
+
+
+//                }
+//            }
+//            else if (GOLookingAt)
+//            {
+//                GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing = false;
+
+//                GOLookingAt = null;
+//            }
+//        }
+//        else if (GOLookingAt)
+//        {
+//            GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing = false;
+
+//            GOLookingAt = null;
+//        }
+
+//    }
+
+//    void RotateHeldItem()
+//    {
+
+//        if (Input.GetButtonDown("RotateItemEnable") && heldItem != null)
+//        {
+//            mouseRotateStartPoint = Input.mousePosition;
+//            heldItem.transform.localRotation = Quaternion.identity;
+//            heldItem.transform.eulerAngles = new Vector3(heldItem.transform.localEulerAngles.x, heldItem.transform.localEulerAngles.y + transform.localEulerAngles.y, heldItem.transform.localEulerAngles.z);
+//            itemStartRotation = heldItem.transform.rotation;
+//            pMovement.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+//            pMovement.enabled = false;
+//            if(!FindObjectOfType<PauseButtonToggle>().IsPaused)
+//            {
+//                Cursor.lockState = CursorLockMode.None;
+//                playerCameraTransform.GetComponent<lockMouse>().canLook = false;
+//            }
+
+//        }
+
+//        else if (Input.GetButton("RotateItemEnable") && heldItem != null)
+//        {
+
+//            Vector2 distBetweenStartPoint = new Vector2((Input.mousePosition - mouseRotateStartPoint).x, (Input.mousePosition - mouseRotateStartPoint).y);
+
+//            heldItem.transform.rotation = itemStartRotation * Quaternion.Euler(new Vector3((distBetweenStartPoint.y / Screen.width) * 360, 0, (distBetweenStartPoint.x / Screen.width) * -360));
+//        }
+
+//        if (Input.GetButtonUp("RotateItemEnable"))
+//        {
+
+//            if (!heldItem.GetComponent<RotatableItem>())
+//            {
+//                Cursor.lockState = CursorLockMode.Locked;
+//                playerCameraTransform.GetComponent<lockMouse>().canLook = true;
+
+//            }
+
+//            if (heldItem)
+//            {
+//                heldItem.transform.localRotation = Quaternion.identity;
+//                heldItem.transform.eulerAngles = new Vector3(heldItem.transform.localEulerAngles.x, heldItem.transform.localEulerAngles.y + transform.localEulerAngles.y, heldItem.transform.localEulerAngles.z);
+//                pMovement.enabled = true;
+//            }
+//        }
+
+//        if ((Input.GetAxisRaw("ItemRotateX") != 0 || Input.GetAxisRaw("ItemRotateY") != 0) && heldItem != null)
+//        {
+//            if (controllerRotating) 
+//            {
+//                heldItem.transform.RotateAround(heldItem.transform.position, heldItem.transform.up, Input.GetAxisRaw("ItemRotateX") * ControllerItemRotateSens * Time.deltaTime);
+//                heldItem.transform.RotateAround(heldItem.transform.position, heldItem.transform.right, Input.GetAxisRaw("ItemRotateY") * ControllerItemRotateSens * Time.deltaTime);
+
+//            }
+//            else
+//            {
+
+//                controllerRotating = true;
+//            }
+//        }
+//        else if (Input.GetAxisRaw("ItemRotateX") == 0 && Input.GetAxisRaw("ItemRotateY") == 0)
+//        {
+//            controllerRotating = false;
+//        }
+//    }
+
+
+//    void ThrowItem()
+//    {
+//        Rigidbody heldItemRB = heldItem.GetComponent<Rigidbody>();
+//        heldItemRB.AddForce(playerCameraTransform.forward * throwForce, ForceMode.Impulse);
+//        DropHeldItem();
+//    }
+
+//    void FixedUpdate()
+//    {
+//        if (heldItem != null)
+//        {
+
+//            Vector3 direction = (playerCameraTransform.position + (playerCameraTransform.forward * holdDist)) - heldItem.transform.position;
+
+
+//            float dist = Vector3.Distance(heldItem.transform.position, playerCameraTransform.position + (playerCameraTransform.forward * holdDist));
+
+
+//            if (dist > dropDist)
+//            {
+//                DropHeldItem();
+//                return;
+//            }
+
+//            if(heldItem.GetComponent<Rigidbody>())
+//                heldItem.GetComponent<Rigidbody>().velocity = direction.normalized * lerpSpeed * dist;
+//        }
+//    }
+
+//    public void DropHeldItem()
+//    {
+//        inventory.removeItem();
+
+
+//        heldItem.GetComponent<Rigidbody>().useGravity = true;
+//        heldItem.GetComponent<Rigidbody>().freezeRotation = false;
+
+
+//        heldItem = null;
+//    }
+
+//    internal void PickupItem(Transform item)
+//    {
+
+
+//        item.GetComponent<Rigidbody>().isKinematic = false;
+//        item.GetComponent<Rigidbody>().useGravity = false;
+//        item.GetComponent<Rigidbody>().freezeRotation = true;
+//        heldItem = item.gameObject;
+//    }
+//}
