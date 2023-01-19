@@ -62,13 +62,7 @@ public class pressurePlatePuzzle : MonoBehaviour
             leftDoor.enabled = true;
             rightDoor.enabled = true;
             SoundEffectManager.GlobalSFXManager.PlaySFX(completeClip);
-            if (Analysis.current != null)
-            {
-                if (Analysis.current.consent)
-                {
-                    Analysis.current.resetTimer("Pressure Plates");
-                }
-            }
+
             return true;
         }
         return false;

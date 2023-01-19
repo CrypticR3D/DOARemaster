@@ -63,13 +63,7 @@ public class chessPuzzle : MonoBehaviour
                             }
                             SoundEffectManager.GlobalSFXManager.PlaySFX(placeAudio);//Matej edit
 
-                            if (Analysis.current != null)
-                            {
-                                if (Analysis.current.consent)
-                                {
-                                    Analysis.current.failCounterChess++;
-                                }
-                            }
+
                         }
                         if (queenChessPiece.GetComponent<chessValuedItem>().checkIfRecent() > 0 || inventory.itemInventory[inventory.selectedItem] == queenChessPiece.GetComponent<HoldableItem>().data)
                         {
@@ -85,13 +79,7 @@ public class chessPuzzle : MonoBehaviour
                             }
                             SoundEffectManager.GlobalSFXManager.PlaySFX(placeAudio);//Matej edit
 
-                            if (Analysis.current != null)
-                            {
-                                if (Analysis.current.consent)
-                                {
-                                    Analysis.current.failCounterChess++;
-                                }
-                            }
+
                         }
                     }
                 }

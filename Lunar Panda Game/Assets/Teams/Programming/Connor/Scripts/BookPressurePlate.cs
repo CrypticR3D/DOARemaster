@@ -35,13 +35,7 @@ public class BookPressurePlate : MonoBehaviour
             //safeDoor.GetComponent<openSafe>().toggleOpening(true);
             //safeDoor.SetActive(false);
 
-            if (Analysis.current != null)
-            {
-                if (Analysis.current.consent && (!Analysis.current.timersPuzzlesp2.ContainsKey("Perspective") && !Analysis.current.timersPuzzlesp1.ContainsKey("Perspective")))
-                {
-                    Analysis.current.resetTimer("Perspective");
-                }
-            }
+
         }
     }
 

@@ -30,13 +30,7 @@ public class UnlockDoor : MonoBehaviour
                     {
                         open();
 
-                        if (Analysis.current != null)
-                        {
-                            if (Analysis.current.consent)
-                            {
-                                Analysis.current.resetTimer("3 Key Parts");
-                            }
-                        }
+
                     }
                 }
             }

@@ -95,10 +95,7 @@ public class BorisBabbles : MonoBehaviour
                     buttonInput.Add(i);
                     if(buttonInput[buttonInput.Count - 1] != buttonOrder[buttonInput.Count - 1])
                     {
-                        if (Analysis.current != null)
-                        {
-                            Analysis.current.failCounterSimon += 1;
-                        }
+
                         StartCoroutine(IncorrectInput());
                     }
                     else if (buttonInput.Count >= buttonOrder.Count)
@@ -109,21 +106,10 @@ public class BorisBabbles : MonoBehaviour
                             //run IEnumerator that changes all the buttons to green and then opens the briefcase
                             StartCoroutine(CorrectInput());
 
-                            if (Analysis.current != null)
-                            {
-                                if (Analysis.current.consent)
-                                {
-                                    string name = "SimonSays" + inRoom.ToString();
-                                    Analysis.current.resetTimer(name);
-                                }
-                            }
                         }
                         else
                         {
-                            if (Analysis.current != null)
-                            {
-                                Analysis.current.failCounterSimon+= 1;
-                            }
+
                             //run IEnumerator that displays the buttons as all red and then resets the puzzle
                             StartCoroutine(IncorrectInput());
                         }

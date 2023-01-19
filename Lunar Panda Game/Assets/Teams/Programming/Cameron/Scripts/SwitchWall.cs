@@ -80,13 +80,7 @@ public class SwitchWall : MonoBehaviour
             amogusPuzzle.resetPuzzle(amogusPuzzle.id);
             amogusPuzzle.TurnOffLights();
 
-            if (Analysis.current != null)
-            {
-                if (Analysis.current.consent)
-                {
-                    Analysis.current.failCounterAntidote++;
-                }
-            }
+
         }
         return completedCombinations;
     }

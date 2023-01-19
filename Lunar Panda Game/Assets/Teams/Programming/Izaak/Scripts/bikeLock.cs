@@ -53,25 +53,13 @@ public class bikeLock : MonoBehaviour
                 {
                     zoomIn.unZoom();
                     puzzleSolved = true;
-                    if (Analysis.current != null)
-                    {
-                        if (Analysis.current.consent && (!Analysis.current.timersPuzzlesp1.ContainsKey("Bike Lock") && !Analysis.current.timersPuzzlesp2.ContainsKey("Bike Lock")))
-                        {
-                            Analysis.current.resetTimer("Bike Lock");
-                        }
-                    }
+
                     return puzzleSolved;
                 }
             }
             else
             {
-                if (Analysis.current != null)
-                {
-                    if (Analysis.current.consent)
-                    {
-                        Analysis.current.failCounterBikeLock++;
-                    }
-                }
+
 
                 puzzleSolved = false;
                 return false;
