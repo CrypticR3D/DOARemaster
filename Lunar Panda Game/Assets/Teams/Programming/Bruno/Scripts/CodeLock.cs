@@ -38,20 +38,11 @@ public class CodeLock : MonoBehaviour
         if(attemptedCode == code)
         {
             GameEvents.current.onPuzzleComplete(id);
-            if (Analysis.current != null)
-            {
-                if (Analysis.current.consent)
-                {
-                    Analysis.current.resetTimer("Code Lock");
-                }
-            }
+
         }
         else
         {
-            if (Analysis.current != null)
-            {
-                Analysis.current.failCounterCodeLock++;
-            }
+
             Debug.Log("Wrong Code");
         }
     }

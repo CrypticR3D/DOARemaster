@@ -54,13 +54,7 @@ public class VentScrewdriver : MonoBehaviour
             {
                 moveto = false;
 
-                if (Analysis.current != null)
-                {
-                    if (Analysis.current.consent && !Analysis.current.timersPuzzlesp1.ContainsKey("Open Vent"))
-                    {
-                        Analysis.current.resetTimer("Open Vent");
-                    }
-                }
+
             }
         }
     }

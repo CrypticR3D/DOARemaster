@@ -75,13 +75,7 @@ public class LevelManager : MonoBehaviour
         loadingScreen.gameObject.SetActive(true);
         StartCoroutine(FadeIn());
         yield return new WaitForSeconds(2f);
-        if (Analysis.current != null)
-        {
-            if (Analysis.current.consent)
-            {
-                Analysis.current.saveAnalytics();
-            }
-        }
+
         //if the current level is not the cabin, increase the level, if it is the cabin, we're going back to the main menu so set it back to 0
         //not a very elegant solution, but it works for now i guess
         if(GameManager.Instance.currentRoom != Room.CABIN)

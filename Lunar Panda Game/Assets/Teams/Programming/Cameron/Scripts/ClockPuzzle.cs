@@ -254,13 +254,7 @@ public class ClockPuzzle : MonoBehaviour
                 completed = true;
                 StartCoroutine(UnlockDoor());
 
-                if (Analysis.current != null)
-                {
-                    if (Analysis.current.consent && (!Analysis.current.timersPuzzlesp1.ContainsKey("Clock") && !Analysis.current.timersPuzzlesp1.ContainsKey("Clock")))
-                    {
-                        Analysis.current.resetTimer("Clock");
-                    }
-                }
+
             }
         }
     }

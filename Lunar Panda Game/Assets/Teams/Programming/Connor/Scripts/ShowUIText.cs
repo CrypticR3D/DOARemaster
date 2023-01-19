@@ -16,7 +16,7 @@ public class ShowUIText : MonoBehaviour
 
     void Update()
     {
-        textValue = combine.fullPrompt;
+        //textValue = combine.fullPrompt;
         textElement.text = textValue;
     }
 }

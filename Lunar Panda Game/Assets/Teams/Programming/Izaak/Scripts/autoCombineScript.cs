@@ -8,36 +8,25 @@ public class autoCombineScript : MonoBehaviour
 {
     private string combinePrompt = "You combine the items together to create: ";
     private string itemNamePrompt;
-    public string fullPrompt;
-    //public Animator anim;
-
 
     [System.Serializable]
     public class itemBuildPath
     {
         public List<ItemData> itemParts;
         public ItemData combinedItem;
-        public GameObject instance;       
+        public GameObject instance;
     }
 
     [Header("Items Required")]
     [Tooltip("The list of all items that can be made through combining and their ingredients")]
     public List<itemBuildPath> autoCombineItemsList;
-    
-    
-    //public List<ItemData> itemParts;
-    //[Tooltip("The object created by combining all the parts")]
-    //public ItemData combinedItem;
 
-    [Header("Scripts")]
-    [Tooltip("Script of the inventory system")]
     public Inventory inventoryScript;
     private List<List<bool>> inInventory;
 
     [SerializeField] ItemData RedKeyData;
     [SerializeField] private KeyInventory _keyInventory;
 
-    // Start is called before the first frame update
     void Start()
     {
         inInventory = new List<List<bool>>();
@@ -53,12 +42,6 @@ public class autoCombineScript : MonoBehaviour
 
             inInventory.Add(temp);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void itemChecking(ItemData item)
@@ -91,8 +74,8 @@ public class autoCombineScript : MonoBehaviour
 
     void combine()
     {
-       for (int k = 0; k < autoCombineItemsList.Count; k++)
-       {
+        for (int k = 0; k < autoCombineItemsList.Count; k++)
+        {
             if (canCombine(k) == true)
             {
                 for (int i = 0; i < inventoryScript.itemInventory.Count; i++)
@@ -101,26 +84,16 @@ public class autoCombineScript : MonoBehaviour
                     {
                         if (autoCombineItemsList[k].itemParts[j] == inventoryScript.itemInventory[i])
                         {
-                            UIManager.Instance.removeItemImage(i);
                             inventoryScript.itemInventory[i] = null;
                             inInventory[k][j] = false;
                         }
                     }
                 }
-                
-                inventoryScript.addItem(autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data);
 
-                autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data.id = Database.current.itemsInScene.Count;
-
-                Database.current.itemsInScene.Add(autoCombineItemsList[k].instance.GetComponent<HoldableItem>());
-
-                itemNamePrompt = autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data.itemName;
-
-                fullPrompt = combinePrompt + itemNamePrompt;
-
-                //anim.SetTrigger("Prompt");
-
-            }  
+                inventoryScript.addItem(autoCombineItemsList[k].combinedItem);
+                itemNamePrompt = autoCombineItemsList[k].combinedItem.itemName;
+                Debug.Log(combinePrompt + itemNamePrompt);
+            }
         }
     }
 }

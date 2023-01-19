@@ -62,7 +62,7 @@ public class tooltipController : MonoBehaviour
     {
         checkControls();
 
-        if (playerPickup.GOLookingAt != null)
+        if (playerPickup.IsLookingAt != null)
         {
             tooltipTimer = 0;
             inRange = true;

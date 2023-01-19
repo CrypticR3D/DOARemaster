@@ -101,13 +101,7 @@ public class chessBoardPlacing : MonoBehaviour
             anim.Play();
             SoundEffectManager.GlobalSFXManager.PlaySFX(openAudio);//Matej edit
 
-            if (Analysis.current != null)
-            {
-                if (Analysis.current.consent && (!Analysis.current.timersPuzzlesp1.ContainsKey("Chess") && !Analysis.current.timersPuzzlesp2.ContainsKey("Chess")))
-                {
-                    Analysis.current.resetTimer("Chess");
-                }
-            }
+
             queenPiece.GetComponent<GlowWhenLookedAt>().enabled = false;
             queenPiece.GetComponent<HoldableItem>().enabled = false;
             pawnPiece.GetComponent<GlowWhenLookedAt>().enabled = false;

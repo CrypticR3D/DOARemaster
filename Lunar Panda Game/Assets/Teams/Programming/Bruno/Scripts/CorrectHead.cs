@@ -47,14 +47,6 @@ public class CorrectHead : MonoBehaviour
                 return;
             }    
         }
-
-        if (Analysis.current != null)
-        {
-            if (Analysis.current.consent)
-            {
-                Analysis.current.resetTimer("Arrangement");
-            }
-        }
         Debug.Log("It can be opened");
         StartCoroutine(Open());
     }

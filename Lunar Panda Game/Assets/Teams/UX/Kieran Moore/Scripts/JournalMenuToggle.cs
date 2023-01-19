@@ -74,12 +74,6 @@ public class JournalMenuToggle : MonoBehaviour
         Cursor.visible = false;
         pickup.enabled = true;
         Time.timeScale = 1f;
-        if (Analysis.current != null)
-        {
-            if (Analysis.current.consent)
-            {
-                Analysis.current.menuOpen = false;
-            }
-        }
+
     }
 }
