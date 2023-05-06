@@ -31,10 +31,10 @@ public class Flashlight : MonoBehaviour
     private bool isOn;
     public string clipName;//Matej changes
 
-    public float angle = 0f;
+    public float intensity = 0f;
 
-    float minAngle = 55f;
-    float maxAngle = 110f;
+    public float minIntensity;
+    public float maxIntensity;
 
 
     void Start()
@@ -52,24 +52,25 @@ public class Flashlight : MonoBehaviour
     {
         toggleLight(); //runs the toggleLight function.
 
-        lightSource.spotAngle = angle;
+        lightSource.intensity = intensity;
 
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
         if (Physics.Raycast(transform.position, fwd, 2))
         {
-
-            angle += 120.0f * Time.deltaTime * 2;
+            Mathf.MoveTowards(intensity, minIntensity, Time.deltaTime / maxIntensity) ;
+            //intensity += Time.deltaTime * 60;
 
         }
 
         else
         {
-            angle -= 120.0f * Time.deltaTime * 2;
+            Mathf.MoveTowards(intensity, maxIntensity, Time.deltaTime / minIntensity);
+            //intensity -= Time.deltaTime * 60;
 
         }
 
-        angle = Mathf.Clamp(angle, minAngle, maxAngle);
+        //intensity = Mathf.Clamp(intensity, minIntensity, maxIntensity);
 
     }
 
