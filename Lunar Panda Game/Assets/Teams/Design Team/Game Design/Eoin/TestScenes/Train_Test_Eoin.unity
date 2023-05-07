@@ -2262,8 +2262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441482e8936e35048a1dffac814e3ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Profile: {fileID: 11400000, guid: 846c102d1f0e1c54f930d46e3da3a42a, type: 2}
-  m_StaticLightingSkyUniqueID: 3
+  m_Profile: {fileID: 0}
+  m_StaticLightingSkyUniqueID: 0
 --- !u!4 &481806669
 Transform:
   m_ObjectHideFlags: 1
@@ -4162,7 +4162,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 5f0b647923546f24b8a8ee946cc2d0e0, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 8506d6c5bc7280a468f17bf78522e33a, type: 2}
 --- !u!4 &782662429
 Transform:
   m_ObjectHideFlags: 0
@@ -29720,7 +29720,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3755500306713177613, guid: d4307f5dbf0a9b54c991f274b682bd14, type: 3}
       propertyPath: clearColorMode
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3755500306713177613, guid: d4307f5dbf0a9b54c991f274b682bd14, type: 3}
+      propertyPath: backgroundColorHDR.b
+      value: 0.44445467
+      objectReference: {fileID: 0}
+    - target: {fileID: 3755500306713177613, guid: d4307f5dbf0a9b54c991f274b682bd14, type: 3}
+      propertyPath: backgroundColorHDR.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3755500306713177613, guid: d4307f5dbf0a9b54c991f274b682bd14, type: 3}
+      propertyPath: backgroundColorHDR.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3755500307497455825, guid: d4307f5dbf0a9b54c991f274b682bd14, type: 3}
       propertyPath: m_Name

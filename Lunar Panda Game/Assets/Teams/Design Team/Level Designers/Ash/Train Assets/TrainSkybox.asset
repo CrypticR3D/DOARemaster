@@ -18,7 +18,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   enabled:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
   colorMode:
     m_OverrideState: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
     min: 1
   enableVolumetricFog:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   albedo:
     m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -72,12 +72,12 @@ MonoBehaviour:
     showAlpha: 1
     showEyeDropper: 1
   globalLightProbeDimmer:
-    m_OverrideState: 1
-    m_Value: 1
+    m_OverrideState: 0
+    m_Value: 0
     min: 0
     max: 1
   depthExtent:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 9.1
     min: 0.1
   denoisingMode:
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1bfcd0f0fa7b8468f281d6bbbaf320, type: 3}
   m_Name: LensDistortion
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 0
@@ -355,7 +355,7 @@ MonoBehaviour:
     m_Value: 15
   compensation:
     m_OverrideState: 1
-    m_Value: 8.61
+    m_Value: -40.11
   limitMin:
     m_OverrideState: 1
     m_Value: 6.9912558
