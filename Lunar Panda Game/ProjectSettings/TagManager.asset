@@ -33,6 +33,7 @@ TagManager:
   - GlowTag
   - DirectGlow
   - Trigger
+  - ZoomObject
   layers:
   - Default
   - TransparentFX

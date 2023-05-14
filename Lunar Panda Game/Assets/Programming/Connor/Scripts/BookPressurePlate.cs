@@ -1,0 +1,50 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BookPressurePlate : MonoBehaviour
+{
+    [Tooltip("Enter Name of Book in inspector")]
+    public string bookName;
+    public ship ship;//Matej changes
+
+    public float weightNeeded;
+    private float bookWeight;
+    public GameObject evilBook;
+    public BookPuzzle book;
+
+
+    void Start()
+    {
+        //weightNeeded = GetComponent<BookPuzzle>().weightNeeded;
+    }
+
+    void Update()
+    {
+        book = FindObjectOfType<BookPuzzle>();
+        bookWeight = evilBook.transform.localScale.x * 10;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        print("COllision");
+        if (collision.gameObject.name == "EvilBook Variant" && book.GetWeight() >= weightNeeded)
+        {
+            print("Completed");
+            ship.MoveShip();
+            //safeDoor.GetComponent<openSafe>().toggleOpening(true);
+            //safeDoor.SetActive(false);
+
+
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+ 
+        if (collision.gameObject.name == "EvilBook Variant" && bookWeight >= weightNeeded)
+        {
+            //safeDoor.GetComponent<openSafe>().toggleOpening(false);
+        }
+    }
+}
