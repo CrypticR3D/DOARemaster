@@ -22,7 +22,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: mFloor
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
-  m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT _HEIGHTMAP _MAPPING_PLANAR _NORMALMAP
+  m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT _HEIGHTMAP _MAPPING_TRIPLANAR _NORMALMAP
     _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -274,7 +274,7 @@ Material:
     - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
-    - _UVBase: 4
+    - _UVBase: 5
     - _UVDetail: 0
     - _UVEmissive: 0
     - _UVSec: 0

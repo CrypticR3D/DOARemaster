@@ -8,9 +8,11 @@ public class SwitchesPuzzle : MonoBehaviour
     public GameObject Switch_2;
     public GameObject Switch_3;
 
-    public GameObject Object_1;
-    public GameObject Object_2;
-    public GameObject Object_3;
+    public GameObject Light_1;
+    public GameObject Light_2;
+    public GameObject Light_3;
+
+    public GameObject Door_1;
 
     InteractRaycasting raycast;
 
@@ -18,10 +20,21 @@ public class SwitchesPuzzle : MonoBehaviour
     private bool Switch_2_isOn;
     private bool Switch_3_isOn;
 
+    private bool Disable_Int;
+
+    [SerializeField] public Animator doorAnim;
+    [SerializeField] private string openAnimationName = "DoorOpen";
+
+    private void Awake()
+    {
+        doorAnim = Door_1.GetComponent<Animator>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         raycast = FindObjectOfType<InteractRaycasting>();
+        Disable_Int = false;
     }
 
     // Update is called once per frame
@@ -29,9 +42,47 @@ public class SwitchesPuzzle : MonoBehaviour
     {
         if (Input.GetButtonDown("Interact"))
         {
-            ActivateObject();
+            if (Disable_Int)
+            {
+                //Do nothing
+            }
+            else
+            {
+                ActivateObject();
+            }
+        }
+
+        if (Switch_1_isOn && Switch_3_isOn || Switch_2_isOn && Switch_3_isOn)
+        {
+            if (Switch_1_isOn && Switch_2_isOn && Switch_3_isOn)
+            {
+                DisableInteraction();
+                DisableAnimation();
+                ActivateDoor();
+            }
+            else
+            {
+                AllSwitchesOff();
+            }
         }
     }
+
+    void ActivateDoor()
+    {
+        doorAnim.Play(openAnimationName);
+    }
+
+    void DisableInteraction()
+    {
+        Disable_Int = true;
+    }
+    void DisableAnimation()
+    {
+        Switch_1.GetComponent<InteractAnimation>().enabled = false;
+        Switch_2.GetComponent<InteractAnimation>().enabled = false;
+        Switch_3.GetComponent<InteractAnimation>().enabled = false;
+    }
+
     void ActivateObject()
     {
         RaycastHit hit;
@@ -45,6 +96,7 @@ public class SwitchesPuzzle : MonoBehaviour
                 {
                     Switch_1_Off();
                 }
+
                 else
                 {
                     Switch_1_On();
@@ -56,6 +108,7 @@ public class SwitchesPuzzle : MonoBehaviour
                 {
                     Switch_2_Off();
                 }
+
                 else
                 {
                     Switch_2_On();
@@ -67,6 +120,7 @@ public class SwitchesPuzzle : MonoBehaviour
                 {
                     Switch_3_Off();
                 }
+
                 else
                 {
                     Switch_3_On();
@@ -76,38 +130,45 @@ public class SwitchesPuzzle : MonoBehaviour
     }
     public void Switch_1_On()
     {
-        Object_1.GetComponent<Light>().color = Color.green;
+        Light_1.GetComponent<Light>().color = Color.green;
         Switch_1_isOn = true;
     }
 
     public void Switch_2_On()
     {
-        Object_2.GetComponent<Light>().color = Color.green;
+        Light_2.GetComponent<Light>().color = Color.green;
         Switch_2_isOn = true;
     }
 
     public void Switch_3_On()
     {
-        Object_3.GetComponent<Light>().color = Color.green;
+        Light_3.GetComponent<Light>().color = Color.green;
         Switch_3_isOn = true;
     }
 
     public void Switch_1_Off()
     {
-        Object_1.GetComponent<Light>().color = Color.red;
+        Light_1.GetComponent<Light>().color = Color.red;
         Switch_1_isOn = false;
     }
 
     public void Switch_2_Off()
     {
-        Object_2.GetComponent<Light>().color = Color.red;
+        Light_2.GetComponent<Light>().color = Color.red;
         Switch_2_isOn = false;
     }
 
     public void Switch_3_Off()
     {
-        Object_3.GetComponent<Light>().color = Color.red;
+        Light_3.GetComponent<Light>().color = Color.red;
         Switch_3_isOn = false;
+    }
+
+    public void AllSwitchesOff()
+    {
+        Switch_1_Off();
+        Switch_2_Off();
+        Switch_3_Off();
     }
 
 }
