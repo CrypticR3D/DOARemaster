@@ -13,21 +13,34 @@ public class SwitchesPuzzle : MonoBehaviour
     public GameObject Light_3;
 
     public GameObject Door_1;
+    public GameObject Door_2;
+    //public GameObject Door_3;
 
     InteractRaycasting raycast;
 
-    private bool Switch_1_isOn;
-    private bool Switch_2_isOn;
-    private bool Switch_3_isOn;
+    public bool Switch_1_isOn;
+    public bool Switch_2_isOn;
+    public bool Switch_3_isOn;
 
-    private bool Disable_Int;
+
+    public bool Disable_Int;
+
+    //private bool CorrectCode;
+
+    //public int R;
 
     [SerializeField] public Animator doorAnim;
+    [SerializeField] public Animator doorAnim2;
+    //[SerializeField] public Animator doorAnim3;
     [SerializeField] private string openAnimationName = "DoorOpen";
+
+
 
     private void Awake()
     {
         doorAnim = Door_1.GetComponent<Animator>();
+        doorAnim2 = Door_2.GetComponent<Animator>();
+        //doorAnim3 = Door_3.GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -35,6 +48,7 @@ public class SwitchesPuzzle : MonoBehaviour
     {
         raycast = FindObjectOfType<InteractRaycasting>();
         Disable_Int = false;
+        //ResetSwitches();
     }
 
     // Update is called once per frame
@@ -42,37 +56,51 @@ public class SwitchesPuzzle : MonoBehaviour
     {
         if (Input.GetButtonDown("Interact"))
         {
-            if (Disable_Int)
-            {
-                //Do nothing
-            }
-            else
+            if (!Disable_Int)
             {
                 ActivateObject();
             }
         }
+    }
 
-        if (Switch_1_isOn && Switch_3_isOn || Switch_2_isOn && Switch_3_isOn || Switch_2_isOn && Switch_1_isOn)
+    void CheckCombination()
+    {
+        //First
+        if (Switch_1_isOn)
         {
-            if (Switch_1_isOn && Switch_2_isOn && Switch_3_isOn)
-            {
-                DisableInteraction();
-                DisableAnimation();
-                ActivateDoor();
-            }
-            else
-            {
-                AllSwitchesOff();
-            }
+            ActivateDoor2();
+        }
+
+        //Second
+        if (Switch_1_isOn && Switch_3_isOn)
+        {
+            //Do Something
+        }
+
+        //Last Door
+        if (Switch_1_isOn && Switch_2_isOn && Switch_3_isOn)
+        {
+            Debug.Log("Correct combination entered. Opening Door...");
+            DisableInteraction();
+            DisableAnimation();
+            ActivateDoor();
         }
     }
-    void ResetSwitch()
-    {
 
+    void ResetSwitches()
+    {
+        Switch_1_Off();
+        Switch_2_Off();
+        Switch_3_Off();
     }
     void ActivateDoor()
     {
-        doorAnim.Play(openAnimationName);
+        doorAnim.Play(openAnimationName); 
+    }
+
+    void ActivateDoor2()
+    {
+        doorAnim2.Play(openAnimationName);
     }
 
     void DisableInteraction()
@@ -134,43 +162,36 @@ public class SwitchesPuzzle : MonoBehaviour
     {
         Light_1.GetComponent<Light>().color = Color.green;
         Switch_1_isOn = true;
+        CheckCombination();
     }
-
     public void Switch_2_On()
     {
         Light_2.GetComponent<Light>().color = Color.green;
         Switch_2_isOn = true;
+        CheckCombination();
     }
-
     public void Switch_3_On()
     {
         Light_3.GetComponent<Light>().color = Color.green;
         Switch_3_isOn = true;
+        CheckCombination();
     }
-
     public void Switch_1_Off()
     {
         Light_1.GetComponent<Light>().color = Color.red;
         Switch_1_isOn = false;
+        Switch_1.GetComponent<InteractAnimation>().Close();
     }
-
     public void Switch_2_Off()
     {
         Light_2.GetComponent<Light>().color = Color.red;
         Switch_2_isOn = false;
+        Switch_2.GetComponent<InteractAnimation>().Close();
     }
-
     public void Switch_3_Off()
     {
         Light_3.GetComponent<Light>().color = Color.red;
         Switch_3_isOn = false;
+        Switch_3.GetComponent<InteractAnimation>().Close();
     }
-
-    public void AllSwitchesOff()
-    {
-        Switch_1_Off();
-        Switch_2_Off();
-        Switch_3_Off();
-    }
-
 }

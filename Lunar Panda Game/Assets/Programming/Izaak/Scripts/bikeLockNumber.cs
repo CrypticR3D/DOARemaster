@@ -13,27 +13,17 @@ public class bikeLockNumber : MonoBehaviour
     private float rotationIncrement = 36;
     private int currentNumber = 0;
     private GameObject bikeLockParent;
-    private bikeLock bikeLockScript;
+    private PadlockInteraction bikeLockScript;
 
-    private GameObject player;
-    private Transform cam;
     // Start is called before the first frame update
     void Start()
     {
         //References the parent object and its script
         bikeLockParent = transform.parent.gameObject;
-        bikeLockScript = bikeLockParent.GetComponent<bikeLock>();
+        bikeLockScript = bikeLockParent.GetComponent<PadlockInteraction>();
         //Matches the current value and rotation with the current code value in the parent script
         currentNumber = bikeLockScript.getCurrentCode(digitPlacement);
         transform.Rotate(0, 0, (currentNumber * rotationIncrement));
-        cam = Camera.main.transform;
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
     }
 
     private void OnMouseOver()

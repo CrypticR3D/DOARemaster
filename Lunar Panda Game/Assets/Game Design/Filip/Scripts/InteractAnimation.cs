@@ -6,7 +6,7 @@ public class InteractAnimation : MonoBehaviour
 {
     [SerializeField] Animator animator;
 
-    [SerializeField] bool closed = true;
+    public bool closed = true;
     [SerializeField] float waitFor;
     Animator anim;
     [SerializeField] string InteractSound = "Electric_Switch";
@@ -22,6 +22,21 @@ public class InteractAnimation : MonoBehaviour
                 StartCoroutine(playAnimation());
             }
         }
+    }
+
+    public void Open()
+    {
+        SoundEffectManager.GlobalSFXManager.PlaySFX(InteractSound);
+        animator.SetTrigger("Open");
+        closed = false;
+
+    }
+    public void Close()
+    {
+        SoundEffectManager.GlobalSFXManager.PlaySFX(InteractSound);
+        animator.SetTrigger("Close");
+        closed = true;
+
     }
 
     bool AnimatorIsPlaying()

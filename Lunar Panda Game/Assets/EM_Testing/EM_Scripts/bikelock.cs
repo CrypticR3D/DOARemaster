@@ -20,7 +20,7 @@ public class bikeLock : MonoBehaviour
     bool finished;
 
     public Camera mainCamera; // Reference to the main camera
-    public Camera puzzleCamera; // Reference to the camera for the puzzle
+    public GameObject puzzleCamera; // Reference to the camera for the puzzle
     bool puzzleInteracted = false;
 
     public GameObject lockNumber_1;
@@ -28,9 +28,12 @@ public class bikeLock : MonoBehaviour
     public GameObject lockNumber_3;
     public GameObject lockNumber_4;
 
+    private Vector3 cameraStartPosition; // The starting position of the player's camera
+
     void Start()
     {
         Cursor.visible = false; // Hide the cursor at the start
+        cameraStartPosition = mainCamera.transform.position; // Store the starting position of the player's camera
     }
 
     void Update()
@@ -69,9 +72,7 @@ public class bikeLock : MonoBehaviour
                 passes++;
                 if (passes == currentCode.Length)
                 {
-                    ChangeCamera(mainCamera); // Switch back to the main camera
                     puzzleSolved = true;
-                    Cursor.visible = false; // Hide the cursor
                     return puzzleSolved;
                 }
             }
@@ -106,47 +107,5 @@ public class bikeLock : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         puzzleInteracted = false;
         enabled = false;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player") && !puzzleSolved)
-        {
-            ChangeCamera(puzzleCamera); // Switch to the puzzle camera
-            Cursor.visible = true; // Show the cursor
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player") && !puzzleSolved)
-        {
-            ChangeCamera(mainCamera); // Switch back to the main camera
-            Cursor.visible = false; // Hide the cursor
-        }
-    }
-
-    private void ChangeCamera(Camera targetCamera)
-    {
-        mainCamera.gameObject.SetActive(false);
-        targetCamera.gameObject.SetActive(true);
-    }
-
-    void OnMouseEnter()
-    {
-        Cursor.visible = true;
-        if (puzzleSolved)
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-    }
-    void OnMouseExit()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 }
