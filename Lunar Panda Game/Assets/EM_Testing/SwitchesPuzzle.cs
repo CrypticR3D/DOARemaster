@@ -52,7 +52,7 @@ public class SwitchesPuzzle : MonoBehaviour
             }
         }
 
-        if (Switch_1_isOn && Switch_3_isOn || Switch_2_isOn && Switch_3_isOn)
+        if (Switch_1_isOn && Switch_3_isOn || Switch_2_isOn && Switch_3_isOn || Switch_2_isOn && Switch_1_isOn)
         {
             if (Switch_1_isOn && Switch_2_isOn && Switch_3_isOn)
             {
@@ -66,7 +66,10 @@ public class SwitchesPuzzle : MonoBehaviour
             }
         }
     }
+    void ResetSwitch()
+    {
 
+    }
     void ActivateDoor()
     {
         doorAnim.Play(openAnimationName);
@@ -82,7 +85,6 @@ public class SwitchesPuzzle : MonoBehaviour
         Switch_2.GetComponent<InteractAnimation>().enabled = false;
         Switch_3.GetComponent<InteractAnimation>().enabled = false;
     }
-
     void ActivateObject()
     {
         RaycastHit hit;
