@@ -35,6 +35,8 @@ TagManager:
   - Trigger
   - ZoomObject
   - Switch
+  - TopCollider
+  - BottomNumberCol
   layers:
   - Default
   - TransparentFX

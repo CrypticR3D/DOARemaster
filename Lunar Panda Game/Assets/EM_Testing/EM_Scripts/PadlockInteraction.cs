@@ -1,15 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class PadlockInteraction : MonoBehaviour
 {
     public Camera mainCamera;
     public Camera lockCamera;
-    public KeyCode interactKey = KeyCode.E;
-    public string correctCombination = "1234";
 
-    private string enteredCombination = "";
     private bool interacting = false;
 
     [Header("Codes")]
@@ -20,39 +18,81 @@ public class PadlockInteraction : MonoBehaviour
 
     [Header("Puzzle State")]
     [Tooltip("Check for if the puzzle is solved")]
-    public bool puzzleSolved;
+    private bool puzzleSolved;
+
+    InteractRaycasting raycast;
+    private bool Disable_Int;
+
+    public GameObject Padlock;
+
+    InventoryMenuToggle inventoryMenuToggle;
+
+    [SerializeField] InteractAnimation interactAnimation;
+
+    public string audioClipName;
+
+    private FirstPersonController PlayerCharacter;
 
     private void Start()
     {
         // Disable the lock camera at the start
         lockCamera.gameObject.SetActive(false);
+        raycast = FindObjectOfType<InteractRaycasting>();
+        inventoryMenuToggle = FindObjectOfType<InventoryMenuToggle>();
+        PlayerCharacter = FindObjectOfType<FirstPersonController>();
+        Disable_Int = false;
     }
 
     private void Update()
     {
-        if (interacting)
+        if (Input.GetButtonDown("Interact"))
         {
-            // Check for combination input
-            checkPuzzleComplete();
+            if (!Disable_Int)
+            {
+                if (!interacting)
+                {
+                    ActivateObject();
+                }
+            }
+        }
 
-            // Check for backing away from the lock
-            if (Input.GetKeyDown(interactKey))
+        // Check for backing away from the lock
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            if (interacting)
             {
                 StopInteracting();
             }
         }
-        else
+    }
+    void ActivateObject()
+    {
+        RaycastHit hit;
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (raycast.raycastInteract(out hit))
         {
-            // Check for starting interaction
-            if (Input.GetKeyDown(interactKey))
+            if (hit.transform.gameObject == Padlock)
             {
-                StartInteracting();
+                if (interacting)
+                {
+                    // Check for combination input
+                    checkPuzzleComplete();
+                }
+                else
+                {
+                    // Check for starting interaction
+                    StartInteracting();
+                }
             }
         }
     }
 
     private void StartInteracting()
     {
+        PlayerCharacter.canMove = false;
+        inventoryMenuToggle.canOpen = false;
+        Padlock.GetComponent<Collider>().enabled = false;
+
         // Enable the lock camera and disable the main camera
         mainCamera.gameObject.SetActive(false);
         lockCamera.gameObject.SetActive(true);
@@ -66,8 +106,9 @@ public class PadlockInteraction : MonoBehaviour
 
     private void StopInteracting()
     {
-        // Reset the entered combination
-        enteredCombination = "";
+        PlayerCharacter.canMove = true;
+        inventoryMenuToggle.canOpen = true;
+        Padlock.GetComponent<Collider>().enabled = true;
 
         // Disable the lock camera and enable the main camera
         lockCamera.gameObject.SetActive(false);
@@ -92,31 +133,36 @@ public class PadlockInteraction : MonoBehaviour
 
     public bool checkPuzzleComplete()
     {
-        // Check if the entered combination is correct
-        if (enteredCombination == correctCombination)
+        int passes = 0;
+        for (int i = 0; i < currentCode.Length; i++)
         {
-            int passes = 0;
-            for (int i = 0; i < currentCode.Length; i++)
+            if (currentCode[i] == correctCode[i])
             {
-                if (currentCode[i] == correctCode[i])
+                passes++;
+                if (passes == currentCode.Length)
                 {
-                    passes++;
-                    if (passes == currentCode.Length)
-                    {
-                        Debug.Log("Correct combination entered!");
-                        puzzleSolved = true;
-                        StopInteracting();
-                        return puzzleSolved;
-                    }
-                }
-                else
-                {
-                    puzzleSolved = false;
-                    return false;
+                    Debug.Log("Correct combination entered!");
+                    PuzzleComplete();
+                    return puzzleSolved;
                 }
             }
-            return false;
+            else
+            {
+                puzzleSolved = false;
+                return false;
+            }
         }
         return false;
+    }
+
+    private void PuzzleComplete()
+    {
+        SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+        interactAnimation.enabled = true;
+        Destroy(GetComponentInChildren<bikeLockNumber>());
+        Destroy(GetComponentInChildren<InteractSound>());
+        puzzleSolved = true;
+        Disable_Int = true;
+        StopInteracting();
     }
 }

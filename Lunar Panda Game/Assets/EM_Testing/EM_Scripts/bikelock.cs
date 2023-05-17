@@ -98,7 +98,7 @@ public class bikeLock : MonoBehaviour
     private void DisablePuzzle()
     {
         GetComponent<Collider>().enabled = false;
-        //Destroy(GetComponentInChildren<bikeLockNumber>());
+        Destroy(GetComponentInChildren<bikeLockNumber>());
         lockNumber_1.GetComponent<Collider>().enabled = false;
         lockNumber_2.GetComponent<Collider>().enabled = false;
         lockNumber_3.GetComponent<Collider>().enabled = false;
