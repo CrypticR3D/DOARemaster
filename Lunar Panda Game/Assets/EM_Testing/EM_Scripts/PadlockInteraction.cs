@@ -32,6 +32,7 @@ public class PadlockInteraction : MonoBehaviour
     public string audioClipName;
 
     private FirstPersonController PlayerCharacter;
+    UIManager uIManager;
 
     private void Start()
     {
@@ -41,6 +42,8 @@ public class PadlockInteraction : MonoBehaviour
         inventoryMenuToggle = FindObjectOfType<InventoryMenuToggle>();
         PlayerCharacter = FindObjectOfType<FirstPersonController>();
         Disable_Int = false;
+
+        uIManager = FindObjectOfType<UIManager>();
     }
 
     private void Update()
@@ -57,7 +60,7 @@ public class PadlockInteraction : MonoBehaviour
         }
 
         // Check for backing away from the lock
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.Mouse1))
         {
             if (interacting)
             {
@@ -68,7 +71,6 @@ public class PadlockInteraction : MonoBehaviour
     void ActivateObject()
     {
         RaycastHit hit;
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (raycast.raycastInteract(out hit))
         {
             if (hit.transform.gameObject == Padlock)
@@ -90,6 +92,8 @@ public class PadlockInteraction : MonoBehaviour
     private void StartInteracting()
     {
         PlayerCharacter.canMove = false;
+        PlayerCharacter.canLook = false;
+        PlayerCharacter.canCrouch = false;
         inventoryMenuToggle.canOpen = false;
         Padlock.GetComponent<Collider>().enabled = false;
 
@@ -102,11 +106,15 @@ public class PadlockInteraction : MonoBehaviour
         Cursor.visible = true;
 
         interacting = true;
+
+        uIManager.isOnPuzzle = true;
     }
 
     private void StopInteracting()
     {
         PlayerCharacter.canMove = true;
+        PlayerCharacter.canLook = true;
+        PlayerCharacter.canCrouch = true;
         inventoryMenuToggle.canOpen = true;
         Padlock.GetComponent<Collider>().enabled = true;
 
@@ -119,6 +127,8 @@ public class PadlockInteraction : MonoBehaviour
         Cursor.visible = false;
 
         interacting = false;
+
+        uIManager.isOnPuzzle = false;
     }
 
     public int getCurrentCode(int digitPlace)

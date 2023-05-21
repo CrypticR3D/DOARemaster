@@ -1,16 +1,9 @@
-/*
-For this script i need to make it so that when one combination on the switch wall is completed,
-the tube thingies change material or light up or something. Should do it in this script to make
-it more object oriented, but idk if i can be bothered or if its practical to do so
-*/
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LabMachine : MonoBehaviour
 {
-    //Filip Changes
     public AudioSource audioSource;
     public AudioSource audioSource2;
     public bool has3DAudio;

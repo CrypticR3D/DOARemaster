@@ -44,20 +44,20 @@ public class bikeLockNumber : MonoBehaviour
             PadlockInteractionScript.checkPuzzleComplete();
         }
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (currentNumber >= 9)
-            {
-                currentNumber = 0;
-            }
-            else
-            {
-                currentNumber++;
-            }
-            transform.Rotate(0, 0, rotationIncrement);
-            SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
-            PadlockInteractionScript.changeCurrentCode(digitPlacement, currentNumber);
-            PadlockInteractionScript.checkPuzzleComplete();
-        }
+        //if (Input.GetMouseButtonDown(1))
+        //{
+        //    if (currentNumber >= 9)
+        //    {
+        //        currentNumber = 0;
+        //    }
+        //    else
+        //    {
+        //        currentNumber++;
+        //    }
+        //    transform.Rotate(0, 0, rotationIncrement);
+        //    SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+        //    PadlockInteractionScript.changeCurrentCode(digitPlacement, currentNumber);
+        //    PadlockInteractionScript.checkPuzzleComplete();
+        //}
     }
 }

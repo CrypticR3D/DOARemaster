@@ -1,17 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    [Tooltip("The material of the wire that comes out of this node. The shader has to be HDRP/Unlit for this")]
-    public Material lineMat;
-    [Tooltip("The output node that needs to be connected to this one")]
-    public GameObject desiredNode;
-    [HideInInspector] public GameObject connectedNode;
+    public GameObject connectedNode;
+    public Material lineMat; // Add this line to declare the lineMat variable
 
-    //i'll find a better use for this script i swear
+    // Other variables and methods in the Node class...
 
-    //where is it?
+    public bool CheckAnswer()
+    {
+        // Implement your logic to check if the connected node satisfies the answer criteria
+        // Return true if the answer is correct, false otherwise
+        // You can access the connected node using the "connectedNode" variable
+        // Example:
+        if (connectedNode != null)
+        {
+            // Perform your answer check here
+            // Example: return connectedNode.GetComponent<MyConnectedNodeScript>().IsAnswerCorrect();
+        }
 
+        return false; // Default return value if no answer check is implemented
+    }
 }

@@ -9,17 +9,13 @@ using UnityEngine.SceneManagement;
 public class PauseButtonToggle : MonoBehaviour
 {
     public bool IsPaused;
-    public bool IsOnRegularMenu;
     public GameObject PauseMenu;
     public FirstPersonController PlayerCharacter;
-    //public GameObject BarOfStamina;
-    JournalMenuToggle Journal;
+
+    UIManager uIManager;
+
     InventoryMenuToggle Inventory;
-    FeedbackToggle Feedback;
     public GameObject PauseMenuElement;
-    public GameObject InventorySlot;
-    public GameObject FlashlightSlot;
-    [SerializeField] GameObject firstSelectedButton;
 
     internal bool canOpen = true;
 
@@ -27,85 +23,70 @@ public class PauseButtonToggle : MonoBehaviour
     void Start()
     {
         PlayerCharacter = FindObjectOfType<FirstPersonController>();
-        Journal = FindObjectOfType<JournalMenuToggle>();
         Inventory = FindObjectOfType<InventoryMenuToggle>();
-        Feedback = FindObjectOfType<FeedbackToggle>();
+        uIManager = FindObjectOfType<UIManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (canOpen)
+        if (canOpen && Input.GetButtonDown("Pause"))
         {
-            if (Input.GetButtonDown("Pause"))
+            if (!IsPaused && !Inventory.IsOnInventory)
             {
-                if (IsPaused == false && Journal.IsOnMenu == false && Inventory.IsOnInventory == false && Feedback.IsOnFeedbackMenu == false)
-                {
-                    AudioListener.pause = true;
-                    IsPaused = true;
-                    //BarOfStamina.SetActive(false);
-                    IsOnRegularMenu = true;
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
-                    PlayerCharacter.canLook = false;
-                    PauseMenu.SetActive(true);
-                    Time.timeScale = 0f;
-                    EventSystem.current.SetSelectedGameObject(null);
-                    if (firstSelectedButton != null)
-                        EventSystem.current.SetSelectedGameObject(firstSelectedButton);
-                    //FindObjectOfType<WalkingSound>().canMakeSound = false;
-                    InventorySlot.SetActive(false);
-                    FlashlightSlot.SetActive(false);
-                  //  SoundEffectManager.SetActive(false);
-                }
-                else if (IsPaused == true)
-                {
-                    if (IsOnRegularMenu == true)
-                    {
-                        Unpause();
-                        Cursor.lockState = CursorLockMode.Locked;
-
-                    }
-                }
+                Pause();
             }
-
-
-            if (PauseMenuElement.activeInHierarchy == false)
+            else if (IsPaused)
             {
-                IsOnRegularMenu = false;
-            }
-
-
-            if (PauseMenuElement.activeInHierarchy == true)
-            {
-                IsOnRegularMenu = true;
+                Unpause();
             }
         }
     }
 
+    public void Pause()
+    {
+        uIManager.HideUI();
+        uIManager.isPaused = true;
+
+        // Enable cursor and lock it to the screen
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        PlayerCharacter.canLook = false;
+
+        AudioListener.pause = true;
+        IsPaused = true;
+
+        PauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
     public void Unpause()
     {
-       if (IsOnRegularMenu == true)
+        if (uIManager.isOnPuzzle)
         {
-            AudioListener.pause = false;
-            PauseMenu.SetActive(false);
-            IsPaused = false;
-            //BarOfStamina.SetActive(true);
-            IsOnRegularMenu = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            PlayerCharacter.canLook = true;
-            Cursor.visible = false;
-            Time.timeScale = 1f;
-           // SoundEffectManager.SetActive = true;
-            //FindObjectOfType<WalkingSound>().canMakeSound = true;
-           InventorySlot.SetActive(true);
-             if (tooltipController.FlashlightEnabled == true)
-             {
-                FlashlightSlot.SetActive(true);
-             }
-         
-            
+            // Enable cursor and lock it to the screen
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            PlayerCharacter.canLook = false;
+
+            uIManager.HideUI();
+            //uIManager.isPaused = false;
         }
+        else
+        {
+            // Disable cursor and unlock it
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            PlayerCharacter.canLook = true;
+
+            uIManager.ShowUI();
+            uIManager.isPaused = false;
+        }
+
+        AudioListener.pause = false;
+        PauseMenu.SetActive(false);
+        IsPaused = false;
+        Time.timeScale = 1f;
     }
 
     public void RestartLvl()

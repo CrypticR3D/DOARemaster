@@ -36,7 +36,7 @@ public class SwitchWall : MonoBehaviour
 
     private void Start()
     {
-        id = amogusPuzzle.id;
+        //id = amogusPuzzle.id;
         GameEvents.current.puzzleReset += resetPuzzle;
     }
 
@@ -76,8 +76,8 @@ public class SwitchWall : MonoBehaviour
             {
                 completedCombinations[i] = false;
             }
-            labMachine.ResetMachine(amogusPuzzle.id);
-            amogusPuzzle.resetPuzzle(amogusPuzzle.id);
+            //labMachine.ResetMachine(amogusPuzzle.id);
+            //amogusPuzzle.resetPuzzle(amogusPuzzle.id);
             amogusPuzzle.TurnOffLights();
 
 
