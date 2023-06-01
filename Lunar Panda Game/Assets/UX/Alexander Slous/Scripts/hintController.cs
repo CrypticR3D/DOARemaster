@@ -21,10 +21,12 @@ public class hintController : MonoBehaviour
 
     bool TimerActive;
     float TimeLeft;
+    GameObject HintUI;
 
     private void Start()
     {
         TimeLeft = TimeLimit;
+        HintUI = GameObject.Find("HintUI");
     }
 
     private void Update()
