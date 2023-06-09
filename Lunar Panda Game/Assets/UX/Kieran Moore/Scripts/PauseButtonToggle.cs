@@ -47,6 +47,7 @@ public class PauseButtonToggle : MonoBehaviour
     {
         uIManager.HideUI();
         uIManager.isPaused = true;
+        uIManager.HideTooltip();
 
         // Enable cursor and lock it to the screen
         Cursor.lockState = CursorLockMode.None;
@@ -70,6 +71,7 @@ public class PauseButtonToggle : MonoBehaviour
             PlayerCharacter.canLook = false;
 
             uIManager.HideUI();
+            uIManager.ShowTooltip();
             //uIManager.isPaused = false;
         }
         else
@@ -80,13 +82,16 @@ public class PauseButtonToggle : MonoBehaviour
             PlayerCharacter.canLook = true;
 
             uIManager.ShowUI();
-            uIManager.isPaused = false;
+            uIManager.HideTooltip();
+
         }
 
         AudioListener.pause = false;
         PauseMenu.SetActive(false);
         IsPaused = false;
         Time.timeScale = 1f;
+
+        uIManager.isPaused = false;
     }
 
     public void RestartLvl()

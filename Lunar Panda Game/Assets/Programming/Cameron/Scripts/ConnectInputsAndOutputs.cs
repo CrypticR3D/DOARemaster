@@ -54,7 +54,11 @@ public class ConnectInputsAndOutputs : MonoBehaviour
         {
             if (interacting)
             {
-                StopInteracting();
+                if (!uIManager.isPaused)
+                {
+                    StopInteracting();
+                }
+                
             }
         }
     }

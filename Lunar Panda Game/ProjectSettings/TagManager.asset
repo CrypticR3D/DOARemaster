@@ -37,6 +37,7 @@ TagManager:
   - Switch
   - TopCollider
   - BottomNumberCol
+  - Node
   layers:
   - Default
   - TransparentFX

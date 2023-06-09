@@ -11,20 +11,25 @@ public class GlowMouseOver : MonoBehaviour
     private bool isGlowing;
     Color customColor = new Color(0.5f, 0.3f, 0f, 1.0f);
     private float speed = 1.0f;
-    //private GameObject Player;
-    //private Collider PlayerCollider;
+    UIManager uIManager;
 
     void Start()
     {
-        //Player = GameObject.FindWithTag("Player"); ;
-        //PlayerCollider = Player.GetComponentInChildren<SphereCollider>();
+        uIManager = FindObjectOfType<UIManager>();
         isGlowing = false;
         m_EmissiveObject = gameObject;
     }
 
     private void OnMouseOver()
     {
-        isGlowing = true;
+        if (uIManager.isPaused)
+        {
+            isGlowing = false;
+        }
+        else
+        {
+            isGlowing = true;
+        }
     }
 
     private void OnMouseExit()

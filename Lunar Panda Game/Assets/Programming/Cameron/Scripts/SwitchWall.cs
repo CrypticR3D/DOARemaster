@@ -11,8 +11,7 @@ public class SwitchWall : MonoBehaviour
     [SerializeField] ConnectInputsAndOutputs amogusPuzzle;
     [SerializeField] List<switchChanger> buttons;
     [SerializeField] switchChanger submitButton;
-    //I would make a list of a bool array for the combinations to make it more modifiable, but they dont show in inspector without doing 
-    //annoying stuff and i cba for that so yeah. 3 bool arrays it is
+
     [SerializeField] bool[] combination1 = new bool[4];
     [SerializeField] bool[] combination2 = new bool[4];
     [SerializeField] bool[] combination3 = new bool[4];

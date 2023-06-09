@@ -14,10 +14,13 @@ public class bikeLockNumber : MonoBehaviour
     private int currentNumber = 0;
     private GameObject PadlockParent;
     private PadlockInteraction PadlockInteractionScript;
+    UIManager uIManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        uIManager = FindObjectOfType<UIManager>();
+
         //References the parent object and its script
         PadlockParent = transform.parent.gameObject;
         PadlockInteractionScript = PadlockParent.GetComponent<PadlockInteraction>();
@@ -28,36 +31,23 @@ public class bikeLockNumber : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!uIManager.isPaused)
         {
-            if (currentNumber <= 0)
+            if (Input.GetMouseButtonDown(0))
             {
-                currentNumber = 9;
+                if (currentNumber <= 0)
+                {
+                    currentNumber = 9;
+                }
+                else
+                {
+                    currentNumber--;
+                }
+                transform.Rotate(0, 0, -rotationIncrement);
+                SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+                PadlockInteractionScript.changeCurrentCode(digitPlacement, currentNumber);
+                PadlockInteractionScript.checkPuzzleComplete();
             }
-            else
-            {
-                currentNumber--;
-            }
-            transform.Rotate(0, 0, -rotationIncrement);
-            SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
-            PadlockInteractionScript.changeCurrentCode(digitPlacement, currentNumber);
-            PadlockInteractionScript.checkPuzzleComplete();
         }
-
-        //if (Input.GetMouseButtonDown(1))
-        //{
-        //    if (currentNumber >= 9)
-        //    {
-        //        currentNumber = 0;
-        //    }
-        //    else
-        //    {
-        //        currentNumber++;
-        //    }
-        //    transform.Rotate(0, 0, rotationIncrement);
-        //    SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
-        //    PadlockInteractionScript.changeCurrentCode(digitPlacement, currentNumber);
-        //    PadlockInteractionScript.checkPuzzleComplete();
-        //}
     }
 }
