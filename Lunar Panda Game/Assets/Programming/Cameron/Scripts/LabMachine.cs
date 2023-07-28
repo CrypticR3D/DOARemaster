@@ -58,10 +58,10 @@ public class LabMachine : MonoBehaviour
 
                         //add glowyinteractthingie
                         GlowWhenLookedAt glowy = antidote.AddComponent<GlowWhenLookedAt>();
-                       // glowy.glowingMaterial = antidoteGlowMat;
+                        // glowy.glowingMaterial = antidoteGlowMat;
                         antidote.AddComponent<Rigidbody>();
                         antidote.transform.parent = null;
-                       
+
                         //Stop countdown
                         countdown.StopTimer();
 
@@ -80,7 +80,7 @@ public class LabMachine : MonoBehaviour
     public void TurnTubeOn(bool[] completedCombos)
     {
         //goes through the bool array of completed combos, and if any are true, change em to be "on"
-        for(int i = 0; i < completedCombos.Length; i++)
+        for (int i = 0; i < completedCombos.Length; i++)
         {
             if (completedCombos[i])
             {
@@ -96,7 +96,7 @@ public class LabMachine : MonoBehaviour
 
     public void ResetMachine(int id)
     {
-        if(id == switchWall.id)
+        if (id == switchWall.id)
         {
             for (int i = 0; i < antidoteLights.Count; i++)
             {

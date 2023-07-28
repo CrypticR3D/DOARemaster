@@ -52,12 +52,12 @@ public class SwitchWall : MonoBehaviour
         //this bool keeps track to see if the player inputted a correct guess
         bool madeCorrectGuess = false;
         //gets the current combination
-        for(int i = 0; i < currentCombination.Length; i++)
+        for (int i = 0; i < currentCombination.Length; i++)
         {
             currentCombination[i] = buttons[i].GetComponent<switchChanger>().getSwitchState();
         }
         //for each combination, check if the current combo is the same. If it is, set the completed combo to true
-        for(int i = 0; i < combinations.Count; i++)
+        for (int i = 0; i < combinations.Count; i++)
         {
             if (CompareBoolArray(combinations[i], currentCombination))
             {
@@ -112,7 +112,7 @@ public class SwitchWall : MonoBehaviour
         {
             if (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
             {
-                foreach(switchChanger button in buttons)
+                foreach (switchChanger button in buttons)
                 {
                     if (hit.transform.GetComponent<switchChanger>() && hit.transform.gameObject == button.gameObject)
                     {
@@ -124,7 +124,7 @@ public class SwitchWall : MonoBehaviour
                 {
                     bool[] x = CheckCombination();
                     //for each button, if its true, set it to false (reset the buttons)
-                    foreach(switchChanger button in buttons)
+                    foreach (switchChanger button in buttons)
                     {
                         if (button.getSwitchState())
                         {
@@ -136,8 +136,8 @@ public class SwitchWall : MonoBehaviour
             }
         }
     }
-    
-     public void resetPuzzle(int id)
+
+    public void resetPuzzle(int id)
     {
         if (id == this.id)
         {
@@ -149,7 +149,7 @@ public class SwitchWall : MonoBehaviour
                 completedCombinations[i] = false;
             }
 
-            for(int i = 0; i < currentCombination.Length; i++)
+            for (int i = 0; i < currentCombination.Length; i++)
             {
                 currentCombination[i] = false;
             }
