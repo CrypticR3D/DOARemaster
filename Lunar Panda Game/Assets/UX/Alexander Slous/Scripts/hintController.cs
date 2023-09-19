@@ -12,27 +12,28 @@ public class hintController : MonoBehaviour
     [Tooltip("Types:\n" +
         "NONE = Doesn't trigger\n" +
         "STAY = Timer counts down if the player stays in the collider\n" +
-        "CONTINUOUS = Timer counts down after player enters the collider and doesn't stop")]
+        "CONTINUOUS = Timer starts after player enters the collider and doesn't stop")]
     public triggerTypes TriggerType;
     [Tooltip("The time it takes to trigger the hint")]
     public float TimeLimit;
     [Tooltip("What you want the hint to say")]
-    public string HintText;
+    public string HintMessage;
 
     bool TimerActive;
     float TimeLeft;
-    GameObject HintUI;
+    public GameObject HintUI;
 
     private void Start()
     {
         TimeLeft = TimeLimit;
-        HintUI = GameObject.Find("HintUI");
+        //HintUI = GameObject.Find("HintText");
     }
 
     private void Update()
     {
         if (TimerActive == true)
         {
+            Debug.Log("Hint timer started");
             TimeLeft -= Time.deltaTime;
         }  
 
@@ -45,8 +46,10 @@ public class hintController : MonoBehaviour
 
     void ActivateHint()
     {
-
+        HintUI.SetActive(true);
     }
+
+    //Checks hint type to know how to handle the timer
 
     void TypeCheck()
     {
