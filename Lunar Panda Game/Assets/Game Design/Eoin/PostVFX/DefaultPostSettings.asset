@@ -279,7 +279,7 @@ MonoBehaviour:
     min: 0
   aerosolDensity:
     m_OverrideState: 1
-    m_Value: 0.006
+    m_Value: 0.206
     min: 0
     max: 1
   aerosolTint:
@@ -330,7 +330,7 @@ MonoBehaviour:
     min: 0
   spaceRotation:
     m_OverrideState: 1
-    m_Value: {x: 0, y: 330.99, z: 0}
+    m_Value: {x: 0, y: 360.3, z: 0}
   colorSaturation:
     m_OverrideState: 1
     m_Value: 1
